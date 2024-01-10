@@ -1,22 +1,24 @@
 ## Naval Archimedes
 
-The idea of the project is to make programming a small naval drone easy for new students. The programming plattform for programming the boats is Node-RED:
-https://nodered.org
+The idea of the project is to make programming a small naval drone easy for new students. The programming plattform for programming the boats is Node-RED:<br>
+https://nodered.org <br><br>
 
-Install Node-RED depending on your plattform as shown:
-https://nodered.org/docs/getting-started/
+Install Node-RED depending on your plattform as shown:<br>
+https://nodered.org/docs/getting-started/ <br><br>
 
-The drones are based on a Raspberry Pi (at the time 3B+):
-https://www.raspberrypi.com/products/raspberry-pi-3-model-b-plus/
-Supported by Arduino Uno for PWM, pre-programmed with Firmata:
-https://store.arduino.cc/products/arduino-uno-rev3
-https://github.com/firmata/arduino
+The drones are based on a Raspberry Pi (at the time 3B+): <br>
+https://www.raspberrypi.com/products/raspberry-pi-3-model-b-plus/ <br><br>
 
-The remote controll used is a Dualshock 4 wireless bluetooth controller:
-https://www.playstation.com/no-no/accessories/dualshock-4-wireless-controller/
 
-The sensorsystem of the drone is basically a Pixhawk 4 (can be upgraded):
-https://docs.px4.io/main/en/flight_controller/pixhawk4.html
+Supported by Arduino Uno for PWM, pre-programmed with Firmata:<br>
+https://store.arduino.cc/products/arduino-uno-rev3 <br>
+https://github.com/firmata/arduino <br><br>
+
+The remote controll used is a Dualshock 4 wireless bluetooth controller:<br>
+https://www.playstation.com/no-no/accessories/dualshock-4-wireless-controller/ <br><br>
+
+The sensorsystem of the drone is basically a Pixhawk 4 (can be upgraded):<br>
+https://docs.px4.io/main/en/flight_controller/pixhawk4.html <br>
 
 ## 2019-2023
 
@@ -29,11 +31,9 @@ The project before the year 2024 was dependent on several npm packages, preferab
 
 ## After 2023
 
-The new version of the project is based on two major contributions. For interaction with the sensorsystem, being the Pixhawk via mavlink, the mavlink2rest program is now used:
-
-https://github.com/mavlink/mavlink2rest
-
-The location and exact name of the mavlink2rest programfile has to be adjusted within the Node-RED subflow.
+The new version of the project is based on two major contributions. For interaction with the sensorsystem, being the Pixhawk via mavlink, the mavlink2rest program is now used:<br>
+https://github.com/mavlink/mavlink2rest <br>
+The location and exact name of the mavlink2rest programfile has to be adjusted within the Node-RED subflow. <br><br>
 
 Additionally, for automatic detection of the correct device, one should install globally a part of the serialport-package:
 * npm
@@ -46,10 +46,8 @@ For the interaction with the bluetooth controller, the node-hid package is still
   ```sh
   npm install node-hid
   ```
-The crc-code, needed for coding the transmission of commands to the controller - but not needed for receiving buttons and such, as now been added as a function, taken and adapted from 
+The crc-code, needed for coding the transmission of commands to the controller - but not needed for receiving buttons and such, as now been added as a function, taken and adapted from <br>
+https://github.com/Pecacheu/dualshock/blob/master/crc.js <br><br>
 
-https://github.com/Pecacheu/dualshock/blob/master/crc.js
-
-The original source of the parcing of the receiving buffer is based on the work of 
-
-https://github.com/seidtgeist/node-ds4
+The original source of the parcing of the receiving buffer is based on the work of<br>
+https://github.com/seidtgeist/node-ds4 <br><br>
