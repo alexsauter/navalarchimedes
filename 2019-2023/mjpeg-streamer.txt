@@ -1,0 +1,81 @@
+https://github.com/cncjs/cncjs/wiki/Setup-Guide:-Raspberry-Pi-%7C-MJPEG-Streamer-Install-&-Setup-&-FFMpeg-Recording
+--------------------------------------------------------------
+
+Aktiver Camera!
+
+
+# Update & Install Tools
+sudo apt-get update
+sudo apt-get upgrade -y
+sudo apt-get install build-essential libjpeg8-dev imagemagick libv4l-dev cmake -y
+
+# Clone Repo in /tmp
+cd /tmp
+git clone https://github.com/jacksonliam/mjpg-streamer.git
+cd mjpg-streamer/mjpg-streamer-experimental
+
+# Make
+make
+sudo make install
+
+
+cd $home
+
+sudo modprobe bcm2835-v4l2
+
+
+/usr/local/bin/mjpg_streamer -i "/usr/local/lib/mjpg-streamer/input_uvc.so -n -f 20 -r 1024x768" -o "/usr/local/lib/mjpg-streamer/output_http.so -p 8081 -w /usr/local/share/mjpg-streamer/www"
+
+----------------------------------------------------------------------
+Node-RED:
+
+[{"id":"f5b01ec2.a46e5","type":"inject","z":"931fc966.a57068","name":"","topic":"","payload":"","payloadType":"date","repeat":"","crontab":"","once":false,"onceDelay":0.1,"x":160,"y":840,"wires":[["ede72b60.292dc8"]]},{"id":"ede72b60.292dc8","type":"exec","z":"931fc966.a57068","command":"sudo modprobe bcm2835-v4l2","addpay":true,"append":"","useSpawn":"false","timer":"","oldrc":false,"name":"","x":430,"y":840,"wires":[[],[],[]]},{"id":"46773e20.720f5","type":"inject","z":"931fc966.a57068","name":"","topic":"","payload":"","payloadType":"date","repeat":"","crontab":"","once":false,"onceDelay":0.1,"x":160,"y":920,"wires":[["8a8453.d7720bb"]]},{"id":"8a8453.d7720bb","type":"exec","z":"931fc966.a57068","command":"/usr/local/bin/mjpg_streamer -i \"/usr/local/lib/mjpg-streamer/input_uvc.so -n -f 20 -r 1024x768\" -o \"/usr/local/lib/mjpg-streamer/output_http.so -p 8081 -w /usr/local/share/mjpg-streamer/www\"","addpay":true,"append":"","useSpawn":"true","timer":"","oldrc":false,"name":"","x":920,"y":920,"wires":[[],[],[]]},{"id":"57fc4f74.39e3a","type":"inject","z":"931fc966.a57068","name":"","topic":"","payload":"","payloadType":"date","repeat":"","crontab":"","once":false,"onceDelay":0.1,"x":160,"y":1020,"wires":[["c5937381.4d8a4"]]},{"id":"c5937381.4d8a4","type":"ui_template","z":"931fc966.a57068","group":"cfcf106a.98046","name":"","order":0,"width":"0","height":"0","format":"<div style=\"text-align: center;padding: 0px;\"></div><iframe src=\"http://192.168.136.39:8081/stream_simple.html\" style=\"display: block; width: 100%; height: 100vh; border: none;\" scrolling=\"no\" frameborder=\"0\"></iframe></div>","storeOutMessages":true,"fwdInMessages":true,"templateScope":"local","x":380,"y":1020,"wires":[[]]},{"id":"cfcf106a.98046","type":"ui_group","z":"","name":"Default","tab":"ac1e3055.26875","disp":false,"width":"20","collapse":false},{"id":"ac1e3055.26875","type":"ui_tab","z":"","name":"Home","icon":"dashboard","disabled":false,"hidden":false}]
+
+
+Tilpass IP! Evt. oppløsning
+
+
+Alternativt:
+
+Installer paletten:
+node-red-contrib-ip
+
+[{"id":"bf40e2e2.ceed1","type":"inject","z":"e4f218b5.8f3408","name":"Prepare for video","topic":"","payload":"","payloadType":"date","repeat":"","crontab":"","once":true,"onceDelay":0.1,"x":168,"y":151,"wires":[["2cb15a19.e15616"]]},{"id":"4b69a446.36ee6c","type":"exec","z":"e4f218b5.8f3408","command":"sudo modprobe bcm2835-v4l2","addpay":true,"append":"","useSpawn":"false","timer":"","oldrc":false,"name":"","x":581,"y":151,"wires":[[],[],[]]},{"id":"b0c79a8a.2c84b8","type":"inject","z":"e4f218b5.8f3408","name":"Start LiveFeed","topic":"","payload":"","payloadType":"date","repeat":"","crontab":"","once":true,"onceDelay":"0.5","x":163,"y":233,"wires":[["2bb2bd42.72bc32"]]},{"id":"f41084fe.427658","type":"exec","z":"e4f218b5.8f3408","command":"/usr/local/bin/mjpg_streamer -i \"/usr/local/lib/mjpg-streamer/input_uvc.so -n -f 20 -r 1024x768\" -o \"/usr/local/lib/mjpg-streamer/output_http.so -p 8081 -w /usr/local/share/mjpg-streamer/www\"","addpay":true,"append":"","useSpawn":"true","timer":"","oldrc":false,"name":"","x":1077,"y":234,"wires":[[],[],[]]},{"id":"30924fc4.26b0b","type":"inject","z":"e4f218b5.8f3408","name":"Show LiveFeed","topic":"","payload":"","payloadType":"date","repeat":"","crontab":"","once":true,"onceDelay":"1","x":163,"y":333,"wires":[["3ea86364.08675c"]]},{"id":"f8179e79.32567","type":"ui_template","z":"e4f218b5.8f3408","group":"18efcd7b.476dd3","name":"Show LiveFeed","order":0,"width":"0","height":"0","format":"<div style=\"text-align: center;padding: 0px;\"><iframe id=\"LiveFeed\" src=\"\" style=\"display: block; width: 100%; height: 100vh; border: none;\" scrolling=\"no\" frameborder=\"0\"></iframe></div>\n<script>\n(function(scope) {\n    // watch msg object from Node-RED\n    scope.$watch('msg', function(msg) {\n        // new message received\n        var x = document.getElementById('LiveFeed');\n        x.setAttribute('src', msg.payload); \n        });\n})(scope);\n</script>","storeOutMessages":true,"fwdInMessages":true,"templateScope":"local","x":864,"y":334,"wires":[[]]},{"id":"3ea86364.08675c","type":"ip","z":"e4f218b5.8f3408","name":"Get IP","https":false,"timeout":"5000","internalIPv4":true,"internalIPv6":false,"publicIPv4":false,"publicIPv6":false,"x":350,"y":333,"wires":[["430e3efc.16c6c"]]},{"id":"430e3efc.16c6c","type":"function","z":"e4f218b5.8f3408","name":"Create LiveFeed-address","func":"msg.payload = \"http://\"+msg.payload.internalIPv4+\":8081/stream_simple.html\";\nreturn msg;","outputs":1,"noerr":0,"x":571,"y":334,"wires":[["f8179e79.32567","dec480ea.e876d"]]},{"id":"dec480ea.e876d","type":"debug","z":"e4f218b5.8f3408","name":"","active":true,"tosidebar":true,"console":false,"tostatus":false,"complete":"false","x":854,"y":404,"wires":[]},{"id":"628fc497.679e1c","type":"inject","z":"e4f218b5.8f3408","name":"Init","topic":"","payload":"","payloadType":"date","repeat":"","crontab":"","once":true,"onceDelay":0.1,"x":134,"y":68,"wires":[["e87e9316.456e4"]]},{"id":"e87e9316.456e4","type":"switch","z":"e4f218b5.8f3408","name":"Only Once","property":"VideoOn","propertyType":"flow","rules":[{"t":"else"},{"t":"true"}],"checkall":"true","repair":false,"outputs":2,"x":323,"y":69,"wires":[["37ddab14.f7a744"],[]]},{"id":"37ddab14.f7a744","type":"change","z":"e4f218b5.8f3408","name":"","rules":[{"t":"set","p":"VideoOn","pt":"flow","to":"false","tot":"bool"}],"action":"","property":"","from":"","to":"","reg":false,"x":550,"y":61,"wires":[[]]},{"id":"2cb15a19.e15616","type":"switch","z":"e4f218b5.8f3408","name":"Only once","property":"VideoOn","propertyType":"flow","rules":[{"t":"false"}],"checkall":"true","repair":false,"outputs":1,"x":352,"y":151,"wires":[["4b69a446.36ee6c"]]},{"id":"2bb2bd42.72bc32","type":"switch","z":"e4f218b5.8f3408","name":"Only Once","property":"VideoOn","propertyType":"flow","rules":[{"t":"false"}],"checkall":"true","repair":false,"outputs":1,"x":348,"y":234,"wires":[["f41084fe.427658"]]},{"id":"18efcd7b.476dd3","type":"ui_group","z":"","name":"Default","tab":"d6e85e56.1502c","disp":false,"width":"20","collapse":false},{"id":"d6e85e56.1502c","type":"ui_tab","z":"","name":"Home","icon":"dashboard","disabled":false,"hidden":false}]
+
+----------------------------------------------------------------------
+----------------------------------------------------------------------
+Gammel forsøk:
+
+/home/pi/.config/lxsession/LXDE-pi/autostart
+
+v4l2-ctl -V
+
+
+
+sudo apt-get install pacman
+
+sudo apt-get install cmake libjpeg8-dev
+
+pacman -S mjpg-streamer
+
+wget https://github.com/jacksonliam/mjpg-streamer/archive/master.zip
+
+unzip master.zip
+
+cd mjp*g*
+cd mjpg-*
+
+sudo make install
+
+cd $home
+
+mjpg_streamer -i "input_uvc.so --help"
+mjpg_streamer -o "output_http.so --help"
+
+sudo modprobe bcm2835-v4l2
+
+/usr/local/bin/mjpg_streamer -i "/usr/local/lib/mjpg-streamer/input_uvc.so -n -f 20 -r 1024x768" -o "/usr/local/lib/mjpg-streamer/output_http.so -p 8081 -w /usr/local/share/mjpg-streamer/www"
+
+
+
+[{"id":"f5b01ec2.a46e5","type":"inject","z":"931fc966.a57068","name":"","topic":"","payload":"","payloadType":"date","repeat":"","crontab":"","once":false,"onceDelay":0.1,"x":160,"y":840,"wires":[["ede72b60.292dc8"]]},{"id":"ede72b60.292dc8","type":"exec","z":"931fc966.a57068","command":"sudo modprobe bcm2835-v4l2","addpay":true,"append":"","useSpawn":"false","timer":"","oldrc":false,"name":"","x":430,"y":840,"wires":[[],[],[]]},{"id":"46773e20.720f5","type":"inject","z":"931fc966.a57068","name":"","topic":"","payload":"","payloadType":"date","repeat":"","crontab":"","once":false,"onceDelay":0.1,"x":160,"y":920,"wires":[["8a8453.d7720bb"]]},{"id":"8a8453.d7720bb","type":"exec","z":"931fc966.a57068","command":"/usr/local/bin/mjpg_streamer -i \"/usr/local/lib/mjpg-streamer/input_uvc.so -n -f 20 -r 1024x768\" -o \"/usr/local/lib/mjpg-streamer/output_http.so -p 8081 -w /usr/local/share/mjpg-streamer/www\"","addpay":true,"append":"","useSpawn":"true","timer":"","oldrc":false,"name":"","x":920,"y":920,"wires":[[],[],[]]},{"id":"57fc4f74.39e3a","type":"inject","z":"931fc966.a57068","name":"","topic":"","payload":"","payloadType":"date","repeat":"","crontab":"","once":false,"onceDelay":0.1,"x":160,"y":1020,"wires":[["c5937381.4d8a4"]]},{"id":"c5937381.4d8a4","type":"ui_template","z":"931fc966.a57068","group":"cfcf106a.98046","name":"","order":0,"width":"0","height":"0","format":"<div style=\"text-align: center;padding: 0px;\"></div><iframe src=\"http://192.168.136.39:8081/stream_simple.html\" style=\"display: block; width: 100%; height: 100vh; border: none;\" scrolling=\"no\" frameborder=\"0\"></iframe></div>","storeOutMessages":true,"fwdInMessages":true,"templateScope":"local","x":380,"y":1020,"wires":[[]]},{"id":"cfcf106a.98046","type":"ui_group","z":"","name":"Default","tab":"ac1e3055.26875","disp":false,"width":"20","collapse":false},{"id":"ac1e3055.26875","type":"ui_tab","z":"","name":"Home","icon":"dashboard","disabled":false,"hidden":false}]
