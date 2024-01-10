@@ -1,11 +1,6 @@
-[![Contributors][contributors-shield]][contributors-url]
-[![Forks][forks-shield]][forks-url]
-[![Issues][issues-shield]][issues-url]
-[![MIT License][license-shield]][license-url]
-
 ## Naval Archimedes
 
-This idea of the project is to make programming a small naval drone easy for new students. The programming plattform for programming the boats is Node-RED:
+The idea of the project is to make programming a small naval drone easy for new students. The programming plattform for programming the boats is Node-RED:
 https://nodered.org
 
 Install Node-RED depending on your plattform as shown:
@@ -35,8 +30,11 @@ The project before the year 2024 was dependent on several npm packages, preferab
 ## After 2023
 
 The new version of the project is based on two major contributions. For interaction with the sensorsystem, being the Pixhawk via mavlink, the mavlink2rest program is now used:
+
 https://github.com/mavlink/mavlink2rest
+
 The location and exact name of the mavlink2rest programfile has to be adjusted within the Node-RED subflow.
+
 Additionally, for automatic detection of the correct device, one should install globally a part of the serialport-package:
 * npm
   ```sh
@@ -49,6 +47,9 @@ For the interaction with the bluetooth controller, the node-hid package is still
   npm install node-hid
   ```
 The crc-code, needed for coding the transmission of commands to the controller - but not needed for receiving buttons and such, as now been added as a function, taken and adapted from 
+
 https://github.com/Pecacheu/dualshock/blob/master/crc.js
+
 The original source of the parcing of the receiving buffer is based on the work of 
+
 https://github.com/seidtgeist/node-ds4
