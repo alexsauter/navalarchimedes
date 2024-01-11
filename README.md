@@ -1,6 +1,6 @@
 ## Naval Archimedes
 
-![modell boats](https://raw.githubusercontent.com/alexsauter/navalarchimedes/main/figs/modelboats.jpg)
+<p style="text-align: center"><img src="https://raw.githubusercontent.com/alexsauter/navalarchimedes/main/figs/modelboats.jpg" width="70"></p>
 
 This project is the basis for programming part of the subject MILM1302 at the Royal Norwegian Naval Academy. In the part called Naval Archimedes, the students have to build parts of a model boat showing their understanding of the basics of naval vessels. The idea of the programming part of the project is to make programming a small naval drone easy for new students. The programming plattform for programming the boats is Node-RED, which can be found here:<br>
 https://nodered.org <br>
