@@ -32,7 +32,11 @@ The latest version of the project is dependent on two major contributions, one f
 
 ### Subflow for Pixhawk interaction
 
-For interaction with the sensorsystem, being the Pixhawk via the mavlink protocol, the <a href="https://github.com/mavlink/mavlink2rest">mavlink2rest</a> program is used. The location and exact name of the mavlink2rest programfile has to be adjusted within the Node-RED subflow, if not placed at the same location. <br><br>
+The subflow for interaction with the Pixhawk via serial (usb) connection is called <a href="https://raw.githubusercontent.com/alexsauter/navalarchimedes/main/TelemetryRC.json">TelemetryRC.json</a>.<br>
+
+<p align="center"><img src="https://raw.githubusercontent.com/alexsauter/navalarchimedes/main/figs/TelemetryRC.png" width="100%"></p>
+
+For this interaction with the sensorsystem, being the Pixhawk via the mavlink protocol, the <a href="https://github.com/mavlink/mavlink2rest">mavlink2rest</a> program is used. The location and exact name of the mavlink2rest programfile has to be adjusted within the Node-RED subflow, if not placed at the same location. <br><br>
 
 Additionally, for automatic detection of the correct device, one should install globally a part of the <a href="https://serialport.io/docs/bin-list">serialport</a>-package:
 * npm

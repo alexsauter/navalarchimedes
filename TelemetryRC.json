@@ -1,0 +1,1516 @@
+[
+    {
+        "id": "531f48d7.825248",
+        "type": "subflow",
+        "name": "Telemetry and RC (min)",
+        "info": "# Connect via USB-Telemetry Radio to Pixhawk 4 with Telemetry Radio\n\nMAVlink telemetry information is received automatically\n\nAdditional control messages (RC) can be transmitted via message input\n\n**Requires:**\nsudo npm install -g @serialport/list\nand\nmavlink2rest from https://github.com/patrickelectric/mavlink2rest\n\n**Find newest common.xml from:**\nhttps://github.com/mavlink/mavlink.git\n\n**Usual environmental variables:**\nOn Windows: COM3\nOn Linux/Raspberry Pi: /dev/ttyACM0",
+        "category": "Pixhawk",
+        "in": [
+            {
+                "x": 300,
+                "y": 720,
+                "wires": [
+                    {
+                        "id": "d5c215658a908462"
+                    }
+                ]
+            }
+        ],
+        "out": [
+            {
+                "x": 2050,
+                "y": 140,
+                "wires": [
+                    {
+                        "id": "7ac730b676070945",
+                        "port": 0
+                    }
+                ]
+            },
+            {
+                "x": 2110,
+                "y": 280,
+                "wires": [
+                    {
+                        "id": "e8524f78e51c381b",
+                        "port": 0
+                    }
+                ]
+            },
+            {
+                "x": 2130,
+                "y": 440,
+                "wires": [
+                    {
+                        "id": "51d00aed7882b8b2",
+                        "port": 0
+                    }
+                ]
+            },
+            {
+                "x": 2110,
+                "y": 720,
+                "wires": [
+                    {
+                        "id": "5ba63e922f750670",
+                        "port": 0
+                    }
+                ]
+            },
+            {
+                "x": 2090,
+                "y": 880,
+                "wires": [
+                    {
+                        "id": "803b72a92990eb47",
+                        "port": 1
+                    }
+                ]
+            }
+        ],
+        "env": [
+            {
+                "name": "MAV_SYS_ID",
+                "type": "num",
+                "value": "1"
+            },
+            {
+                "name": "MAV_COMP_ID",
+                "type": "num",
+                "value": "1"
+            },
+            {
+                "name": "MAV_COMP_ID_OWN",
+                "type": "num",
+                "value": "191"
+            },
+            {
+                "name": "PixhawkOnly",
+                "type": "bool",
+                "value": "false"
+            },
+            {
+                "name": "RadioOnly",
+                "type": "bool",
+                "value": "false"
+            },
+            {
+                "name": "Datarate",
+                "type": "num",
+                "value": "500"
+            }
+        ],
+        "meta": {},
+        "color": "#C0DEED",
+        "inputLabels": [
+            "Send msg/RC-msg"
+        ],
+        "outputLabels": [
+            "ATTITUDE",
+            "VFR_HUD",
+            "GLOBAL_POSITION_INT",
+            "CONTROL",
+            "ALL"
+        ],
+        "icon": "node-red/bridge.svg",
+        "status": {
+            "x": 1460,
+            "y": 240,
+            "wires": [
+                {
+                    "id": "236369c628cf5b4e",
+                    "port": 0
+                }
+            ]
+        }
+    },
+    {
+        "id": "82ba853b.b77358",
+        "type": "debug",
+        "z": "531f48d7.825248",
+        "name": "VFR_HUD",
+        "active": false,
+        "tosidebar": false,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 2150,
+        "y": 300,
+        "wires": []
+    },
+    {
+        "id": "ad1d061e.1dee68",
+        "type": "debug",
+        "z": "531f48d7.825248",
+        "name": "HEARTBEAT",
+        "active": false,
+        "tosidebar": false,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "x": 2110,
+        "y": 560,
+        "wires": []
+    },
+    {
+        "id": "5ce40776.e36098",
+        "type": "debug",
+        "z": "531f48d7.825248",
+        "name": "ALTITUDE",
+        "active": false,
+        "tosidebar": false,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "x": 2110,
+        "y": 360,
+        "wires": []
+    },
+    {
+        "id": "bc371754.5860a8",
+        "type": "debug",
+        "z": "531f48d7.825248",
+        "name": "VIBRATION",
+        "active": false,
+        "tosidebar": false,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "x": 2110,
+        "y": 600,
+        "wires": []
+    },
+    {
+        "id": "c3714fb4.b8bfd",
+        "type": "debug",
+        "z": "531f48d7.825248",
+        "name": "GLOBAL_POSITION_INT",
+        "active": false,
+        "tosidebar": false,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 2170,
+        "y": 460,
+        "wires": []
+    },
+    {
+        "id": "f3e213b.faa68f",
+        "type": "debug",
+        "z": "531f48d7.825248",
+        "name": "NAMED_VALUE_FLOAT",
+        "active": false,
+        "tosidebar": false,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 2170,
+        "y": 740,
+        "wires": []
+    },
+    {
+        "id": "9d71a759.8b2ab8",
+        "type": "status",
+        "z": "531f48d7.825248",
+        "name": "",
+        "scope": [
+            "f5a0e7f80bbbf90a"
+        ],
+        "x": 1140,
+        "y": 360,
+        "wires": [
+            [
+                "236369c628cf5b4e"
+            ]
+        ]
+    },
+    {
+        "id": "2dc47cd7.3e59b4",
+        "type": "debug",
+        "z": "531f48d7.825248",
+        "name": "ATTITUDE",
+        "active": false,
+        "tosidebar": false,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "x": 2090,
+        "y": 160,
+        "wires": []
+    },
+    {
+        "id": "e964489d.9d2038",
+        "type": "catch",
+        "z": "531f48d7.825248",
+        "name": "",
+        "scope": null,
+        "uncaught": false,
+        "x": 140,
+        "y": 880,
+        "wires": [
+            [
+                "5805e263.e334bc"
+            ]
+        ]
+    },
+    {
+        "id": "5805e263.e334bc",
+        "type": "debug",
+        "z": "531f48d7.825248",
+        "name": "",
+        "active": true,
+        "tosidebar": false,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 350,
+        "y": 880,
+        "wires": []
+    },
+    {
+        "id": "80e1f7a888ddb002",
+        "type": "comment",
+        "z": "531f48d7.825248",
+        "name": "MAVLINK msg-id list",
+        "info": "MAVLINK_MSG_ID_HEARTBEAT 0\nMAVLINK_MSG_ID_SYS_STATUS 1\nMAVLINK_MSG_ID_SYSTEM_TIME 2\nMAVLINK_MSG_ID_PING 4\nMAVLINK_MSG_ID_CHANGE_OPERATOR_CONTROL 5\nMAVLINK_MSG_ID_CHANGE_OPERATOR_CONTROL_ACK 6\nMAVLINK_MSG_ID_AUTH_KEY 7\nMAVLINK_MSG_ID_SET_MODE 11\nMAVLINK_MSG_ID_PARAM_REQUEST_READ 20\nMAVLINK_MSG_ID_PARAM_REQUEST_LIST 21\nMAVLINK_MSG_ID_PARAM_VALUE 22\nMAVLINK_MSG_ID_PARAM_SET 23\nMAVLINK_MSG_ID_GPS_RAW_INT 24\nMAVLINK_MSG_ID_GPS_STATUS 25\nMAVLINK_MSG_ID_SCALED_IMU 26\nMAVLINK_MSG_ID_RAW_IMU 27\nMAVLINK_MSG_ID_RAW_PRESSURE 28\nMAVLINK_MSG_ID_SCALED_PRESSURE 29\nMAVLINK_MSG_ID_ATTITUDE 30\nMAVLINK_MSG_ID_ATTITUDE_QUATERNION 31\nMAVLINK_MSG_ID_LOCAL_POSITION_NED 32\nMAVLINK_MSG_ID_GLOBAL_POSITION_INT 33\nMAVLINK_MSG_ID_RC_CHANNELS_SCALED 34\nMAVLINK_MSG_ID_RC_CHANNELS_RAW 35\nMAVLINK_MSG_ID_SERVO_OUTPUT_RAW 36\nMAVLINK_MSG_ID_MISSION_REQUEST_PARTIAL_LIST 37\nMAVLINK_MSG_ID_MISSION_WRITE_PARTIAL_LIST 38\nMAVLINK_MSG_ID_MISSION_ITEM 39\nMAVLINK_MSG_ID_MISSION_REQUEST 40\nMAVLINK_MSG_ID_MISSION_SET_CURRENT 41\nMAVLINK_MSG_ID_MISSION_CURRENT 42\nMAVLINK_MSG_ID_MISSION_REQUEST_LIST 43\nMAVLINK_MSG_ID_MISSION_COUNT 44\nMAVLINK_MSG_ID_MISSION_CLEAR_ALL 45\nMAVLINK_MSG_ID_MISSION_ITEM_REACHED 46\nMAVLINK_MSG_ID_MISSION_ACK 47\nMAVLINK_MSG_ID_SET_GPS_GLOBAL_ORIGIN 48\nMAVLINK_MSG_ID_GPS_GLOBAL_ORIGIN 49\nMAVLINK_MSG_ID_PARAM_MAP_RC 50\nMAVLINK_MSG_ID_SAFETY_SET_ALLOWED_AREA 54\nMAVLINK_MSG_ID_SAFETY_ALLOWED_AREA 55\nMAVLINK_MSG_ID_ATTITUDE_QUATERNION_COV 61\nMAVLINK_MSG_ID_NAV_CONTROLLER_OUTPUT 62\nMAVLINK_MSG_ID_GLOBAL_POSITION_INT_COV 63\nMAVLINK_MSG_ID_LOCAL_POSITION_NED_COV 64\nMAVLINK_MSG_ID_RC_CHANNELS 65\nMAVLINK_MSG_ID_REQUEST_DATA_STREAM 66\nMAVLINK_MSG_ID_DATA_STREAM 67\nMAVLINK_MSG_ID_MANUAL_CONTROL 69\nMAVLINK_MSG_ID_RC_CHANNELS_OVERRIDE 70\nMAVLINK_MSG_ID_MISSION_ITEM_INT 73\nMAVLINK_MSG_ID_VFR_HUD 74\nMAVLINK_MSG_ID_COMMAND_INT 75\nMAVLINK_MSG_ID_COMMAND_LONG 76\nMAVLINK_MSG_ID_COMMAND_ACK 77\nMAVLINK_MSG_ID_MANUAL_SETPOINT 81\nMAVLINK_MSG_ID_SET_ATTITUDE_TARGET 82\nMAVLINK_MSG_ID_SET_POSITION_TARGET_LOCAL_NED 84\nMAVLINK_MSG_ID_POSITION_TARGET_LOCAL_NED 85\nMAVLINK_MSG_ID_SET_POSITION_TARGET_GLOBAL_INT 86\nMAVLINK_MSG_ID_POSITION_TARGET_GLOBAL_INT 87\nMAVLINK_MSG_ID_LOCAL_POSITION_NED_SYSTEM_GLOBAL_OFFSET 89\nMAVLINK_MSG_ID_HIL_STATE 90\nMAVLINK_MSG_ID_HIL_CONTROLS 91\nMAVLINK_MSG_ID_HIL_RC_INPUTS_RAW 92\nMAVLINK_MSG_ID_OPTICAL_FLOW 100\nMAVLINK_MSG_ID_GLOBAL_VISION_POSITION_ESTIMATE 101\nMAVLINK_MSG_ID_VISION_POSITION_ESTIMATE 102\nMAVLINK_MSG_ID_VISION_SPEED_ESTIMATE 103\nMAVLINK_MSG_ID_VICON_POSITION_ESTIMATE 104\nMAVLINK_MSG_ID_HIGHRES_IMU 105\nMAVLINK_MSG_ID_OPTICAL_FLOW_RAD 106\nMAVLINK_MSG_ID_HIL_SENSOR 107\nMAVLINK_MSG_ID_SIM_STATE 108\nMAVLINK_MSG_ID_RADIO_STATUS 109\nMAVLINK_MSG_ID_FILE_TRANSFER_PROTOCOL 110\nMAVLINK_MSG_ID_TIMESYNC 111\nMAVLINK_MSG_ID_CAMERA_TRIGGER 112\nMAVLINK_MSG_ID_HIL_GPS 113\nMAVLINK_MSG_ID_HIL_OPTICAL_FLOW 114\nMAVLINK_MSG_ID_HIL_STATE_QUATERNION 115\nMAVLINK_MSG_ID_SCALED_IMU2 116\nMAVLINK_MSG_ID_LOG_REQUEST_LIST 117\nMAVLINK_MSG_ID_LOG_ENTRY 118\nMAVLINK_MSG_ID_LOG_REQUEST_DATA 119\nMAVLINK_MSG_ID_LOG_DATA 120\nMAVLINK_MSG_ID_LOG_ERASE 121\nMAVLINK_MSG_ID_LOG_REQUEST_END 122\nMAVLINK_MSG_ID_GPS_INJECT_DATA 123\nMAVLINK_MSG_ID_GPS2_RAW 124\nMAVLINK_MSG_ID_POWER_STATUS 125\nMAVLINK_MSG_ID_SERIAL_CONTROL 126\nMAVLINK_MSG_ID_GPS_RTK 127\nMAVLINK_MSG_ID_GPS2_RTK 128\nMAVLINK_MSG_ID_SCALED_IMU3 129\nMAVLINK_MSG_ID_DATA_TRANSMISSION_HANDSHAKE 130\nMAVLINK_MSG_ID_ENCAPSULATED_DATA 131\nMAVLINK_MSG_ID_DISTANCE_SENSOR 132\nMAVLINK_MSG_ID_TERRAIN_REQUEST 133\nMAVLINK_MSG_ID_TERRAIN_DATA 134\nMAVLINK_MSG_ID_TERRAIN_CHECK 135\nMAVLINK_MSG_ID_TERRAIN_REPORT 136\nMAVLINK_MSG_ID_SCALED_PRESSURE2 137\nMAVLINK_MSG_ID_ATT_POS_MOCAP 138\nMAVLINK_MSG_ID_SET_ACTUATOR_CONTROL_TARGET 139\nMAVLINK_MSG_ID_ACTUATOR_CONTROL_TARGET 140\nMAVLINK_MSG_ID_ALTITUDE 141\nMAVLINK_MSG_ID_RESOURCE_REQUEST 142\nMAVLINK_MSG_ID_SCALED_PRESSURE3 143\nMAVLINK_MSG_ID_CONTROL_SYSTEM_STATE 146\nMAVLINK_MSG_ID_BATTERY_STATUS 147\nMAVLINK_MSG_ID_AUTOPILOT_VERSION 148\nMAVLINK_MSG_ID_LANDING_TARGET 149\nMAVLINK_MSG_ID_SENSOR_OFFSETS 150\nMAVLINK_MSG_ID_SET_MAG_OFFSETS 151\nMAVLINK_MSG_ID_MEMINFO 152\nMAVLINK_MSG_ID_AP_ADC 153\nMAVLINK_MSG_ID_DIGICAM_CONFIGURE 154\nMAVLINK_MSG_ID_DIGICAM_CONTROL 155\nMAVLINK_MSG_ID_MOUNT_CONFIGURE 156\nMAVLINK_MSG_ID_MOUNT_CONTROL 157\nMAVLINK_MSG_ID_MOUNT_STATUS 158\nMAVLINK_MSG_ID_FENCE_POINT 160\nMAVLINK_MSG_ID_FENCE_FETCH_POINT 161\nMAVLINK_MSG_ID_FENCE_STATUS 162\nMAVLINK_MSG_ID_AHRS 163\nMAVLINK_MSG_ID_SIMSTATE 164\nMAVLINK_MSG_ID_HWSTATUS 165\nMAVLINK_MSG_ID_RADIO 166\nMAVLINK_MSG_ID_LIMITS_STATUS 167\nMAVLINK_MSG_ID_WIND 168\nMAVLINK_MSG_ID_DATA16 169\nMAVLINK_MSG_ID_DATA32 170\nMAVLINK_MSG_ID_DATA64 171\nMAVLINK_MSG_ID_DATA96 172\nMAVLINK_MSG_ID_RANGEFINDER 173\nMAVLINK_MSG_ID_AIRSPEED_AUTOCAL 174\nMAVLINK_MSG_ID_RALLY_POINT 175\nMAVLINK_MSG_ID_RALLY_FETCH_POINT 176\nMAVLINK_MSG_ID_COMPASSMOT_STATUS 177\nMAVLINK_MSG_ID_AHRS2 178\nMAVLINK_MSG_ID_CAMERA_STATUS 179\nMAVLINK_MSG_ID_CAMERA_FEEDBACK 180\nMAVLINK_MSG_ID_BATTERY2 181\nMAVLINK_MSG_ID_AHRS3 182\nMAVLINK_MSG_ID_AUTOPILOT_VERSION_REQUEST 183\nMAVLINK_MSG_ID_LED_CONTROL 186\nMAVLINK_MSG_ID_MAG_CAL_PROGRESS 191\nMAVLINK_MSG_ID_MAG_CAL_REPORT 192\nMAVLINK_MSG_ID_EKF_STATUS_REPORT 193\nMAVLINK_MSG_ID_PID_TUNING 194\nMAVLINK_MSG_ID_GIMBAL_REPORT 200\nMAVLINK_MSG_ID_GIMBAL_CONTROL 201\nMAVLINK_MSG_ID_GIMBAL_RESET 202\nMAVLINK_MSG_ID_GIMBAL_AXIS_CALIBRATION_PROGRESS 203\nMAVLINK_MSG_ID_GIMBAL_SET_HOME_OFFSETS 204\nMAVLINK_MSG_ID_GIMBAL_HOME_OFFSET_CALIBRATION_RESULT 205\nMAVLINK_MSG_ID_GIMBAL_SET_FACTORY_PARAMETERS 206\nMAVLINK_MSG_ID_GIMBAL_FACTORY_PARAMETERS_LOADED 207\nMAVLINK_MSG_ID_GIMBAL_ERASE_FIRMWARE_AND_CONFIG 208\nMAVLINK_MSG_ID_GIMBAL_PERFORM_FACTORY_TESTS 209\nMAVLINK_MSG_ID_GIMBAL_REPORT_FACTORY_TESTS_PROGRESS 210\nMAVLINK_MSG_ID_GOPRO_POWER_ON 215\nMAVLINK_MSG_ID_GOPRO_POWER_OFF 216\nMAVLINK_MSG_ID_GOPRO_COMMAND 217\nMAVLINK_MSG_ID_GOPRO_RESPONSE 218\nMAVLINK_MSG_ID_RPM 226\nMAVLINK_MSG_ID_VIBRATION 241\nMAVLINK_MSG_ID_HOME_POSITION 242\nMAVLINK_MSG_ID_SET_HOME_POSITION 243\nMAVLINK_MSG_ID_MESSAGE_INTERVAL 244\nMAVLINK_MSG_ID_EXTENDED_SYS_STATE 245\nMAVLINK_MSG_ID_ADSB_VEHICLE 246\nMAVLINK_MSG_ID_V2_EXTENSION 248\nMAVLINK_MSG_ID_MEMORY_VECT 249\nMAVLINK_MSG_ID_DEBUG_VECT 250\nMAVLINK_MSG_ID_NAMED_VALUE_FLOAT 251\nMAVLINK_MSG_ID_NAMED_VALUE_INT 252\nMAVLINK_MSG_ID_STATUSTEXT 253\nMAVLINK_MSG_ID_DEBUG 254\nMAVLINK_MSG_ID_EXTENDED_MESSAGE 255\n\nStructure of messages -> https://github.com/mavlink/mavlink/blob/master/message_definitions/v1.0/common.xml\n\nF.eks.:\n\n    <message id=\"30\" name=\"ATTITUDE\">\n      <description>The attitude in the aeronautical frame (right-handed, Z-down, Y-right, X-front, ZYX, intrinsic).</description>\n      <field type=\"uint32_t\" name=\"time_boot_ms\" units=\"ms\">Timestamp (time since system boot).</field>\n      <field type=\"float\" name=\"roll\" units=\"rad\">Roll angle (-pi..+pi)</field>\n      <field type=\"float\" name=\"pitch\" units=\"rad\">Pitch angle (-pi..+pi)</field>\n      <field type=\"float\" name=\"yaw\" units=\"rad\">Yaw angle (-pi..+pi)</field>\n      <field type=\"float\" name=\"rollspeed\" units=\"rad/s\">Roll angular speed</field>\n      <field type=\"float\" name=\"pitchspeed\" units=\"rad/s\">Pitch angular speed</field>\n      <field type=\"float\" name=\"yawspeed\" units=\"rad/s\">Yaw angular speed</field>\n    </message>\n\n    ",
+        "x": 170,
+        "y": 1000,
+        "wires": []
+    },
+    {
+        "id": "692348f150c4c05c",
+        "type": "comment",
+        "z": "531f48d7.825248",
+        "name": "Message structure for selected messages",
+        "info": "Structure of messages -> https://github.com/mavlink/mavlink/blob/master/message_definitions/v1.0/common.xml\n\n    <message id=\"0\" name=\"HEARTBEAT\">\n type\tuint8_t\tMAV_TYPE\tVehicle or component type. For a flight controller component the vehicle type (quadrotor, helicopter, etc.). For other components the component type (e.g. camera, gimbal, etc.). This should be used in preference to component id for identifying the component type.\nautopilot\tuint8_t\tMAV_AUTOPILOT\tAutopilot type / class. Use MAV_AUTOPILOT_INVALID for components that are not flight controllers.\nbase_mode\tuint8_t\tMAV_MODE_FLAG\tSystem mode bitmap.\ncustom_mode\tuint32_t\t\tA bitfield for use for autopilot-specific flags\nsystem_status\tuint8_t\tMAV_STATE\tSystem status flag.\nmavlink_version\tuint8_t_mavlink_version\t\tMAVLink version, not writable by user, gets added by protocol because of magic data type: uint8_t_mavlink_version\n\n    <message id=\"30\" name=\"ATTITUDE\">\n      <description>The attitude in the aeronautical frame (right-handed, Z-down, Y-right, X-front, ZYX, intrinsic).</description>\n      <field type=\"uint32_t\" name=\"time_boot_ms\" units=\"ms\">Timestamp (time since system boot).</field>\n      <field type=\"float\" name=\"roll\" units=\"rad\">Roll angle (-pi..+pi)</field>\n      <field type=\"float\" name=\"pitch\" units=\"rad\">Pitch angle (-pi..+pi)</field>\n      <field type=\"float\" name=\"yaw\" units=\"rad\">Yaw angle (-pi..+pi)</field>\n      <field type=\"float\" name=\"rollspeed\" units=\"rad/s\">Roll angular speed</field>\n      <field type=\"float\" name=\"pitchspeed\" units=\"rad/s\">Pitch angular speed</field>\n      <field type=\"float\" name=\"yawspeed\" units=\"rad/s\">Yaw angular speed</field>\n    </message>\n\n    <message id=\"33\" name=\"GLOBAL_POSITION_INT\">\n      <description>The filtered global position (e.g. fused GPS and accelerometers). The position is in GPS-frame (right-handed, Z-up). It\n               is designed as scaled integer message since the resolution of float is not sufficient.</description>\n      <field type=\"uint32_t\" name=\"time_boot_ms\" units=\"ms\">Timestamp (time since system boot).</field>\n      <field type=\"int32_t\" name=\"lat\" units=\"degE7\">Latitude, expressed</field>\n      <field type=\"int32_t\" name=\"lon\" units=\"degE7\">Longitude, expressed</field>\n      <field type=\"int32_t\" name=\"alt\" units=\"mm\">Altitude (MSL). Note that virtually all GPS modules provide both WGS84 and MSL.</field>\n      <field type=\"int32_t\" name=\"relative_alt\" units=\"mm\">Altitude above ground</field>\n      <field type=\"int16_t\" name=\"vx\" units=\"cm/s\">Ground X Speed (Latitude, positive north)</field>\n      <field type=\"int16_t\" name=\"vy\" units=\"cm/s\">Ground Y Speed (Longitude, positive east)</field>\n      <field type=\"int16_t\" name=\"vz\" units=\"cm/s\">Ground Z Speed (Altitude, positive down)</field>\n      <field type=\"uint16_t\" name=\"hdg\" units=\"cdeg\" invalid=\"UINT16_MAX\">Vehicle heading (yaw angle), 0.0..359.99 degrees. If unknown, set to: UINT16_MAX</field>\n    </message>\n\n    <message id=\"74\" name=\"VFR_HUD\">\n      <description>Metrics typically displayed on a HUD for fixed wing aircraft.</description>\n      <field type=\"float\" name=\"airspeed\" units=\"m/s\">Vehicle speed in form appropriate for vehicle type. For standard aircraft this is typically calibrated airspeed (CAS) or indicated airspeed (IAS) - either of which can be used by a pilot to estimate stall speed.</field>\n      <field type=\"float\" name=\"groundspeed\" units=\"m/s\">Current ground speed.</field>\n      <field type=\"int16_t\" name=\"heading\" units=\"deg\">Current heading in compass units (0-360, 0=north).</field>\n      <field type=\"uint16_t\" name=\"throttle\" units=\"%\">Current throttle setting (0 to 100).</field>\n      <field type=\"float\" name=\"alt\" units=\"m\">Current altitude (MSL).</field>\n      <field type=\"float\" name=\"climb\" units=\"m/s\">Current climb rate.</field>\n    </message>\n\n    <message id=\"141\" name=\"ALTITUDE\">\n      <description>The current system altitude.</description>\n      <field type=\"uint64_t\" name=\"time_usec\" units=\"us\">Timestamp (UNIX Epoch time or time since system boot). The receiving end can infer timestamp format (since 1.1.1970 or since system boot) by checking for the magnitude of the number.</field>\n      <field type=\"float\" name=\"altitude_monotonic\" units=\"m\">This altitude measure is initialized on system boot and monotonic (it is never reset, but represents the local altitude change). The only guarantee on this field is that it will never be reset and is consistent within a flight. The recommended value for this field is the uncorrected barometric altitude at boot time. This altitude will also drift and vary between flights.</field>\n      <field type=\"float\" name=\"altitude_amsl\" units=\"m\">This altitude measure is strictly above mean sea level and might be non-monotonic (it might reset on events like GPS lock or when a new QNH value is set). It should be the altitude to which global altitude waypoints are compared to. Note that it is *not* the GPS altitude, however, most GPS modules already output MSL by default and not the WGS84 altitude.</field>\n      <field type=\"float\" name=\"altitude_local\" units=\"m\">This is the local altitude in the local coordinate frame. It is not the altitude above home, but in reference to the coordinate origin (0, 0, 0). It is up-positive.</field>\n      <field type=\"float\" name=\"altitude_relative\" units=\"m\">This is the altitude above the home position. It resets on each change of the current home position.</field>\n      <field type=\"float\" name=\"altitude_terrain\" units=\"m\">This is the altitude above terrain. It might be fed by a terrain database or an altimeter. Values smaller than -1000 should be interpreted as unknown.</field>\n      <field type=\"float\" name=\"bottom_clearance\" units=\"m\">This is not the altitude, but the clear space below the system according to the fused clearance estimate. It generally should max out at the maximum range of e.g. the laser altimeter. It is generally a moving target. A negative value indicates no measurement available.</field>\n    </message>\n\n    <message id=\"241\" name=\"VIBRATION\">\n      <description>Vibration levels and accelerometer clipping</description>\n      <field type=\"uint64_t\" name=\"time_usec\" units=\"us\">Timestamp (UNIX Epoch time or time since system boot). The receiving end can infer timestamp format (since 1.1.1970 or since system boot) by checking for the magnitude of the number.</field>\n      <field type=\"float\" name=\"vibration_x\">Vibration levels on X-axis</field>\n      <field type=\"float\" name=\"vibration_y\">Vibration levels on Y-axis</field>\n      <field type=\"float\" name=\"vibration_z\">Vibration levels on Z-axis</field>\n      <field type=\"uint32_t\" name=\"clipping_0\">first accelerometer clipping count</field>\n      <field type=\"uint32_t\" name=\"clipping_1\">second accelerometer clipping count</field>\n      <field type=\"uint32_t\" name=\"clipping_2\">third accelerometer clipping count</field>\n    </message>\n\n    <message id=\"251\" name=\"NAMED_VALUE_FLOAT\">\n      <description>Send a key-value pair as float. The use of this message is discouraged for normal packets, but a quite efficient way for testing new messages and getting experimental debug output.</description>\n      <field type=\"uint32_t\" name=\"time_boot_ms\" units=\"ms\">Timestamp (time since system boot).</field>\n      <field type=\"char[10]\" name=\"name\" instance=\"true\">Name of the debug variable</field>\n      <field type=\"float\" name=\"value\">Floating point value</field>\n    </message>\n    <message id=\"252\" name=\"NAMED_VALUE_INT\">\n      <description>Send a key-value pair as integer. The use of this message is discouraged for normal packets, but a quite efficient way for testing new messages and getting experimental debug output.</description>\n      <field type=\"uint32_t\" name=\"time_boot_ms\" units=\"ms\">Timestamp (time since system boot).</field>\n      <field type=\"char[10]\" name=\"name\" instance=\"true\">Name of the debug variable</field>\n      <field type=\"int32_t\" name=\"value\">Signed integer value</field>\n    </message>",
+        "x": 240,
+        "y": 1060,
+        "wires": []
+    },
+    {
+        "id": "a439f078.2f667",
+        "type": "function",
+        "z": "531f48d7.825248",
+        "name": "Reformat",
+        "func": "msg.topic = msg.payload.name.substr(0,msg.payload.name.length-1);\nmsg.payload = msg.payload.value;\n//https://stackoverflow.com/questions/22809401/removing-a-null-character-from-a-string-in-javascript/34897151\n//msg.topic.replace(/\\0.*$/g,'');\nreturn msg;",
+        "outputs": 1,
+        "timeout": "",
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 2040,
+        "y": 660,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "f8b98d1afe51725c",
+        "type": "comment",
+        "z": "531f48d7.825248",
+        "d": true,
+        "name": "Field Reordering",
+        "info": "Message payload fields are reordered for transmission as follows:\n\nFields are sorted according to their native data size:\n(u)int64_t, double (8 bytes)\n(u)int32_t, float (4)\n(u)int16_t (2)\n(u)int8_t, char (1)\nIf two fields have the same length, their order is preserved as it was present before the data field size ordering\nArrays are handled based on the data type they use, not based on the total array size\nThe over-the-air order is the same as for the struct and thus represents the reordered fields\nThe CRC_EXTRA field is calculated after the reordering, to ensure that a mistake during field reordering will be caught by a faulty CRC. The provided Python, C and C# reference implementations are tested to have the correct field reordering, this is only a concern for custom implementations.\n\n\nAnd for CRC:\nhttps://mavlink.io/en/guide/serialization.html#crc_extra\nThe CRC covers the whole message, excluding magic byte and the signature (if present). The CRC includes the CRC_EXTRA byte, which is used to ensure that the sending and receiving systems share a common understanding of the message definition.",
+        "x": 320,
+        "y": 1100,
+        "wires": []
+    },
+    {
+        "id": "2b395cd05f376f83",
+        "type": "inject",
+        "z": "531f48d7.825248",
+        "name": "",
+        "props": [
+            {
+                "p": "payload",
+                "v": "32.545",
+                "vt": "num"
+            },
+            {
+                "p": "topic",
+                "v": "test",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "test",
+        "payload": "32.545",
+        "payloadType": "num",
+        "x": 230,
+        "y": 780,
+        "wires": [
+            [
+                "c16e02c8d6c3213e"
+            ]
+        ]
+    },
+    {
+        "id": "fcccbe6cfdf3e068",
+        "type": "comment",
+        "z": "531f48d7.825248",
+        "name": "Prepare message to send",
+        "info": "",
+        "x": 190,
+        "y": 680,
+        "wires": []
+    },
+    {
+        "id": "ad320d077bc28ebf",
+        "type": "function",
+        "z": "531f48d7.825248",
+        "name": "PARAM_REQUEST_LIST message",
+        "func": "\nvar newmessage = {};\nnewmessage.type = \"PARAM_REQUEST_LIST\";\nnewmessage.fields = {\n    //'name':\t        msg.topic,\n    'target_component':\t msg.payload\n};\nvar msglist = flow.get(\"newmessage\") || 0;\nif (msglist === 0) {\n    msglist = [];\n}\nmsglist[msglist.length] = newmessage;\nflow.set(\"newmessage\", msglist);\n",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 480,
+        "y": 1180,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "cadb650910701cd5",
+        "type": "inject",
+        "z": "531f48d7.825248",
+        "name": "Target component 1",
+        "props": [
+            {
+                "p": "payload"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "1",
+        "payloadType": "num",
+        "x": 190,
+        "y": 1180,
+        "wires": [
+            [
+                "ad320d077bc28ebf"
+            ]
+        ]
+    },
+    {
+        "id": "c3a8d45243b9c37f",
+        "type": "inject",
+        "z": "531f48d7.825248",
+        "name": "Target component 0",
+        "props": [
+            {
+                "p": "payload"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "0",
+        "payloadType": "num",
+        "x": 190,
+        "y": 1140,
+        "wires": [
+            [
+                "ad320d077bc28ebf"
+            ]
+        ]
+    },
+    {
+        "id": "3730e6c76172c0b9",
+        "type": "exec",
+        "z": "531f48d7.825248",
+        "command": "./mavlink2rest-arm-unknown-linux-musleabihf ",
+        "addpay": "payload",
+        "append": "",
+        "useSpawn": "true",
+        "timer": "",
+        "winHide": false,
+        "oldrc": false,
+        "name": "Start mavlink2rest",
+        "x": 790,
+        "y": 320,
+        "wires": [
+            [
+                "f5471fcbc88dae2b"
+            ],
+            [
+                "9c17f739aff6ff80"
+            ],
+            []
+        ]
+    },
+    {
+        "id": "c26f34a9627bd7cf",
+        "type": "exec",
+        "z": "531f48d7.825248",
+        "command": "serialport-list -f json",
+        "addpay": "",
+        "append": "",
+        "useSpawn": "false",
+        "timer": "",
+        "winHide": false,
+        "oldrc": false,
+        "name": "Get ports",
+        "x": 500,
+        "y": 180,
+        "wires": [
+            [
+                "a511ae1e310285bd"
+            ],
+            [],
+            []
+        ]
+    },
+    {
+        "id": "7a92b3dd36c7579a",
+        "type": "inject",
+        "z": "531f48d7.825248",
+        "name": "Get connected serial ports",
+        "props": [],
+        "repeat": "2",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "x": 260,
+        "y": 180,
+        "wires": [
+            [
+                "c26f34a9627bd7cf",
+                "564ea069659ff64e"
+            ]
+        ]
+    },
+    {
+        "id": "a511ae1e310285bd",
+        "type": "function",
+        "z": "531f48d7.825248",
+        "name": "Save available ports",
+        "func": "flow.set('devices',JSON.parse(msg.payload));\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 740,
+        "y": 160,
+        "wires": [
+            [
+                "1a9b28c56b7c376e"
+            ]
+        ]
+    },
+    {
+        "id": "b8a09f897dde0ddc",
+        "type": "comment",
+        "z": "531f48d7.825248",
+        "name": "Requirement serialport-list",
+        "info": "Requires\n    sudo npm install -g @serialport/list\nfor the command\n    serialport-list -f json",
+        "x": 230,
+        "y": 100,
+        "wires": []
+    },
+    {
+        "id": "1a9b28c56b7c376e",
+        "type": "function",
+        "z": "531f48d7.825248",
+        "name": "Select Port",
+        "func": "function findPathToManufacturer(devices, manufacturer, manufacturerTELE) {\n    for (var i = 0; i < devices.length; i++) {\n        if (devices[i].manufacturer == manufacturer) {\n            return devices[i].path;\n        } else if (devices[i].manufacturer == manufacturerTELE) {\n            return devices[i].path;\n        }\n    }\n    return null;\n}\nfunction findPathToManufacturerOneOnly(devices, manufacturer) {\n    for (var i = 0; i < devices.length; i++) {\n        if (devices[i].manufacturer == manufacturer) {\n            return devices[i].path;\n        }\n    }\n    return null;\n}\nnode.send({ topic: \"info\", payload: \"\", status: { fill: \"green\", shape: \"ring\", text: '... waiting for port ...' } });\n\nvar PixhawkOnly = env.get(\"PixhawkOnly\") || false;\nvar RadioOnly = env.get(\"RadioOnly\") || false;\n\nvar devicepath = null;\n\nif (PixhawkOnly) {\n    devicepath = findPathToManufacturerOneOnly(flow.get('devices') || {}, \"3D Robotics\");\n} else if (RadioOnly) {\n    devicepath = findPathToManufacturerOneOnly(flow.get('devices') || {}, \"FTDI\");\n} else {\n    devicepath = findPathToManufacturer(flow.get('devices') || {}, \"3D Robotics\", \"FTDI\");\n}\n\n//var devicepath = findPathToManufacturer(flow.get('devices')||{}, \"3D Robotics\", \"FTDI\");\n\nif (devicepath != null) {\n    //var port = new SerialPort({ path: devicepath, baudRate: 57600 });\n    //flow.set('portinuse', devicepath);\n    node.status({ fill: \"green\", shape: \"dot\", text: 'connecting to ' + devicepath + \":57600\" });\n    node.send({ topic: \"port\", payload: \"--connect serial:\" + devicepath + \":57600 --mavlink 1\", status: { fill: \"green\", shape: \"dot\", text: 'connecting to ' + devicepath + \":57600\" } });\n\n    //node.on('close',function() {\n        //flow.set('portinuse', null);\n    //});\n} else {\n    node.send({topic : \"port\", reset : true});\n}",
+        "outputs": 1,
+        "timeout": "",
+        "noerr": 0,
+        "initialize": "// Code added here will be run once\n// whenever the node is started.\nnode.status({ fill: \"green\", shape: \"ring\", text: '... waiting for port ...' });\n",
+        "finalize": "// Code added here will be run when the\n// node is being stopped or re-deployed.\nnode.status({ fill: \"red\", shape: \"dot\", text: 'Node closed.' });",
+        "libs": [],
+        "x": 970,
+        "y": 160,
+        "wires": [
+            [
+                "d8517ae99fbedc0c"
+            ]
+        ]
+    },
+    {
+        "id": "405dc4ea115c735e",
+        "type": "comment",
+        "z": "531f48d7.825248",
+        "name": "Info",
+        "info": "If running, watch at http://<boat-IP>:8088/",
+        "x": 810,
+        "y": 300,
+        "wires": []
+    },
+    {
+        "id": "d8517ae99fbedc0c",
+        "type": "rbe",
+        "z": "531f48d7.825248",
+        "name": "",
+        "func": "rbe",
+        "gap": "",
+        "start": "",
+        "inout": "out",
+        "septopics": true,
+        "property": "payload",
+        "topi": "topic",
+        "x": 470,
+        "y": 320,
+        "wires": [
+            [
+                "76bbb990875ae56e",
+                "1844b91922d92e7c"
+            ]
+        ]
+    },
+    {
+        "id": "9e5aad4cc8c87be7",
+        "type": "comment",
+        "z": "531f48d7.825248",
+        "name": "Requirement mavlink2rest",
+        "info": "Requires download of mavlink2rest from https://github.com/patrickelectric/mavlink2rest, via browser or wget\n    wget https://github.com/mavlink/mavlink2rest/releases/latest/download/mavlink2rest-arm-unknown-linux-musleabihf\neller for windows\n    wget https://github.com/mavlink/mavlink2rest/releases/latest/download/mavlink2rest-x86_64-pc-windows-msvc.exe\nfor the command, here for linux, write\n    ./mavlink2rest-arm-unknown-linux-musleabihf --connect serial:<devicepath>:57600 --mavlink 1\n",
+        "x": 230,
+        "y": 280,
+        "wires": []
+    },
+    {
+        "id": "e7db9ee17e86d2ab",
+        "type": "comment",
+        "z": "531f48d7.825248",
+        "name": "Startup",
+        "info": "",
+        "x": 110,
+        "y": 40,
+        "wires": []
+    },
+    {
+        "id": "7af1024211880b11",
+        "type": "change",
+        "z": "531f48d7.825248",
+        "name": "toStatus",
+        "rules": [
+            {
+                "t": "set",
+                "p": "status.fill",
+                "pt": "msg",
+                "to": "green",
+                "tot": "str"
+            },
+            {
+                "t": "set",
+                "p": "status.shape",
+                "pt": "msg",
+                "to": "dot",
+                "tot": "str"
+            },
+            {
+                "t": "set",
+                "p": "status.text",
+                "pt": "msg",
+                "to": "payload",
+                "tot": "msg",
+                "dc": true
+            },
+            {
+                "t": "delete",
+                "p": "payload",
+                "pt": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 1140,
+        "y": 280,
+        "wires": [
+            [
+                "236369c628cf5b4e"
+            ]
+        ]
+    },
+    {
+        "id": "856990b7d0c13294",
+        "type": "change",
+        "z": "531f48d7.825248",
+        "name": "toStatus",
+        "rules": [
+            {
+                "t": "set",
+                "p": "status.fill",
+                "pt": "msg",
+                "to": "red",
+                "tot": "str"
+            },
+            {
+                "t": "set",
+                "p": "status.shape",
+                "pt": "msg",
+                "to": "dot",
+                "tot": "str"
+            },
+            {
+                "t": "set",
+                "p": "status.text",
+                "pt": "msg",
+                "to": "Error in mavlink communication",
+                "tot": "str"
+            },
+            {
+                "t": "delete",
+                "p": "payload",
+                "pt": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 1140,
+        "y": 320,
+        "wires": [
+            [
+                "236369c628cf5b4e"
+            ]
+        ]
+    },
+    {
+        "id": "c16e02c8d6c3213e",
+        "type": "function",
+        "z": "531f48d7.825248",
+        "name": "NAMED_VALUE_FLOAT",
+        "func": "var MAV_SYS_ID = env.get(\"MAV_SYS_ID\") || 1;\nvar MAV_COMP_ID = env.get(\"MAV_COMP_ID\") || 1;\nvar MAV_COMP_ID_OWN = env.get(\"MAV_COMP_ID_OWN\") || 191; //191\tMAV_COMP_ID_ONBOARD_COMPUTER\n\nif ((typeof msg.payload === \"number\") && (typeof msg.topic === \"string\")) {\n    var value = msg.payload;\n    var text = msg.topic;\n\n    msg = {};\n    msg.payload = {};\n    msg.payload.header = {};\n    msg.payload.message = {};\n\n    msg.payload.header.system_id = MAV_SYS_ID;//255;\n    msg.payload.header.component_id = MAV_COMP_ID_OWN;//0 or 191; //191\tMAV_COMP_ID_ONBOARD_COMPUTER, from https://mavlink.io/en/messages/minimal.html\n\n    msg.payload.header.sequence = (context.get(\"sequence\")||0);\n    context.set(\"sequence\", msg.payload.header.sequence+1); //Save sequence number for next time\n\n    //if (value % 1 === 0) {\n    //    msg.payload.message.type = \"NAMED_VALUE_INT\";\n    //} else {\n    msg.payload.message.type = \"NAMED_VALUE_FLOAT\";\n    //}\n    msg.payload.message.time_boot_ms = Date.now() - (context.get(\"lasttime\")||Date.now());\n    context.set(\"lasttime\",Date.now());\n    msg.payload.message.value = value;\n    msg.payload.message.name = text.split(\"\");  //devide into array of single characters\n    msg.payload.message.name = msg.payload.message.name.slice(0, 10);   //limit to 10 characters\n    //And fill inn empty characters if needed\n    if (msg.payload.message.name.length < 10) {\n        for (let i = msg.payload.message.name.length; i < 10; i++) {\n            msg.payload.message.name[i] = \" \";\n        }\n    }\n\n    //msg.payload = JSON.stringify(msg.payload);\n    msg.ip = flow.get(\"BoatIP\")||\"localhoast\";\n    //msg.url = \"http://\"+IP+\":8088/v1/mavlink/\";\n    //msg.method = \"POST\";\n    return msg;\n}",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 730,
+        "y": 740,
+        "wires": [
+            [
+                "a5a964dde78dbac5"
+            ]
+        ]
+    },
+    {
+        "id": "a72f786e41a87cc5",
+        "type": "http request",
+        "z": "531f48d7.825248",
+        "name": "GET ALL",
+        "method": "GET",
+        "ret": "obj",
+        "paytoqs": "ignore",
+        "url": "http://{{{ip}}}:8088/v1/mavlink/",
+        "tls": "",
+        "persist": false,
+        "proxy": "",
+        "insecureHTTPParser": false,
+        "authType": "",
+        "senderr": false,
+        "headers": [],
+        "x": 940,
+        "y": 540,
+        "wires": [
+            [
+                "f5a0e7f80bbbf90a",
+                "803b72a92990eb47"
+            ]
+        ]
+    },
+    {
+        "id": "076bc121793747db",
+        "type": "delay",
+        "z": "531f48d7.825248",
+        "name": "",
+        "pauseType": "rate",
+        "timeout": "5",
+        "timeoutUnits": "seconds",
+        "rate": "1",
+        "nbRateUnits": "1",
+        "rateUnits": "second",
+        "randomFirst": "1",
+        "randomLast": "5",
+        "randomUnits": "seconds",
+        "drop": true,
+        "allowrate": true,
+        "outputs": 1,
+        "x": 530,
+        "y": 540,
+        "wires": [
+            [
+                "b2d9d1772502128f"
+            ]
+        ]
+    },
+    {
+        "id": "d7eab8f972e02df1",
+        "type": "inject",
+        "z": "531f48d7.825248",
+        "name": "",
+        "props": [],
+        "repeat": "0.02",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "x": 190,
+        "y": 540,
+        "wires": [
+            [
+                "465a117a1df8c502"
+            ]
+        ]
+    },
+    {
+        "id": "b2d9d1772502128f",
+        "type": "delay",
+        "z": "531f48d7.825248",
+        "name": "",
+        "pauseType": "rate",
+        "timeout": "5",
+        "timeoutUnits": "seconds",
+        "rate": "50",
+        "nbRateUnits": "1",
+        "rateUnits": "second",
+        "randomFirst": "1",
+        "randomLast": "5",
+        "randomUnits": "seconds",
+        "drop": true,
+        "allowrate": false,
+        "outputs": 1,
+        "x": 720,
+        "y": 540,
+        "wires": [
+            [
+                "a72f786e41a87cc5"
+            ]
+        ]
+    },
+    {
+        "id": "9c17f739aff6ff80",
+        "type": "switch",
+        "z": "531f48d7.825248",
+        "name": "",
+        "property": "payload",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "cont",
+                "v": "error",
+                "vt": "str"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 1,
+        "x": 990,
+        "y": 320,
+        "wires": [
+            [
+                "856990b7d0c13294"
+            ]
+        ]
+    },
+    {
+        "id": "f5471fcbc88dae2b",
+        "type": "switch",
+        "z": "531f48d7.825248",
+        "name": "",
+        "property": "payload",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "cont",
+                "v": "Server running",
+                "vt": "str"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 1,
+        "x": 990,
+        "y": 280,
+        "wires": [
+            [
+                "7af1024211880b11"
+            ]
+        ]
+    },
+    {
+        "id": "76bbb990875ae56e",
+        "type": "change",
+        "z": "531f48d7.825248",
+        "name": "toStatus",
+        "rules": [
+            {
+                "t": "delete",
+                "p": "payload",
+                "pt": "msg"
+            },
+            {
+                "t": "delete",
+                "p": "topic",
+                "pt": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 1000,
+        "y": 240,
+        "wires": [
+            [
+                "236369c628cf5b4e"
+            ]
+        ]
+    },
+    {
+        "id": "236369c628cf5b4e",
+        "type": "delay",
+        "z": "531f48d7.825248",
+        "name": "",
+        "pauseType": "rate",
+        "timeout": "5",
+        "timeoutUnits": "seconds",
+        "rate": "1",
+        "nbRateUnits": "1",
+        "rateUnits": "second",
+        "randomFirst": "1",
+        "randomLast": "5",
+        "randomUnits": "seconds",
+        "drop": false,
+        "allowrate": false,
+        "outputs": 1,
+        "x": 1330,
+        "y": 240,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "564ea069659ff64e",
+        "type": "ip",
+        "z": "531f48d7.825248",
+        "name": "ip",
+        "https": false,
+        "timeout": "5000",
+        "internalIPv4": true,
+        "internalIPv6": false,
+        "publicIPv4": false,
+        "publicIPv6": false,
+        "x": 510,
+        "y": 100,
+        "wires": [
+            [
+                "a910b222c7dea717"
+            ]
+        ]
+    },
+    {
+        "id": "a910b222c7dea717",
+        "type": "change",
+        "z": "531f48d7.825248",
+        "name": "",
+        "rules": [
+            {
+                "t": "set",
+                "p": "BoatIP",
+                "pt": "flow",
+                "to": "payload.internalIPv4",
+                "tot": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 700,
+        "y": 100,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "1844b91922d92e7c",
+        "type": "switch",
+        "z": "531f48d7.825248",
+        "name": "",
+        "property": "payload",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "cont",
+                "v": "serial",
+                "vt": "str"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 1,
+        "x": 630,
+        "y": 320,
+        "wires": [
+            [
+                "3730e6c76172c0b9"
+            ]
+        ]
+    },
+    {
+        "id": "465a117a1df8c502",
+        "type": "function",
+        "z": "531f48d7.825248",
+        "name": "dynamic IP",
+        "func": "msg.ip = flow.get(\"BoatIP\")||\"localhoast\";\nmsg.rate = env.get(\"Datarate\") || 1000;\nmsg.MAV_SYS_ID = env.get(\"MAV_SYS_ID\") || 1;\nmsg.MAV_COMP_ID = env.get(\"MAV_COMP_ID\") || 1;\nmsg.MAV_COMP_ID_OWN = env.get(\"MAV_COMP_ID_OWN\") || 191; //191\tMAV_COMP_ID_ONBOARD_COMPUTER\n//msg.url = \"http://\"+IP+\":8088/v1/mavlink/\"; //http://10.124.224.82:8088/v1/mavlink/\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 350,
+        "y": 540,
+        "wires": [
+            [
+                "076bc121793747db"
+            ]
+        ]
+    },
+    {
+        "id": "a5a964dde78dbac5",
+        "type": "http request",
+        "z": "531f48d7.825248",
+        "name": "NAMED_VALUE_FLOAT",
+        "method": "POST",
+        "ret": "txt",
+        "paytoqs": "ignore",
+        "url": "http://{{{ip}}}:8088/v1/mavlink",
+        "tls": "",
+        "persist": false,
+        "proxy": "",
+        "insecureHTTPParser": false,
+        "authType": "",
+        "senderr": false,
+        "headers": [],
+        "x": 1010,
+        "y": 740,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "f5a0e7f80bbbf90a",
+        "type": "function",
+        "z": "531f48d7.825248",
+        "name": "Extract own System and Component",
+        "func": "msg.payload = msg.payload.vehicles[msg.MAV_SYS_ID];\nmsg.payload = msg.payload.components[msg.MAV_COMP_ID];\nmsg.payload = msg.payload.messages;\nnode.status({ fill: \"green\", shape: \"dot\", text: \"receiving data\" });\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1110,
+        "y": 460,
+        "wires": [
+            [
+                "1fc557b8364e532c",
+                "5220db9344afacac",
+                "17de8b43f9fb5d52",
+                "ed721c0d8763f71c"
+            ]
+        ]
+    },
+    {
+        "id": "1fc557b8364e532c",
+        "type": "function",
+        "z": "531f48d7.825248",
+        "name": "Extract message type, ATTITUDE",
+        "func": "msg.payload = msg.payload.ATTITUDE.message;\nmsg.topic = msg.payload.type;\ndelete msg.payload.type;\nif (msg.payload != undefined) {\n    return msg;\n}\n",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1500,
+        "y": 340,
+        "wires": [
+            [
+                "7ac730b676070945"
+            ]
+        ]
+    },
+    {
+        "id": "5220db9344afacac",
+        "type": "function",
+        "z": "531f48d7.825248",
+        "name": "Extract message type, VFR_HUD",
+        "func": "msg.payload = msg.payload.VFR_HUD.message;\nmsg.topic = msg.payload.type;\ndelete msg.payload.type;\nif (msg.payload != undefined) {\n    return msg;\n}\n",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1500,
+        "y": 400,
+        "wires": [
+            [
+                "e8524f78e51c381b"
+            ]
+        ]
+    },
+    {
+        "id": "17de8b43f9fb5d52",
+        "type": "function",
+        "z": "531f48d7.825248",
+        "name": "Extract message type, GLOBAL_POSITION_INT",
+        "func": "msg.payload = msg.payload.GLOBAL_POSITION_INT.message;\nmsg.topic = msg.payload.type;\ndelete msg.payload.type;\nif (msg.payload != undefined) {\n    return msg;\n}\n",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1540,
+        "y": 460,
+        "wires": [
+            [
+                "51d00aed7882b8b2"
+            ]
+        ]
+    },
+    {
+        "id": "ed721c0d8763f71c",
+        "type": "function",
+        "z": "531f48d7.825248",
+        "name": "Extract message type, NAMED_VALUE_FLOAT",
+        "func": "msg.payload = msg.payload.NAMED_VALUE_FLOAT.message;\nmsg.topic = msg.payload.type;\ndelete msg.payload.type;\nif (msg.payload != undefined) {\n    return msg;\n}\n",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1540,
+        "y": 520,
+        "wires": [
+            [
+                "1a026b54248621b7"
+            ]
+        ]
+    },
+    {
+        "id": "5ba63e922f750670",
+        "type": "function",
+        "z": "531f48d7.825248",
+        "name": "NAMED_VALUE_FLOAT",
+        "func": "var text = msg.payload.name;\nmsg.payload = msg.payload.value;\nmsg.topic = text.join(\"\");        //Make string from array\nmsg.topic = msg.topic.trim();   //Remove spaces\nreturn msg;\n",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1870,
+        "y": 720,
+        "wires": [
+            [
+                "f3e213b.faa68f"
+            ]
+        ]
+    },
+    {
+        "id": "7ac730b676070945",
+        "type": "rbe",
+        "z": "531f48d7.825248",
+        "name": "",
+        "func": "rbe",
+        "gap": "",
+        "start": "",
+        "inout": "out",
+        "septopics": false,
+        "property": "payload",
+        "topi": "topic",
+        "x": 1750,
+        "y": 340,
+        "wires": [
+            [
+                "2dc47cd7.3e59b4"
+            ]
+        ]
+    },
+    {
+        "id": "e8524f78e51c381b",
+        "type": "rbe",
+        "z": "531f48d7.825248",
+        "name": "",
+        "func": "rbe",
+        "gap": "",
+        "start": "",
+        "inout": "out",
+        "septopics": false,
+        "property": "payload",
+        "topi": "topic",
+        "x": 1750,
+        "y": 400,
+        "wires": [
+            [
+                "82ba853b.b77358"
+            ]
+        ]
+    },
+    {
+        "id": "51d00aed7882b8b2",
+        "type": "rbe",
+        "z": "531f48d7.825248",
+        "name": "",
+        "func": "rbe",
+        "gap": "",
+        "start": "",
+        "inout": "out",
+        "septopics": false,
+        "property": "payload",
+        "topi": "topic",
+        "x": 1790,
+        "y": 460,
+        "wires": [
+            [
+                "c3714fb4.b8bfd"
+            ]
+        ]
+    },
+    {
+        "id": "1a026b54248621b7",
+        "type": "rbe",
+        "z": "531f48d7.825248",
+        "name": "",
+        "func": "rbe",
+        "gap": "",
+        "start": "",
+        "inout": "out",
+        "septopics": false,
+        "property": "payload",
+        "topi": "topic",
+        "x": 1790,
+        "y": 520,
+        "wires": [
+            [
+                "5ba63e922f750670"
+            ]
+        ]
+    },
+    {
+        "id": "c6343b5ae0382945",
+        "type": "change",
+        "z": "531f48d7.825248",
+        "name": "",
+        "rules": [
+            {
+                "t": "set",
+                "p": "reset",
+                "pt": "msg",
+                "to": "true",
+                "tot": "bool"
+            },
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "",
+                "tot": "str"
+            },
+            {
+                "t": "set",
+                "p": "topic",
+                "pt": "msg",
+                "to": "port",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 420,
+        "y": 420,
+        "wires": [
+            [
+                "d8517ae99fbedc0c"
+            ]
+        ]
+    },
+    {
+        "id": "0b3fc21138eee3d7",
+        "type": "trigger",
+        "z": "531f48d7.825248",
+        "name": "",
+        "op1": "",
+        "op2": "",
+        "op1type": "pay",
+        "op2type": "nul",
+        "duration": "2000",
+        "extend": true,
+        "overrideDelay": false,
+        "units": "ms",
+        "reset": "",
+        "bytopic": "all",
+        "topic": "topic",
+        "outputs": 1,
+        "x": 220,
+        "y": 420,
+        "wires": [
+            [
+                "c6343b5ae0382945"
+            ]
+        ]
+    },
+    {
+        "id": "803b72a92990eb47",
+        "type": "switch",
+        "z": "531f48d7.825248",
+        "name": "Check data content",
+        "property": "payload",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "cont",
+                "v": "RequestError",
+                "vt": "str"
+            },
+            {
+                "t": "else"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 2,
+        "x": 1170,
+        "y": 580,
+        "wires": [
+            [
+                "0b3fc21138eee3d7"
+            ],
+            []
+        ]
+    },
+    {
+        "id": "d5c215658a908462",
+        "type": "delay",
+        "z": "531f48d7.825248",
+        "name": "",
+        "pauseType": "rate",
+        "timeout": "5",
+        "timeoutUnits": "seconds",
+        "rate": "50",
+        "nbRateUnits": "1",
+        "rateUnits": "second",
+        "randomFirst": "1",
+        "randomLast": "5",
+        "randomUnits": "seconds",
+        "drop": true,
+        "allowrate": false,
+        "outputs": 1,
+        "x": 460,
+        "y": 720,
+        "wires": [
+            [
+                "c16e02c8d6c3213e"
+            ]
+        ]
+    },
+    {
+        "id": "69621e36.f7fe",
+        "type": "subflow:531f48d7.825248",
+        "z": "ea48a78e85d57ba1",
+        "name": "Telemetry and RC",
+        "x": 530,
+        "y": 180,
+        "wires": [
+            [
+                "b814590f.ce8f08"
+            ],
+            [
+                "2c6167e0.80ba18"
+            ],
+            [
+                "3faccd72.f14b72"
+            ],
+            [
+                "7bda28.6c76e5d8"
+            ],
+            [
+                "73c0a8c4c6f4239d"
+            ]
+        ]
+    },
+    {
+        "id": "aad595db.68bb28",
+        "type": "inject",
+        "z": "ea48a78e85d57ba1",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "test",
+        "payload": "32.545",
+        "payloadType": "num",
+        "x": 270,
+        "y": 140,
+        "wires": [
+            [
+                "69621e36.f7fe"
+            ]
+        ]
+    },
+    {
+        "id": "2c6167e0.80ba18",
+        "type": "debug",
+        "z": "ea48a78e85d57ba1",
+        "name": "VFR_HUD",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "x": 910,
+        "y": 100,
+        "wires": []
+    },
+    {
+        "id": "3faccd72.f14b72",
+        "type": "debug",
+        "z": "ea48a78e85d57ba1",
+        "name": "GLOBAL_POSITION_INT",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "x": 950,
+        "y": 160,
+        "wires": []
+    },
+    {
+        "id": "7bda28.6c76e5d8",
+        "type": "debug",
+        "z": "ea48a78e85d57ba1",
+        "name": "Radio Control",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "x": 920,
+        "y": 220,
+        "wires": []
+    },
+    {
+        "id": "b814590f.ce8f08",
+        "type": "debug",
+        "z": "ea48a78e85d57ba1",
+        "name": "ATTITUDE",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 910,
+        "y": 40,
+        "wires": []
+    },
+    {
+        "id": "73c0a8c4c6f4239d",
+        "type": "debug",
+        "z": "ea48a78e85d57ba1",
+        "name": "All",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 890,
+        "y": 280,
+        "wires": []
+    },
+    {
+        "id": "fd9947145a1a20da",
+        "type": "inject",
+        "z": "ea48a78e85d57ba1",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "othertest",
+        "payload": "300",
+        "payloadType": "num",
+        "x": 270,
+        "y": 200,
+        "wires": [
+            [
+                "69621e36.f7fe"
+            ]
+        ]
+    }
+]
