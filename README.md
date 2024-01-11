@@ -1,8 +1,10 @@
 ## Naval Archimedes
 
-The idea of the project is to make programming a small naval drone easy for new students. The programming plattform for programming the boats is Node-RED:<br>
+https://raw.githubusercontent.com/alexsauter/navalarchimedes/main/figs/modelboats.jpg
+
+This project is the basis for programming part of the subject MILM1302 at the Royal Norwegian Naval Academy. In the part called Naval Archimedes, the students have to build parts of a model boat showing their understanding of the basics of naval vessels. The idea of the programming part of the project is to make programming a small naval drone easy for new students. The programming plattform for programming the boats is Node-RED, which can be found here:<br>
 https://nodered.org <br>
-Install Node-RED depending on your plattform as shown:<br>
+Instalation of Node-RED depending on the plattform is explained here:<br>
 https://nodered.org/docs/getting-started/ <br><br>
 
 The drones are based on a Raspberry Pi (at the time 3B+): <br>
