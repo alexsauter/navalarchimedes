@@ -6,16 +6,16 @@ This project is the basis for a programming part of the subject MILM1302 at the 
 
 The programming plattform for programming the boats is Node-RED, which can be found here:<br>
 https://nodered.org <br>
-Installation of Node-RED depending on the plattform is explained here:<br>
+Installation of Node-RED, depending on the plattform, is explained here:<br>
 https://nodered.org/docs/getting-started/ <br><br>
 
 ## Hardware
 
 <p align="center"><img src="https://raw.githubusercontent.com/alexsauter/navalarchimedes/main/figs/Hardware.jpg" width="100%"></p>
 
-The drones are based on a Raspberry Pi (at the time 3B+; https://www.raspberrypi.com/products/raspberry-pi-3-model-b-plus/), loaded with the standard operation system. In 2024, this means Raspbian as a 32-bit version of Linux 11 (bullseye).<br><br>
+The drones are based on a Raspberry Pi (at the time <a href="https://www.raspberrypi.com/products/raspberry-pi-3-model-b-plus/">Raspberry Pi 3B+</a>, loaded with the standard operation system (OS). In 2024, this means Raspbian as a 32-bit version of Linux 11 (bullseye).<br><br>
 
-The Raspberry Pi is supported by an Arduino Uno (https://store.arduino.cc/products/arduino-uno-rev3) for better puls width modulation (PWM) signals for the motors and servos. The Arduino is pre-programmed with Firmata (https://github.com/firmata/arduino). <br><br>
+The Raspberry Pi is supported by an <a href="https://store.arduino.cc/products/arduino-uno-rev3">Arduino Uno</a> in order to be able to generate better puls width modulation (PWM) signals for the motors and servos. The Arduino is pre-programmed with <a href="https://github.com/firmata/arduino">Firmata</a>, thus all programming can be done on the Raspberry Pi via Node-RED - using the palette <a href="https://flows.nodered.org/node/node-red-node-arduino">node-red-node-arduino</a> for interaction with the Arduino. <br><br>
 
 The remote controll used is a Dualshock 4 wireless bluetooth controller:<br>
 https://www.playstation.com/no-no/accessories/dualshock-4-wireless-controller/ <br><br>
