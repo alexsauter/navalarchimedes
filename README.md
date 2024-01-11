@@ -23,7 +23,7 @@ As remote controll, a <a href="https://www.playstation.com/no-no/accessories/dua
 <p align="center"><img src="https://raw.githubusercontent.com/alexsauter/navalarchimedes/main/figs/PS4controller.png" width="100%"></p>
 
 The sensorsystem of the drone is basically a <a href="https://docs.px4.io/main/en/flight_controller/pixhawk4.html">Pixhawk 4</a> (can be upgraded), which to the least is supposed to give a heading and GPS-positon to the drone. Furthermore, the 433 MHz digital radio transmitter kan be used to enable other forms of communication with the drone. Possible ways of communicating and thus controlling the drone are shown below.<br>
-<p align="center"><img src="https://raw.githubusercontent.com/alexsauter/navalarchimedes/main/figs/ComPorts.jpg" width="100%"></p>
+<p align="center"><img src="https://raw.githubusercontent.com/alexsauter/navalarchimedes/main/figs/ComPorts.jpg" width="80%"></p>
 
 
 ## Latest version
@@ -32,14 +32,22 @@ The latest version of the project is dependent on two major contributions, one f
 
 ### Subflow for Pixhawk interaction
 
-The subflow for interaction with the Pixhawk via serial (usb) connection is called <a href="https://raw.githubusercontent.com/alexsauter/navalarchimedes/main/TelemetryRC.json">TelemetryRC.json</a>.<br>
+The subflow for interaction with the Pixhawk via serial (usb) connection is called <a href="https://raw.githubusercontent.com/alexsauter/navalarchimedes/main/TelemetryRC.json">TelemetryRC.json</a>, including some debug and injection nodes for testing.<br>
 
 <p align="center"><img src="https://raw.githubusercontent.com/alexsauter/navalarchimedes/main/figs/TelemetryRC.png" width="100%"></p>
 
-For this interaction with the sensorsystem, being the Pixhawk via the mavlink protocol, the <a href="https://github.com/mavlink/mavlink2rest">mavlink2rest</a> program is used. The location and exact name of the mavlink2rest programfile has to be adjusted within the Node-RED subflow, if not placed at the same location. <br><br>
+For this interaction with the sensorsystem, being the Pixhawk via the mavlink protocol, the <a href="https://github.com/mavlink/mavlink2rest">mavlink2rest</a> program is used. The location and exact name of the mavlink2rest programfile has to be adjusted within the Node-RED subflow, if not placed at the same location. When using Linux, this get be downloaded by wget or curl.<br>
+For Raspberry Pi:
+  ```sh
+  wget https://github.com/mavlink/mavlink2rest/releases/latest/download/mavlink2rest-arm-unknown-linux-musleabihf
+  ```
+For Windows:
+  ```sh
+  wget https://github.com/mavlink/mavlink2rest/releases/latest/download/mavlink2rest-x86_64-pc-windows-msvc.exe
+  ```
+Check the project page for other or new versions of the links.<br><br>
 
 Additionally, for automatic detection of the correct device, one should install globally a part of the <a href="https://serialport.io/docs/bin-list">serialport</a>-package:
-* npm
   ```sh
   npm install -g @serialport/list
   ```
@@ -47,7 +55,6 @@ Additionally, for automatic detection of the correct device, one should install 
 ### Subflow for DS4 interaction
 
 For the interaction with the bluetooth controller, the <a href="https://github.com/node-hid/node-hid">node-hid</a> package is still required, but now without any further dependencies.
-* npm
   ```sh
   npm install node-hid
   ```
@@ -65,7 +72,6 @@ The original source of the parcing of the receiving buffer from the DS4 controll
 ## The project during the periode 2019-2023
 
 The project before the year 2024 was dependent on several npm packages, preferably installed directly into the .node-red folder.
-* npm
   ```sh
   npm install bindings nan prebuild-install process serialport crc jspack underscore util events mavlink process
   npm install node-hid
