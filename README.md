@@ -11,7 +11,7 @@ https://nodered.org/docs/getting-started/ <br><br>
 
 ## Hardware
 
-<p align="center"><img src="https://raw.githubusercontent.com/alexsauter/navalarchimedes/main/figs/Hardware.jpg" width="60%"></p>
+<p align="center"><img src="https://raw.githubusercontent.com/alexsauter/navalarchimedes/main/figs/Hardware.jpg" width="100%"></p>
 
 The drones are based on a Raspberry Pi (at the time 3B+; https://www.raspberrypi.com/products/raspberry-pi-3-model-b-plus/), loaded with the standard operation system. In 2024, this means Raspbian as a 32-bit version of Linux 11 (bullseye).<br><br>
 
