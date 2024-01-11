@@ -1,4 +1,6 @@
-## Naval Archimedes
+# Naval Archimedes
+
+## Background
 
 <p align="center"><img src="https://raw.githubusercontent.com/alexsauter/navalarchimedes/main/figs/modelboats.jpg" width="70%"></p>
 
@@ -24,33 +26,37 @@ The sensorsystem of the drone is basically a <a href="https://docs.px4.io/main/e
 <p align="center"><img src="https://raw.githubusercontent.com/alexsauter/navalarchimedes/main/figs/ComPorts.jpg" width="100%"></p>
 
 
-## After 2023
+## Latest version
 
-The new version of the project is based on two major contributions. For interaction with the sensorsystem, being the Pixhawk via mavlink, the mavlink2rest program is now used:<br>
-https://github.com/mavlink/mavlink2rest <br>
-The location and exact name of the mavlink2rest programfile has to be adjusted within the Node-RED subflow. <br><br>
+The latest version of the project is dependent on two major contributions, one for interaction with the Pixhawk and one for interaction with the bluetooth controller.
 
-Additionally, for automatic detection of the correct device, one should install globally a part of the serialport-package:
+### Subflow for Pixhawk interaction
+
+For interaction with the sensorsystem, being the Pixhawk via the mavlink protocol, the <a href="https://github.com/mavlink/mavlink2rest">mavlink2rest</a> program is used. The location and exact name of the mavlink2rest programfile has to be adjusted within the Node-RED subflow, if not placed at the same location. <br><br>
+
+Additionally, for automatic detection of the correct device, one should install globally a part of the <a href="https://serialport.io/docs/bin-list">serialport</a>-package:
 * npm
   ```sh
   npm install -g @serialport/list
   ```
 
-For the interaction with the bluetooth controller, the node-hid package is still required, but now without any further dependencies.
+### Subflow for DS4 interaction
+
+For the interaction with the bluetooth controller, the <a href="https://github.com/node-hid/node-hid">node-hid</a> package is still required, but now without any further dependencies.
 * npm
   ```sh
   npm install node-hid
   ```
-The crc-code, needed for coding the transmission of commands to the controller - but not needed for receiving buttons and such, as now been added as a function, taken and adapted from https://github.com/Pecacheu/dualshock/blob/master/crc.js .<br><br>
-
-The original source of the parcing of the receiving buffer is based on the work of https://github.com/seidtgeist/node-ds4 .<br><br>
-
-The settings.js file in the .node-red folder has to be adjusted at the functionGlobalContext position to be
+The settings.js file in the .node-red folder has to be adjusted at the functionGlobalContext position to be able to use the subflow.
   ```sh
     functionGlobalContext: {
          HID:require('node-hid')
     },
   ```
+The crc-code, needed for coding the transmission of commands to the controller - but not needed for receiving buttons and such, is added as part of a function-node, taken and adapted from https://github.com/Pecacheu/dualshock/blob/master/crc.js .<br><br>
+
+The original source of the parcing of the receiving buffer from the DS4 controller is based on the work of https://github.com/seidtgeist/node-ds4 .
+
 
 ## The project during the periode 2019-2023
 
