@@ -74,7 +74,8 @@ The settings.js file in the .node-red folder has to be adjusted at the functionG
   ```
 The crc-code, needed for coding the transmission of commands to the controller - but not needed for receiving buttons and such, is added as part of a function-node, taken and adapted from https://github.com/Pecacheu/dualshock/blob/master/crc.js .<br>
 The original source of the parcing of the receiving buffer from the DS4 controller is based on the work of https://github.com/seidtgeist/node-ds4 .<br>
-The bluetooth controller has first to be connected on an OS-level, but will then be automatically detected by the subflow-node.
+The bluetooth controller has first to be connected on an OS-level, but will then be automatically detected by the subflow-node.<br><br>
+Both rumble and color changes are working, the speaker is not supported in this version. A newer project (https://github.com/Pecacheu/dualshock) may be interesting to invesitgate in order to enable further functionality of the controller. Within this project, the reading of the buttons is sufficient.
 
 ## The project during the periode 2019-2023
 
