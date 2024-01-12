@@ -66,16 +66,8 @@ For the interaction with the bluetooth controller, the <a href="https://github.c
   ```sh
   npm install node-hid
   ```
-The settings.js file in the .node-red folder has to be adjusted at the functionGlobalContext position to be able to use the subflow.
-  ```sh
-    functionGlobalContext: {
-         HID:require('node-hid')
-    },
-  ```
-The crc-code, needed for coding the transmission of commands to the controller - but not needed for receiving buttons and such, is added as part of a function-node, taken and adapted from https://github.com/Pecacheu/dualshock/blob/master/crc.js .<br>
-The original source of the parcing of the receiving buffer from the DS4 controller is based on the work of https://github.com/seidtgeist/node-ds4 .<br>
 The bluetooth controller has first to be connected on an OS-level, but will then be automatically detected by the subflow-node.<br>
-In linux, one most probably has to allow the use of the device. This can be done by editing the following file, here done with the use of leafpad (sudo apt-get leafpad):
+In linux, normally one has to allow the use of the device. This can be done by editing the following file, here done with the use of leafpad (sudo apt-get leafpad):
   ```sh
 	sudo leafpad /etc/udev/rules.d/90-hidraw-permissions.rules
   ```
@@ -87,6 +79,14 @@ And reload the rules:
   ```sh
 sudo udevadm control --reload-rules
   ```
+In order to allow Node-RED (and the BluetoothDS4-subflow) to use the node-hid package, the settings.js file in the .node-red folder has to be adjusted at the functionGlobalContext position.
+  ```sh
+    functionGlobalContext: {
+         HID:require('node-hid')
+    },
+  ```
+The crc-code, needed for coding the transmission of commands to the controller - but not needed for receiving buttons and such, is added as part of a function-node, taken and adapted from https://github.com/Pecacheu/dualshock/blob/master/crc.js .<br>
+The original source of the parcing of the receiving buffer from the DS4 controller is based on the work of https://github.com/seidtgeist/node-ds4 .<br><br>
 Both rumble and color changes are working, the speaker is not supported in this version. A newer project (https://github.com/Pecacheu/dualshock) may be interesting to invesitgate in order to enable further functionality of the controller. Within this project, the reading of the buttons is sufficient.
 
 ## The project during the periode 2019-2023
