@@ -1,0 +1,2819 @@
+[
+    {
+        "id": "cf7c4432.a5acf8",
+        "type": "subflow",
+        "name": "Bluetooth I/O",
+        "info": "# Uses node-hid for interaction with Wireless Controller of type Dualshock PS4\n\n**Requires node-hid:**\nnpm install node-hid\nnpm install crc\n\n**Modify settings.js:**\nLinux:\nHID:require('/usr/lib/node_modules/node-hid/nodehid.js'),\ncrc:require('/home/pi/node_modules/crc')\nWindows:\nHID:require('C:\\\\Users\\\\<user>\\\\node_modules\\\\node-hid\\\\nodehid.js'),\ncrc:require('C:\\\\Users\\\\<user>\\\\node_modules\\\\crc')\n\n**Add permission to udev:**\nsudo leafpad /etc/udev/rules.d/90-hidraw-permissions.rules\nKERNEL==\"hidraw*\", SUBSYSTEM==\"hidraw\", MODE=\"0664\", GROUP=\"plugdev\"\nsudo udevadm control --reload-rules\n\n**Example input variables:**\nmsg.rumbleLeft\nmsg.rumbleRight\nmsg.r\nmsg.g\nmsg.b\n\n**Example output:**\n{\"leftAnalogX\":132,\"leftAnalogY\":128,\"rightAnalogX\":126,\"rightAnalogY\":124,\"l2Analog\":0,\"r2Analog\":0,\"dPadUp\":false,\"dPadRight\":false,\"dPadDown\":false,\"dPadLeft\":false,\"cross\":false,\"circle\":false,\"square\":false,\"triangle\":false,\"l1\":false,\"l2\":false,\"r1\":false,\"r2\":false,\"l3\":false,\"r3\":false,\"share\":false,\"options\":false,\"trackPadButton\":false,\"psButton\":false,\"motionY\":-4,\"motionX\":0,\"motionZ\":6,\"orientationRoll\":-28,\"orientationYaw\":7976,\"orientationPitch\":1676,\"trackPadTouch0Id\":1,\"trackPadTouch0Active\":false,\"trackPadTouch0X\":1352,\"trackPadTouch0Y\":876,\"trackPadTouch1Id\":0,\"trackPadTouch1Active\":false,\"trackPadTouch1X\":0,\"trackPadTouch1Y\":0,\"timestamp\":10,\"batteryLevel\":6}\n\n**Comment:**\nRumble is set to reset itself, but also the controller will reset it after some time.",
+        "category": "Dualshock",
+        "in": [
+            {
+                "x": 160,
+                "y": 880,
+                "wires": [
+                    {
+                        "id": "323e2f3b.0a715"
+                    }
+                ]
+            }
+        ],
+        "out": [
+            {
+                "x": 1240,
+                "y": 220,
+                "wires": [
+                    {
+                        "id": "1e59b2b7.39643d",
+                        "port": 0
+                    }
+                ]
+            },
+            {
+                "x": 1240,
+                "y": 260,
+                "wires": [
+                    {
+                        "id": "278108a6.e4f988",
+                        "port": 0
+                    }
+                ]
+            },
+            {
+                "x": 1240,
+                "y": 300,
+                "wires": [
+                    {
+                        "id": "446e72c8.0d63bc",
+                        "port": 0
+                    }
+                ]
+            },
+            {
+                "x": 1240,
+                "y": 360,
+                "wires": [
+                    {
+                        "id": "e6a0b36d.bb15b",
+                        "port": 0
+                    }
+                ]
+            },
+            {
+                "x": 1240,
+                "y": 400,
+                "wires": [
+                    {
+                        "id": "45b27b6c.dfe5b4",
+                        "port": 0
+                    }
+                ]
+            },
+            {
+                "x": 1240,
+                "y": 440,
+                "wires": [
+                    {
+                        "id": "89a67109.2697",
+                        "port": 0
+                    }
+                ]
+            },
+            {
+                "x": 1240,
+                "y": 480,
+                "wires": [
+                    {
+                        "id": "2d27feef.4fc5f2",
+                        "port": 0
+                    }
+                ]
+            },
+            {
+                "x": 1240,
+                "y": 540,
+                "wires": [
+                    {
+                        "id": "fd8937b.78cb0c8",
+                        "port": 0
+                    }
+                ]
+            },
+            {
+                "x": 1240,
+                "y": 580,
+                "wires": [
+                    {
+                        "id": "4d29dc23.3d2d44",
+                        "port": 0
+                    }
+                ]
+            },
+            {
+                "x": 1240,
+                "y": 620,
+                "wires": [
+                    {
+                        "id": "a7185cb8.3482d",
+                        "port": 0
+                    }
+                ]
+            },
+            {
+                "x": 1240,
+                "y": 660,
+                "wires": [
+                    {
+                        "id": "41ac732f.111b9c",
+                        "port": 0
+                    }
+                ]
+            },
+            {
+                "x": 1240,
+                "y": 720,
+                "wires": [
+                    {
+                        "id": "49d3fb93.d0da84",
+                        "port": 0
+                    }
+                ]
+            },
+            {
+                "x": 1240,
+                "y": 760,
+                "wires": [
+                    {
+                        "id": "fa2a72a3.9d0de",
+                        "port": 0
+                    }
+                ]
+            },
+            {
+                "x": 1240,
+                "y": 820,
+                "wires": [
+                    {
+                        "id": "ba5d2762.5bbdd8",
+                        "port": 0
+                    }
+                ]
+            },
+            {
+                "x": 1240,
+                "y": 860,
+                "wires": [
+                    {
+                        "id": "964cea87.189588",
+                        "port": 0
+                    }
+                ]
+            },
+            {
+                "x": 1240,
+                "y": 900,
+                "wires": [
+                    {
+                        "id": "a8382578.5fbe38",
+                        "port": 0
+                    }
+                ]
+            },
+            {
+                "x": 1240,
+                "y": 940,
+                "wires": [
+                    {
+                        "id": "2b724dca.15dbd2",
+                        "port": 0
+                    }
+                ]
+            },
+            {
+                "x": 1240,
+                "y": 1000,
+                "wires": [
+                    {
+                        "id": "ab8dc0fe.16eb6",
+                        "port": 0
+                    }
+                ]
+            },
+            {
+                "x": 1240,
+                "y": 1040,
+                "wires": [
+                    {
+                        "id": "896c18a4.229898",
+                        "port": 0
+                    }
+                ]
+            },
+            {
+                "x": 1240,
+                "y": 1100,
+                "wires": [
+                    {
+                        "id": "f4db2baf.2a9d28",
+                        "port": 0
+                    }
+                ]
+            },
+            {
+                "x": 1240,
+                "y": 1140,
+                "wires": [
+                    {
+                        "id": "cbde625c.38eca",
+                        "port": 0
+                    }
+                ]
+            },
+            {
+                "x": 1240,
+                "y": 1200,
+                "wires": [
+                    {
+                        "id": "dd2a8e70.da605",
+                        "port": 0
+                    }
+                ]
+            },
+            {
+                "x": 1240,
+                "y": 1240,
+                "wires": [
+                    {
+                        "id": "98628ebe.0f31f",
+                        "port": 0
+                    }
+                ]
+            },
+            {
+                "x": 1240,
+                "y": 1300,
+                "wires": [
+                    {
+                        "id": "adaa9e8e.e131f",
+                        "port": 0
+                    }
+                ]
+            },
+            {
+                "x": 780,
+                "y": 340,
+                "wires": [
+                    {
+                        "id": "e8f63e8.55a69c",
+                        "port": 0
+                    }
+                ]
+            },
+            {
+                "x": 640,
+                "y": 880,
+                "wires": [
+                    {
+                        "id": "323e2f3b.0a715",
+                        "port": 0
+                    }
+                ]
+            }
+        ],
+        "env": [],
+        "color": "#C0DEED",
+        "inputLabels": [
+            "Input"
+        ],
+        "outputLabels": [
+            "psButton",
+            "options",
+            "share",
+            "triangle",
+            "cross",
+            "square",
+            "circle",
+            "l1",
+            "l2",
+            "r1",
+            "r2",
+            "l3",
+            "r3",
+            "dPadUp",
+            "dPadDown",
+            "dPadLeft",
+            "dPadRight",
+            "leftAnalogX",
+            "leftAnalogY",
+            "rightAnalogX",
+            "rightAnalogY",
+            "l2Analog",
+            "r2Analog",
+            "batteryLevel",
+            "Raw data",
+            "Send-report"
+        ],
+        "icon": "node-red/bluetooth.png",
+        "status": {
+            "x": 620,
+            "y": 360,
+            "wires": [
+                {
+                    "id": "ce0a8e4b.d074e",
+                    "port": 0
+                },
+                {
+                    "id": "b2a47bdb.5dc558",
+                    "port": 0
+                },
+                {
+                    "id": "88dcc031.f247c",
+                    "port": 0
+                }
+            ]
+        }
+    },
+    {
+        "id": "4dd4280e.8ed768",
+        "type": "inject",
+        "z": "cf7c4432.a5acf8",
+        "name": "(Re)start receiving data",
+        "repeat": "2",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 190,
+        "y": 140,
+        "wires": [
+            [
+                "9126eede.2b86"
+            ]
+        ]
+    },
+    {
+        "id": "273fe72e.4a8a78",
+        "type": "function",
+        "z": "cf7c4432.a5acf8",
+        "name": "List of devices",
+        "func": "var HID = global.get(\"HID\");\n//HID.setDriverType('libusb');\n//HID.setDriverType('hidraw');\n\n//console.log('devices:', HID.devices());\nmsg.devices = HID.devices();\nflow.set(\"HIDdevices\",msg.devices);\n\n//var device = new HID.HID(0x54c,0x9cc,\"dc:0c:2d:f9:2c:a5\");\n//msg.report = device.getFeatureReport(0x04, 66);\n\n\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 460,
+        "y": 120,
+        "wires": [
+            [
+                "da02e161.f8339"
+            ]
+        ]
+    },
+    {
+        "id": "da02e161.f8339",
+        "type": "debug",
+        "z": "cf7c4432.a5acf8",
+        "name": "",
+        "active": true,
+        "tosidebar": false,
+        "console": false,
+        "tostatus": false,
+        "complete": "devices",
+        "targetType": "msg",
+        "x": 650,
+        "y": 120,
+        "wires": []
+    },
+    {
+        "id": "e8f63e8.55a69c",
+        "type": "function",
+        "z": "cf7c4432.a5acf8",
+        "name": "Continuous data-stream",
+        "func": "var HID = global.get(\"HID\");\n//HID.setDriverType('libusb');\n//HID.setDriverType('hidraw');\n\nvar product = \"Wireless Controller\";\n\n//var HIDdevices = flow.get(\"HIDdevices\");\n\nfunction findPathToProduct(product) {\n    var HIDdevices = flow.get(\"HIDdevices\")||[];\n    for (var i=0; i<HIDdevices.length; i++) {\n        //console.log(ports[i].manufacturer);\n        if (HIDdevices[i].product == product) {\n            flow.set(\"device\",HIDdevices[i]);\n            return HIDdevices[i].path;\n        }\n    }\n}\n\nvar devicepath = findPathToProduct(product);    //product description for DS4 as HID device\n\nif (devicepath === undefined) {\n    node.status({fill:\"red\",shape:\"ring\",text:'Device not found'});\n    return;\n} else {\n    node.status({fill:\"yellow\",shape:\"dot\",text:'Wireless Controller-device found at port '+devicepath});\n    console.log('Wireless Controller-device found at port '+devicepath);\n}\n\n//var device = new HID.HID(msg.payload[0].vendorId,msg.payload[0].productId,msg.payload[0].serialNumber);\nvar device = new HID.HID(devicepath);\n//msg.report = device.getFeatureReport(0x04, 66);\n\n// Buffer -> DS4State\nfunction parseDS4HIDData(buf) {\n  var dPad = buf[5] & 15;\n  return {\n    leftAnalogX: buf[1],\n    leftAnalogY: buf[2],\n    rightAnalogX: buf[3],\n    rightAnalogY: buf[4],\n    l2Analog: buf[8],\n    r2Analog: buf[9],\n\n    dPadUp:    dPad === 0 || dPad === 1 || dPad === 7,\n    dPadRight: dPad === 1 || dPad === 2 || dPad === 3,\n    dPadDown:  dPad === 3 || dPad === 4 || dPad === 5,\n    dPadLeft:  dPad === 5 || dPad === 6 || dPad === 7,\n\n    cross: (buf[5] & 32) !== 0,\n    circle: (buf[5] & 64) !== 0,\n    square: (buf[5] & 16) !== 0,\n    triangle: (buf[5] & 128) !== 0,\n\n    l1: (buf[6] & 0x01) !== 0,\n    l2: (buf[6] & 0x04) !== 0,\n    r1: (buf[6] & 0x02) !== 0,\n    r2: (buf[6] & 0x08) !== 0,\n    l3: (buf[6] & 0x40) !== 0,\n    r3: (buf[6] & 0x80) !== 0,\n\n    share: (buf[6] & 0x10) !== 0,\n    options: (buf[6] & 0x20) !== 0,\n    trackPadButton: (buf[7] & 2) !== 0,\n    psButton: (buf[7] & 1) !== 0,\n\n    // ACCEL/GYRO\n    motionY: buf.readInt16LE(13),\n    motionX: -buf.readInt16LE(15),\n    motionZ: -buf.readInt16LE(17),\n\n    orientationRoll: -buf.readInt16LE(19),\n    orientationYaw: buf.readInt16LE(21),\n    orientationPitch: buf.readInt16LE(23),\n\n    // TRACKPAD\n    trackPadTouch0Id: buf[35] & 0x7f,\n    trackPadTouch0Active: (buf[35] >> 7) === 0,\n    trackPadTouch0X: ((buf[37] & 0x0f) << 8) | buf[36],\n    trackPadTouch0Y: buf[38] << 4 | ((buf[37] & 0xf0) >> 4),\n\n    trackPadTouch1Id: buf[39] & 0x7f,\n    trackPadTouch1Active: (buf[39] >> 7) === 0,\n    trackPadTouch1X: ((buf[41] & 0x0f) << 8) | buf[40],\n    trackPadTouch1Y: buf[42] << 4 | ((buf[41] & 0xf0) >> 4),\n\n    timestamp: buf[7] >> 2,\n    //battery: buf[12],\n    //batteryShort1: buf[12] & 0x0f,\n    //batteryShort2: buf[12] & 0xf0,\n    batteryLevel: buf[12]\n  };\n}\n\ndevice.on('data', function(buf) {\n    //node.status({fill:\"green\",shape:\"dot\",text:'connected'});\n    //console.log(parseDS4HIDData(buf.slice(2)));\n    msg.payload = parseDS4HIDData(buf.slice(2));\n    node.send(msg);\n});\n\ndevice.on(\"error\", function(err) {\n    console.log(err);\n});\n",
+        "outputs": 1,
+        "timeout": "",
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 690,
+        "y": 220,
+        "wires": [
+            [
+                "e8673479.ed5238",
+                "28ab1c9.c29f7e4",
+                "88ddc8c2.35bcb8",
+                "f7d63516.fa27b8",
+                "6adebd07.37be04",
+                "47809b.2fdfaf64",
+                "141e32a1.5ba7bd",
+                "15007dd0.680a42",
+                "484c1232.b42d9c",
+                "d3bfd424.d7efb8",
+                "f84b680d.ae2f98",
+                "7337b642.6f3738",
+                "aa389ea1.1c61f",
+                "11075ea0.b88251",
+                "2eaf5be9.bd6584",
+                "1b9ba9d1.206fc6",
+                "2afe1552.e3e9aa",
+                "53b44aed.d20854",
+                "b1dc335e.d1796",
+                "719d20cf.40ebb",
+                "c1f29fe3.c5b57",
+                "e23240d4.448f",
+                "f17c5dd2.d74ac",
+                "6f46d649.5fcba8",
+                "82773ef7.7885f",
+                "bb135780.96ad08"
+            ]
+        ]
+    },
+    {
+        "id": "e8673479.ed5238",
+        "type": "debug",
+        "z": "cf7c4432.a5acf8",
+        "name": "",
+        "active": false,
+        "tosidebar": false,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "x": 950,
+        "y": 80,
+        "wires": []
+    },
+    {
+        "id": "28ab1c9.c29f7e4",
+        "type": "change",
+        "z": "cf7c4432.a5acf8",
+        "name": "batteryLevel",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "payload.batteryLevel",
+                "tot": "msg"
+            },
+            {
+                "t": "set",
+                "p": "topic",
+                "pt": "msg",
+                "to": "batteryLevel",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 930,
+        "y": 1300,
+        "wires": [
+            [
+                "adaa9e8e.e131f"
+            ]
+        ]
+    },
+    {
+        "id": "adaa9e8e.e131f",
+        "type": "rbe",
+        "z": "cf7c4432.a5acf8",
+        "name": "",
+        "func": "rbe",
+        "gap": "",
+        "start": "",
+        "inout": "out",
+        "property": "payload",
+        "x": 1110,
+        "y": 1300,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "323e2f3b.0a715",
+        "type": "function",
+        "z": "cf7c4432.a5acf8",
+        "name": "Send data",
+        "func": "var HID = global.get(\"HID\");\n//----------------------------------------------------\n//var crc = global.get(\"crc\");\n\n//Code by Shubshub @ https://pastebin.com/KiazwqCu\nfunction CrcModel(width, name, polynomial, initial, finalXor, inputReflected, resultReflected) {\n\tthis.width = width;\n\tthis.name = name;\n\tthis.polynomial = polynomial;\n\tthis.initial = initial;\n\tthis.finalXor = finalXor;\n\tthis.inputReflected = inputReflected;\n\tthis.resultReflected = resultReflected;\n}\n\n/* Known CRC algorihtms */\nvar CrcDatabase = [\n\tnew CrcModel(8, \"CRC8\", 0x07, 0x00, 0x00, false, false),\n\tnew CrcModel(8, \"CRC8_SAE_J1850\", 0x1D, 0xFF, 0xFF, false, false),\n\tnew CrcModel(8, \"CRC8_SAE_J1850_ZERO\", 0x1D, 0x00, 0x00, false, false),\n\tnew CrcModel(8, \"CRC8_8H2F\", 0x2F, 0xFF, 0xFF, false, false),\n\tnew CrcModel(8, \"CRC8_CDMA2000\", 0x9B, 0xFF, 0x00, false, false),\n\tnew CrcModel(8, \"CRC8_DARC\", 0x39, 0x00, 0x00, true, true),\n\tnew CrcModel(8, \"CRC8_DVB_S2\", 0xD5, 0x00, 0x00, false, false),\n\tnew CrcModel(8, \"CRC8_EBU\", 0x1D, 0xFF, 0x00, true, true),\n\tnew CrcModel(8, \"CRC8_ICODE\", 0x1D, 0xFD, 0x00, false, false),\n\tnew CrcModel(8, \"CRC8_ITU\", 0x07, 0x00, 0x55, false, false),\n\tnew CrcModel(8, \"CRC8_MAXIM\", 0x31, 0x00, 0x00, true, true),\n\tnew CrcModel(8, \"CRC8_ROHC\", 0x07, 0xFF, 0x00, true, true),\n\tnew CrcModel(8, \"CRC8_WCDMA\", 0x9B, 0x00, 0x00, true, true),\n\n\tnew CrcModel(16, \"CRC16_CCIT_ZERO\", 0x1021, 0x0000, 0x0000, false, false),\n\tnew CrcModel(16, \"CRC16_ARC\", 0x8005, 0x0000, 0x0000, true, true),\n\tnew CrcModel(16, \"CRC16_AUG_CCITT\", 0x1021, 0x1D0F, 0x0000, false, false),\n\tnew CrcModel(16, \"CRC16_BUYPASS\", 0x8005, 0x0000, 0x0000, false, false),\n\tnew CrcModel(16, \"CRC16_CCITT_FALSE\", 0x1021, 0xFFFF, 0x0000, false, false),\n\tnew CrcModel(16, \"CRC16_CDMA2000\", 0xC867, 0xFFFF, 0x0000, false, false),\n\tnew CrcModel(16, \"CRC16_DDS_110\", 0x8005, 0x800D, 0x0000, false, false),\n\tnew CrcModel(16, \"CRC16_DECT_R\", 0x0589, 0x0000, 0x0001, false, false),\n\tnew CrcModel(16, \"CRC16_DECT_X\", 0x0589, 0x0000, 0x0000, false, false),\n\tnew CrcModel(16, \"CRC16_DNP\", 0x3D65, 0x0000, 0xFFFF, true, true),\n\tnew CrcModel(16, \"CRC16_EN_13757\", 0x3D65, 0x0000, 0xFFFF, false, false),\n\tnew CrcModel(16, \"CRC16_GENIBUS\", 0x1021, 0xFFFF, 0xFFFF, false, false),\n\tnew CrcModel(16, \"CRC16_MAXIM\", 0x8005, 0x0000, 0xFFFF, true, true),\n\tnew CrcModel(16, \"CRC16_MCRF4XX\", 0x1021, 0xFFFF, 0x0000, true, true),\n\tnew CrcModel(16, \"CRC16_RIELLO\", 0x1021, 0xB2AA, 0x0000, true, true),\n\tnew CrcModel(16, \"CRC16_T10_DIF\", 0x8BB7, 0x0000, 0x0000, false, false),\n\tnew CrcModel(16, \"CRC16_TELEDISK\", 0xA097, 0x0000, 0x0000, false, false),\n\tnew CrcModel(16, \"CRC16_TMS37157\", 0x1021, 0x89EC, 0x0000, true, true),\n\tnew CrcModel(16, \"CRC16_USB\", 0x8005, 0xFFFF, 0xFFFF, true, true),\n\tnew CrcModel(16, \"CRC16_A\", 0x1021, 0xC6C6, 0x0000, true, true),\n\tnew CrcModel(16, \"CRC16_KERMIT\", 0x1021, 0x0000, 0x0000, true, true),\n\tnew CrcModel(16, \"CRC16_MODBUS\", 0x8005, 0xFFFF, 0x0000, true, true),\n\tnew CrcModel(16, \"CRC16_X_25\", 0x1021, 0xFFFF, 0xFFFF, true, true),\n\tnew CrcModel(16, \"CRC16_XMODEM\", 0x1021, 0x0000, 0x0000, false, false),\n\n\tnew CrcModel(32, \"CRC32\", 0x04C11DB7, 0xFFFFFFFF, 0xFFFFFFFF, true, true),\n\tnew CrcModel(32, \"CRC32_BZIP2\", 0x04C11DB7, 0xFFFFFFFF, 0xFFFFFFFF, false, false),\n\tnew CrcModel(32, \"CRC32_C\", 0x1EDC6F41, 0xFFFFFFFF, 0xFFFFFFFF, true, true),\n\tnew CrcModel(32, \"CRC32_D\", 0xA833982B, 0xFFFFFFFF, 0xFFFFFFFF, true, true),\n\tnew CrcModel(32, \"CRC32_MPEG2\", 0x04C11DB7, 0xFFFFFFFF, 0x00000000, false, false),\n\tnew CrcModel(32, \"CRC32_POSIX\", 0x04C11DB7, 0x00000000, 0xFFFFFFFF, false, false),\n\tnew CrcModel(32, \"CRC32_Q\", 0x814141AB, 0x00000000, 0x00000000, false, false),\n\tnew CrcModel(32, \"CRC32_JAMCRC\", 0x04C11DB7, 0xFFFFFFFF, 0x00000000, true, true),\n\tnew CrcModel(32, \"CRC32_XFER\", 0x000000AF, 0x00000000, 0x00000000, false, false)\n];\n\n/* two constructors supported:\n    - new Crc(width, polynomial, initialVal, finalXorVal, inputReflected, resultReflected)\n    - new Crc(width, crcModel)\n*/\nvar Crc = function(width, polynomial, initialVal, finalXorVal, inputReflected, resultReflected) {\n\t/* private variables */\n\t// crc model variables\n\tvar width;\n\tvar polynomial;\n\tvar initialVal;\n\tvar finalXorVal;\n\tvar inputReflected;\n\tvar resultReflected;\n\n\tvar crcTable; // lookup table\n\tvar castMask;\n\tvar msbMask;\n\n\t/* 'constructor' */\n\tif (arguments.length == 2 && typeof arguments[1] === \"object\") {\n\t\twidth = arguments[0];\n\t\tpolynomial = arguments[1].polynomial;\n\t\tinitialVal = arguments[1].initial;\n\t\tfinalXorVal = arguments[1].finalXor;\n\t\tinputReflected = arguments[1].inputReflected;\n\t\tresultReflected = arguments[1].resultReflected;\n\t} else if (arguments.length == 6) {\n\t\twidth = arguments[0];\n\t\tpolynomial = arguments[1];\n\t\tinitialVal = arguments[2];\n\t\tfinalXorVal = arguments[3];\n\t\tinputReflected = arguments[4];\n\t\tresultReflected = arguments[5];\n\t} else {\n\t\tnew Error(\"Invalid arguments\");\n\t}\n\n\tswitch (width) {\n\t\tcase 8:\n\t\t\tcastMask = 0xFF;\n\t\t\tbreak;\n\t\tcase 16:\n\t\t\tcastMask = 0xFFFF;\n\t\t\tbreak;\n\t\tcase 32:\n\t\t\tcastMask = 0xFFFFFFFF;\n\t\t\tbreak;\n\t\tdefault:\n\t\t\tthrow \"Invalid CRC width\";\n\t\t\tbreak;\n\t}\n\tmsbMask = 0x01 << (width - 1)\n\t/* 'constructor' END */\n\n\tthis.calcCrcTable = function() {\n\t\tcrcTable = new Array(256);\n\n\t\tfor (var divident = 0; divident < 256; divident++) {\n\t\t\tvar currByte = (divident << (width - 8)) & castMask;\n\t\t\tfor (var bit = 0; bit < 8; bit++) {\n\t\t\t\tif ((currByte & msbMask) != 0) {\n\t\t\t\t\tcurrByte <<= 1;\n\t\t\t\t\tcurrByte ^= polynomial;\n\t\t\t\t} else {\n\t\t\t\t\tcurrByte <<= 1;\n\t\t\t\t}\n\t\t\t}\n\t\t\tcrcTable[divident] = (currByte & castMask);\n\t\t}\n\t}\n\n\tthis.calcCrcTableReversed = function() {\n\t\tcrcTable = new Array(256);\n\n\t\tfor (var divident = 0; divident < 256; divident++) {\n\t\t\tvar reflectedDivident = new CrcUtil().Reflect8(divident);\n\n\t\t\tvar currByte = (reflectedDivident << (width - 8)) & castMask;\n\n\t\t\tfor (var bit = 0; bit < 8; bit++) {\n\t\t\t\tif ((currByte & msbMask) != 0) {\n\t\t\t\t\tcurrByte <<= 1;\n\t\t\t\t\tcurrByte ^= polynomial;\n\t\t\t\t} else {\n\t\t\t\t\tcurrByte <<= 1;\n\t\t\t\t}\n\t\t\t}\n\n\t\t\tcurrByte = new CrcUtil().ReflectGeneric(currByte, width);\n\n\t\t\tcrcTable[divident] = (currByte & castMask);\n\t\t}\n\t}\n\n\tif (!this.crcTable) {\n\t\tthis.calcCrcTable();\n\t}\n\n\tthis.compute = function(bytes) {\n\t\tvar crc = initialVal;\n\t\tfor (var i = 0; i < bytes.length; i++) {\n\n\t\t\tvar curByte = bytes[i] & 0xFF;\n\n\t\t\tif (inputReflected) {\n\t\t\t\tcurByte = new CrcUtil().Reflect8(curByte);\n\t\t\t}\n\n\t\t\t/* update the MSB of crc value with next input byte */\n\t\t\tcrc = (crc ^ (curByte << (width - 8))) & castMask;\n\t\t\t/* this MSB byte value is the index into the lookup table */\n\t\t\tvar pos = (crc >> (width - 8)) & 0xFF;\n\t\t\t/* shift out this index */\n\t\t\tcrc = (crc << 8) & castMask;\n\t\t\t/* XOR-in remainder from lookup table using the calculated index */\n\t\t\tcrc = (crc ^ crcTable[pos]) & castMask;\n\t\t}\n\n\t\tif (resultReflected) {\n\t\t\tcrc = new CrcUtil().ReflectGeneric(crc, width);\n\t\t}\n\t\treturn ((crc ^ finalXorVal) & castMask);\n\t}\n\n\tthis.getLookupTable = function() {\n\t\treturn crcTable;\n\t}\n};\n\n/*\n * String utility functions\n */\nvar StringUtil = function() {\n\tif (StringUtil.prototype._singletonInstance) {\n\t\treturn StringUtil.prototype._singletonInstance;\n\t}\n\tStringUtil.prototype._singletonInstance = this;\n\n\t/*\n\t * Converts a string into an array of bytes.\n\t * This is not really correct as an character (unicode!) does not always fit into a byte, so the\n\t * character value might be cut!\n\t */\n\tthis.getCharacterByteArrayFromString = function(str) {\n\t\tvar i, charVal;\n\t\tvar bytes = [];\n\t\tfor (i = 0; i < str.length; i++) {\n\t\t\tcharVal = str.charCodeAt(i);\n\t\t\tif (charVal < 256) {\n\t\t\t\tbytes[i] = str.charCodeAt(i);\n\t\t\t}\n\t\t}\n\t\treturn bytes;\n\t};\n\n\t/*\n\t * Get the given number as hexadecimal string\n\t */\n\tthis.getNumberAsHexStr = function(num) {\n\t\tvar tempStr = num.toString(16).toUpperCase();\n\t\treturn (\"0x\" + tempStr);\n\t}\n\n\tthis.getNumberAsHexStr = function(num, widthInBits) {\n\t\tvar tempStr = num.toString(16).toUpperCase();\n\t\twhile (tempStr.length < (widthInBits >> 2)) {\n\t\t\ttempStr = '0' + tempStr;\n\t\t}\n\t\treturn (\"0x\" + tempStr);\n\t}\n\n\t/*\n\t * Get the given 32bit number as hexadecimal string\n\t */\n\tthis.getNumberAsHexStr32 = function(num) {\n\t\tvar valueHigh = num >>> 16;\n\t\tvar valueLow = num & 0x0000FFFF;\n\t\treturn (\"0x\" + valueHigh.toString(16).toUpperCase() + valueLow.toString(16).toUpperCase());\n\t}\n\n\tthis.getNumberAsHexStr32FixedWidth = function(num) {\n\t\tvar valueHigh = num >>> 16;\n\t\tvalueHigh = valueHigh.toString(16).toUpperCase()\n\t\twhile (valueHigh.length < 4) {\n\t\t\tvalueHigh = '0' + valueHigh;\n\t\t}\n\n\t\tvar valueLow = num & 0x0000FFFF;\n\t\tvalueLow = valueLow.toString(16).toUpperCase()\n\t\twhile (valueLow.length < 4) {\n\t\t\tvalueLow = '0' + valueLow;\n\t\t}\n\n\t\treturn (\"0x\" + valueHigh + valueLow);\n\t}\n\n\tvar lastErrToken;\n\t/*\n\t * Get value of token where a call to getCharacterByteArrayFromByteString might have failed. */\n\tthis.getLastErrorToken = function() {\n\t\treturn lastErrToken;\n\t}\n\n\t/*\n\t * Converts a string of byte values into an array of bytes.\n\t * Returns undefined if an errors occurs. The erroneous token can be retrieved by getLastErrorToken().\n\t */\n\tthis.getCharacterByteArrayFromByteString = function(str) {\n\t\tvar bytes = [];\n\t\tvar bytePos = 0;\n\t\tvar splitStr = str.split(/\\s+/);\n\t\tfor (var i = 0; i < splitStr.length; i++) {\n\t\t\tvar byteStr = splitStr[i];\n\t\t\tif (byteStr.substr(0, 2) === \"0x\") {\n\t\t\t\tbyteStr = byteStr.substr(2, byteStr.length - 2);\n\t\t\t}\n\n\t\t\tif (byteStr === \" \" || byteStr === \"\")\n\t\t\t\tcontinue;\n\n\t\t\tvar b = parseInt(byteStr, 16);\n\t\t\tif (Number.isNaN(b) || b === undefined) {\n\t\t\t\tlastErrToken = byteStr;\n\t\t\t\treturn undefined;\n\t\t\t} else {\n\t\t\t\tif (b < 256) {\n\t\t\t\t\tbytes[bytePos] = b;\n\t\t\t\t\tbytePos++;\n\t\t\t\t} else {\n\t\t\t\t\tlastErrToken = byteStr;\n\t\t\t\t\treturn undefined;\n\t\t\t\t}\n\n\t\t\t}\n\t\t}\n\t\treturn bytes;\n\t}\n\n};\n\n/*\n * CRC utility functions to reflect numbers.\n */\nvar CrcUtil = function() {\n\t/* singleton */\n\tif (CrcUtil.prototype._singletonInstance) {\n\t\treturn CrcUtil.prototype._singletonInstance;\n\t}\n\tCrcUtil.prototype._singletonInstance = this;\n\n\tthis.Reflect8 = function(val) {\n\t\tvar resByte = 0;\n\n\t\tfor (var i = 0; i < 8; i++) {\n\t\t\tif ((val & (1 << i)) != 0) {\n\t\t\t\tresByte |= ((1 << (7 - i)) & 0xFF);\n\t\t\t}\n\t\t}\n\n\t\treturn resByte;\n\t}\n\n\tthis.Reflect16 = function(val) {\n\t\tvar resByte = 0;\n\n\t\tfor (var i = 0; i < 16; i++) {\n\t\t\tif ((val & (1 << i)) != 0) {\n\t\t\t\tresByte |= ((1 << (15 - i)) & 0xFFFF);\n\t\t\t}\n\t\t}\n\n\t\treturn resByte;\n\t}\n\n\tthis.Reflect32 = function(val) {\n\t\tvar resByte = 0;\n\n\t\tfor (var i = 0; i < 32; i++) {\n\t\t\tif ((val & (1 << i)) != 0) {\n\t\t\t\tresByte |= ((1 << (31 - i)) & 0xFFFFFFFF);\n\t\t\t}\n\t\t}\n\n\t\treturn resByte;\n\t}\n\n\tthis.ReflectGeneric = function(val, width) {\n\t\tvar resByte = 0;\n\n\t\tfor (var i = 0; i < width; i++) {\n\t\t\tif ((val & (1 << i)) != 0) {\n\t\t\t\tresByte |= (1 << ((width - 1) - i));\n\t\t\t}\n\t\t}\n\n\t\treturn resByte;\n\t}\n};\n\nfunction crc32(bytes) {\n\tvar crc = new Crc(32, 0x04C11DB7, 0xFFFFFFFF, 0xFFFFFFFF, true, true);\n\tvar crcValue = crc.compute(bytes);\n\t//return new Uint8Array((new Int32Array([crcValue])).buffer);\n\treturn crcValue;\n}\n\n//----------------------------------------------------\n\nvar HIDdevice = flow.get(\"device\");\n\nvar device = new HID.HID(HIDdevice.path);\nmsg.report = device.getFeatureReport(0x04, 66);\n\nvar data = {};\n\n//data.rumbleRight = 200;\n//data.rumbleLeft = 200;\nif (msg.rumbleRight === undefined) {\n    data.rumbleRight = flow.get(\"rumbleRight\");\n} else {\n    data.rumbleRight = msg.rumbleRight;\n}\nif (msg.rumbleLeft === undefined) {\n    data.rumbleLeft = flow.get(\"rumbleLeft\");\n} else {\n    data.rumbleLeft = msg.rumbleLeft;\n}\n\n\n//data.r = 120;\n//data.g = 120;\n//data.b = 120;\nif (msg.r === undefined) {\n    data.r = flow.get(\"r\");\n} else {\n    data.r = msg.r;\n}\nif (msg.g === undefined) {\n    data.g = flow.get(\"g\");\n} else {\n    data.g = msg.g;\n}\nif (msg.b === undefined) {\n    data.b = flow.get(\"b\");\n} else {\n    data.b = msg.b;\n}\n\n//Save back to flow-variables\nflow.set(\"rumbleRight\",data.rumbleRight);\nflow.set(\"rumbleLeft\",data.rumbleLeft);\nflow.set(\"r\",data.r);\nflow.set(\"g\",data.g);\nflow.set(\"b\",data.b);\n\n// Set rumble and LED\n// stolen from:\n// https://github.com/torvalds/linux/blob/master/drivers/hid/hid-sony.c#L2048\n// https://github.com/todbot/node-hid-ds4-test/blob/master/node-hid-ds4-test.js\nfunction setRumbleLed(rumbleL, rumbleR, ledR,ledG,ledB) {\n\n    var buf = Array(78-4).fill(0); // 4 bytes short for CRC32 calc below\n    buf[0]  = 0x11; // reportId\n    buf[1]  = 0x80;\n    buf[3]  = 0x0f;\n    buf[6]  = rumbleL;\n    buf[7]  = rumbleR;\n    buf[8]  = ledR;\n    buf[9]  = ledG;\n    buf[10] = ledB;\n    \n    // calculate crc32, add those 4 bytes to end of buf array\n    var tmpbuf = buf.slice(0); // clone\n    tmpbuf.unshift( 0xA2 ); // add bluetooth header byte for crc32\n    //var crc32 = crc.crc32( tmpbuf );\n    var crc32var = crc32( tmpbuf );\n    buf[74] = (crc32var & 0x000000ff) >> 0;\n    buf[75] = (crc32var & 0x0000ff00) >> 8;\n    buf[76] = (crc32var & 0x00ff0000) >> 16;\n    buf[77] = (crc32var & 0xff000000) >> 24;\n    // end crc32 calc\n    \n    //console.log(\"outbuf:\",\"len:\",buf.length, \"vals:\",buf.join(','));\n    device.write(buf);\n    //node.status({fill:\"green\",shape:\"dot\",text:'Message sent'});\n\n}\n\nsetRumbleLed( data.rumbleLeft, data.rumbleRight, data.r, data.g, data.b);\n\nif (data.rumbleLeft > 0 || data.rumbleRight > 0) {\n    msg.rumbleReset = true;\n} else {\n    msg.rumbleReset = false;\n    msg.reset = true;\n}\n\nreturn [msg,data];",
+        "outputs": 2,
+        "timeout": "",
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 330,
+        "y": 880,
+        "wires": [
+            [
+                "6bf75efd.a1335"
+            ],
+            []
+        ]
+    },
+    {
+        "id": "da3cde8b.76051",
+        "type": "delay",
+        "z": "cf7c4432.a5acf8",
+        "name": "",
+        "pauseType": "delay",
+        "timeout": "1",
+        "timeoutUnits": "seconds",
+        "rate": "1",
+        "nbRateUnits": "1",
+        "rateUnits": "second",
+        "randomFirst": "1",
+        "randomLast": "5",
+        "randomUnits": "seconds",
+        "drop": false,
+        "outputs": 1,
+        "x": 440,
+        "y": 220,
+        "wires": [
+            [
+                "e8f63e8.55a69c"
+            ]
+        ]
+    },
+    {
+        "id": "88ddc8c2.35bcb8",
+        "type": "trigger",
+        "z": "cf7c4432.a5acf8",
+        "name": "Reconnect if needed",
+        "op1": "true",
+        "op2": "false",
+        "op1type": "bool",
+        "op2type": "bool",
+        "duration": "2",
+        "extend": true,
+        "units": "s",
+        "reset": "",
+        "bytopic": "all",
+        "outputs": 1,
+        "x": 980,
+        "y": 140,
+        "wires": [
+            [
+                "851bedb0.70897"
+            ]
+        ]
+    },
+    {
+        "id": "851bedb0.70897",
+        "type": "change",
+        "z": "cf7c4432.a5acf8",
+        "name": "Set BluetoothAlive-flag",
+        "rules": [
+            {
+                "t": "set",
+                "p": "BluetoothAlive",
+                "pt": "flow",
+                "to": "payload",
+                "tot": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 1240,
+        "y": 140,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "7ae32aee.cf2f54",
+        "type": "inject",
+        "z": "cf7c4432.a5acf8",
+        "name": "",
+        "repeat": "",
+        "crontab": "",
+        "once": true,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "false",
+        "payloadType": "bool",
+        "x": 1190,
+        "y": 80,
+        "wires": [
+            [
+                "851bedb0.70897"
+            ]
+        ]
+    },
+    {
+        "id": "9126eede.2b86",
+        "type": "switch",
+        "z": "cf7c4432.a5acf8",
+        "name": "",
+        "property": "BluetoothAlive",
+        "propertyType": "flow",
+        "rules": [
+            {
+                "t": "false"
+            },
+            {
+                "t": "true"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 2,
+        "x": 270,
+        "y": 220,
+        "wires": [
+            [
+                "da3cde8b.76051",
+                "273fe72e.4a8a78",
+                "b2a47bdb.5dc558"
+            ],
+            [
+                "88dcc031.f247c"
+            ]
+        ]
+    },
+    {
+        "id": "ce0a8e4b.d074e",
+        "type": "status",
+        "z": "cf7c4432.a5acf8",
+        "name": "",
+        "scope": [
+            "e8f63e8.55a69c",
+            "323e2f3b.0a715"
+        ],
+        "x": 420,
+        "y": 380,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "b2a47bdb.5dc558",
+        "type": "function",
+        "z": "cf7c4432.a5acf8",
+        "name": "Reconnect status",
+        "func": "msg.payload = {fill:\"red\",shape:\"ring\",text:\"trying to reconnect\"};\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 450,
+        "y": 280,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "f7d63516.fa27b8",
+        "type": "change",
+        "z": "cf7c4432.a5acf8",
+        "name": "psButton",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "payload.psButton",
+                "tot": "msg"
+            },
+            {
+                "t": "set",
+                "p": "topic",
+                "pt": "msg",
+                "to": "psButton",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 960,
+        "y": 220,
+        "wires": [
+            [
+                "1e59b2b7.39643d"
+            ]
+        ]
+    },
+    {
+        "id": "1e59b2b7.39643d",
+        "type": "rbe",
+        "z": "cf7c4432.a5acf8",
+        "name": "",
+        "func": "rbe",
+        "gap": "",
+        "start": "",
+        "inout": "out",
+        "property": "payload",
+        "x": 1110,
+        "y": 220,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "6adebd07.37be04",
+        "type": "change",
+        "z": "cf7c4432.a5acf8",
+        "name": "options",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "payload.options",
+                "tot": "msg"
+            },
+            {
+                "t": "set",
+                "p": "topic",
+                "pt": "msg",
+                "to": "options",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 960,
+        "y": 260,
+        "wires": [
+            [
+                "278108a6.e4f988"
+            ]
+        ]
+    },
+    {
+        "id": "278108a6.e4f988",
+        "type": "rbe",
+        "z": "cf7c4432.a5acf8",
+        "name": "",
+        "func": "rbe",
+        "gap": "",
+        "start": "",
+        "inout": "out",
+        "property": "payload",
+        "x": 1110,
+        "y": 260,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "47809b.2fdfaf64",
+        "type": "change",
+        "z": "cf7c4432.a5acf8",
+        "name": "share",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "payload.share",
+                "tot": "msg"
+            },
+            {
+                "t": "set",
+                "p": "topic",
+                "pt": "msg",
+                "to": "share",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 950,
+        "y": 300,
+        "wires": [
+            [
+                "446e72c8.0d63bc"
+            ]
+        ]
+    },
+    {
+        "id": "446e72c8.0d63bc",
+        "type": "rbe",
+        "z": "cf7c4432.a5acf8",
+        "name": "",
+        "func": "rbe",
+        "gap": "",
+        "start": "",
+        "inout": "out",
+        "property": "payload",
+        "x": 1110,
+        "y": 300,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "141e32a1.5ba7bd",
+        "type": "change",
+        "z": "cf7c4432.a5acf8",
+        "name": "triangle",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "payload.triangle",
+                "tot": "msg"
+            },
+            {
+                "t": "set",
+                "p": "topic",
+                "pt": "msg",
+                "to": "triangle",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 960,
+        "y": 360,
+        "wires": [
+            [
+                "e6a0b36d.bb15b"
+            ]
+        ]
+    },
+    {
+        "id": "e6a0b36d.bb15b",
+        "type": "rbe",
+        "z": "cf7c4432.a5acf8",
+        "name": "",
+        "func": "rbe",
+        "gap": "",
+        "start": "",
+        "inout": "out",
+        "property": "payload",
+        "x": 1110,
+        "y": 360,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "15007dd0.680a42",
+        "type": "change",
+        "z": "cf7c4432.a5acf8",
+        "name": "cross",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "payload.cross",
+                "tot": "msg"
+            },
+            {
+                "t": "set",
+                "p": "topic",
+                "pt": "msg",
+                "to": "cross",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 950,
+        "y": 400,
+        "wires": [
+            [
+                "45b27b6c.dfe5b4"
+            ]
+        ]
+    },
+    {
+        "id": "45b27b6c.dfe5b4",
+        "type": "rbe",
+        "z": "cf7c4432.a5acf8",
+        "name": "",
+        "func": "rbe",
+        "gap": "",
+        "start": "",
+        "inout": "out",
+        "property": "payload",
+        "x": 1110,
+        "y": 400,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "484c1232.b42d9c",
+        "type": "change",
+        "z": "cf7c4432.a5acf8",
+        "name": "square",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "payload.square",
+                "tot": "msg"
+            },
+            {
+                "t": "set",
+                "p": "topic",
+                "pt": "msg",
+                "to": "square",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 950,
+        "y": 440,
+        "wires": [
+            [
+                "89a67109.2697"
+            ]
+        ]
+    },
+    {
+        "id": "89a67109.2697",
+        "type": "rbe",
+        "z": "cf7c4432.a5acf8",
+        "name": "",
+        "func": "rbe",
+        "gap": "",
+        "start": "",
+        "inout": "out",
+        "property": "payload",
+        "x": 1110,
+        "y": 440,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "d3bfd424.d7efb8",
+        "type": "change",
+        "z": "cf7c4432.a5acf8",
+        "name": "circle",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "payload.circle",
+                "tot": "msg"
+            },
+            {
+                "t": "set",
+                "p": "topic",
+                "pt": "msg",
+                "to": "circle",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 950,
+        "y": 480,
+        "wires": [
+            [
+                "2d27feef.4fc5f2"
+            ]
+        ]
+    },
+    {
+        "id": "2d27feef.4fc5f2",
+        "type": "rbe",
+        "z": "cf7c4432.a5acf8",
+        "name": "",
+        "func": "rbe",
+        "gap": "",
+        "start": "",
+        "inout": "out",
+        "property": "payload",
+        "x": 1110,
+        "y": 480,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "f84b680d.ae2f98",
+        "type": "change",
+        "z": "cf7c4432.a5acf8",
+        "name": "leftAnalogX",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "payload.leftAnalogX",
+                "tot": "msg"
+            },
+            {
+                "t": "set",
+                "p": "topic",
+                "pt": "msg",
+                "to": "leftAnalogX",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 970,
+        "y": 1000,
+        "wires": [
+            [
+                "ab8dc0fe.16eb6"
+            ]
+        ]
+    },
+    {
+        "id": "ab8dc0fe.16eb6",
+        "type": "rbe",
+        "z": "cf7c4432.a5acf8",
+        "name": "",
+        "func": "rbe",
+        "gap": "",
+        "start": "",
+        "inout": "out",
+        "property": "payload",
+        "x": 1110,
+        "y": 1000,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "7337b642.6f3738",
+        "type": "change",
+        "z": "cf7c4432.a5acf8",
+        "name": "leftAnalogY",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "payload.leftAnalogY",
+                "tot": "msg"
+            },
+            {
+                "t": "set",
+                "p": "topic",
+                "pt": "msg",
+                "to": "leftAnalogY",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 970,
+        "y": 1040,
+        "wires": [
+            [
+                "896c18a4.229898"
+            ]
+        ]
+    },
+    {
+        "id": "896c18a4.229898",
+        "type": "rbe",
+        "z": "cf7c4432.a5acf8",
+        "name": "",
+        "func": "rbe",
+        "gap": "",
+        "start": "",
+        "inout": "out",
+        "property": "payload",
+        "x": 1110,
+        "y": 1040,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "aa389ea1.1c61f",
+        "type": "change",
+        "z": "cf7c4432.a5acf8",
+        "name": "rightAnalogX",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "payload.rightAnalogX",
+                "tot": "msg"
+            },
+            {
+                "t": "set",
+                "p": "topic",
+                "pt": "msg",
+                "to": "rightAnalogX",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 970,
+        "y": 1100,
+        "wires": [
+            [
+                "f4db2baf.2a9d28"
+            ]
+        ]
+    },
+    {
+        "id": "f4db2baf.2a9d28",
+        "type": "rbe",
+        "z": "cf7c4432.a5acf8",
+        "name": "",
+        "func": "rbe",
+        "gap": "",
+        "start": "",
+        "inout": "out",
+        "property": "payload",
+        "x": 1110,
+        "y": 1100,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "11075ea0.b88251",
+        "type": "change",
+        "z": "cf7c4432.a5acf8",
+        "name": "rightAnalogY",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "payload.rightAnalogY",
+                "tot": "msg"
+            },
+            {
+                "t": "set",
+                "p": "topic",
+                "pt": "msg",
+                "to": "rightAnalogY",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 970,
+        "y": 1140,
+        "wires": [
+            [
+                "cbde625c.38eca"
+            ]
+        ]
+    },
+    {
+        "id": "cbde625c.38eca",
+        "type": "rbe",
+        "z": "cf7c4432.a5acf8",
+        "name": "",
+        "func": "rbe",
+        "gap": "",
+        "start": "",
+        "inout": "out",
+        "property": "payload",
+        "x": 1110,
+        "y": 1140,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "2eaf5be9.bd6584",
+        "type": "change",
+        "z": "cf7c4432.a5acf8",
+        "name": "l2Analog",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "payload.l2Analog",
+                "tot": "msg"
+            },
+            {
+                "t": "set",
+                "p": "topic",
+                "pt": "msg",
+                "to": "l2Analog",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 960,
+        "y": 1200,
+        "wires": [
+            [
+                "dd2a8e70.da605"
+            ]
+        ]
+    },
+    {
+        "id": "dd2a8e70.da605",
+        "type": "rbe",
+        "z": "cf7c4432.a5acf8",
+        "name": "",
+        "func": "rbe",
+        "gap": "",
+        "start": "",
+        "inout": "out",
+        "property": "payload",
+        "x": 1110,
+        "y": 1200,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "1b9ba9d1.206fc6",
+        "type": "change",
+        "z": "cf7c4432.a5acf8",
+        "name": "r2Analog",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "payload.r2Analog",
+                "tot": "msg"
+            },
+            {
+                "t": "set",
+                "p": "topic",
+                "pt": "msg",
+                "to": "r2Analog",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 960,
+        "y": 1240,
+        "wires": [
+            [
+                "98628ebe.0f31f"
+            ]
+        ]
+    },
+    {
+        "id": "98628ebe.0f31f",
+        "type": "rbe",
+        "z": "cf7c4432.a5acf8",
+        "name": "",
+        "func": "rbe",
+        "gap": "",
+        "start": "",
+        "inout": "out",
+        "property": "payload",
+        "x": 1110,
+        "y": 1240,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "2afe1552.e3e9aa",
+        "type": "change",
+        "z": "cf7c4432.a5acf8",
+        "name": "l1",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "payload.l1",
+                "tot": "msg"
+            },
+            {
+                "t": "set",
+                "p": "topic",
+                "pt": "msg",
+                "to": "l1",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 950,
+        "y": 540,
+        "wires": [
+            [
+                "fd8937b.78cb0c8"
+            ]
+        ]
+    },
+    {
+        "id": "fd8937b.78cb0c8",
+        "type": "rbe",
+        "z": "cf7c4432.a5acf8",
+        "name": "",
+        "func": "rbe",
+        "gap": "",
+        "start": "",
+        "inout": "out",
+        "property": "payload",
+        "x": 1110,
+        "y": 540,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "53b44aed.d20854",
+        "type": "change",
+        "z": "cf7c4432.a5acf8",
+        "name": "l2",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "payload.l2",
+                "tot": "msg"
+            },
+            {
+                "t": "set",
+                "p": "topic",
+                "pt": "msg",
+                "to": "l2",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 950,
+        "y": 580,
+        "wires": [
+            [
+                "4d29dc23.3d2d44"
+            ]
+        ]
+    },
+    {
+        "id": "4d29dc23.3d2d44",
+        "type": "rbe",
+        "z": "cf7c4432.a5acf8",
+        "name": "",
+        "func": "rbe",
+        "gap": "",
+        "start": "",
+        "inout": "out",
+        "property": "payload",
+        "x": 1110,
+        "y": 580,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "b1dc335e.d1796",
+        "type": "change",
+        "z": "cf7c4432.a5acf8",
+        "name": "r1",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "payload.r1",
+                "tot": "msg"
+            },
+            {
+                "t": "set",
+                "p": "topic",
+                "pt": "msg",
+                "to": "r1",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 950,
+        "y": 620,
+        "wires": [
+            [
+                "a7185cb8.3482d"
+            ]
+        ]
+    },
+    {
+        "id": "a7185cb8.3482d",
+        "type": "rbe",
+        "z": "cf7c4432.a5acf8",
+        "name": "",
+        "func": "rbe",
+        "gap": "",
+        "start": "",
+        "inout": "out",
+        "property": "payload",
+        "x": 1110,
+        "y": 620,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "719d20cf.40ebb",
+        "type": "change",
+        "z": "cf7c4432.a5acf8",
+        "name": "r2",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "payload.r2",
+                "tot": "msg"
+            },
+            {
+                "t": "set",
+                "p": "topic",
+                "pt": "msg",
+                "to": "r2",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 950,
+        "y": 660,
+        "wires": [
+            [
+                "41ac732f.111b9c"
+            ]
+        ]
+    },
+    {
+        "id": "41ac732f.111b9c",
+        "type": "rbe",
+        "z": "cf7c4432.a5acf8",
+        "name": "",
+        "func": "rbe",
+        "gap": "",
+        "start": "",
+        "inout": "out",
+        "property": "payload",
+        "x": 1110,
+        "y": 660,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "c1f29fe3.c5b57",
+        "type": "change",
+        "z": "cf7c4432.a5acf8",
+        "name": "l3",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "payload.l3",
+                "tot": "msg"
+            },
+            {
+                "t": "set",
+                "p": "topic",
+                "pt": "msg",
+                "to": "l3",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 950,
+        "y": 720,
+        "wires": [
+            [
+                "49d3fb93.d0da84"
+            ]
+        ]
+    },
+    {
+        "id": "49d3fb93.d0da84",
+        "type": "rbe",
+        "z": "cf7c4432.a5acf8",
+        "name": "",
+        "func": "rbe",
+        "gap": "",
+        "start": "",
+        "inout": "out",
+        "property": "payload",
+        "x": 1110,
+        "y": 720,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "e23240d4.448f",
+        "type": "change",
+        "z": "cf7c4432.a5acf8",
+        "name": "r3",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "payload.r3",
+                "tot": "msg"
+            },
+            {
+                "t": "set",
+                "p": "topic",
+                "pt": "msg",
+                "to": "r3",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 950,
+        "y": 760,
+        "wires": [
+            [
+                "fa2a72a3.9d0de"
+            ]
+        ]
+    },
+    {
+        "id": "fa2a72a3.9d0de",
+        "type": "rbe",
+        "z": "cf7c4432.a5acf8",
+        "name": "",
+        "func": "rbe",
+        "gap": "",
+        "start": "",
+        "inout": "out",
+        "property": "payload",
+        "x": 1110,
+        "y": 760,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "f17c5dd2.d74ac",
+        "type": "change",
+        "z": "cf7c4432.a5acf8",
+        "name": "dPadUp",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "payload.dPadUp",
+                "tot": "msg"
+            },
+            {
+                "t": "set",
+                "p": "topic",
+                "pt": "msg",
+                "to": "dPadUp",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 960,
+        "y": 820,
+        "wires": [
+            [
+                "ba5d2762.5bbdd8"
+            ]
+        ]
+    },
+    {
+        "id": "ba5d2762.5bbdd8",
+        "type": "rbe",
+        "z": "cf7c4432.a5acf8",
+        "name": "",
+        "func": "rbe",
+        "gap": "",
+        "start": "",
+        "inout": "out",
+        "property": "payload",
+        "x": 1110,
+        "y": 820,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "6f46d649.5fcba8",
+        "type": "change",
+        "z": "cf7c4432.a5acf8",
+        "name": "dPadDown",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "payload.dPadDown",
+                "tot": "msg"
+            },
+            {
+                "t": "set",
+                "p": "topic",
+                "pt": "msg",
+                "to": "dPadDown",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 970,
+        "y": 860,
+        "wires": [
+            [
+                "964cea87.189588"
+            ]
+        ]
+    },
+    {
+        "id": "964cea87.189588",
+        "type": "rbe",
+        "z": "cf7c4432.a5acf8",
+        "name": "",
+        "func": "rbe",
+        "gap": "",
+        "start": "",
+        "inout": "out",
+        "property": "payload",
+        "x": 1110,
+        "y": 860,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "82773ef7.7885f",
+        "type": "change",
+        "z": "cf7c4432.a5acf8",
+        "name": "dPadLeft",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "payload.dPadLeft",
+                "tot": "msg"
+            },
+            {
+                "t": "set",
+                "p": "topic",
+                "pt": "msg",
+                "to": "dPadLeft",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 960,
+        "y": 900,
+        "wires": [
+            [
+                "a8382578.5fbe38"
+            ]
+        ]
+    },
+    {
+        "id": "a8382578.5fbe38",
+        "type": "rbe",
+        "z": "cf7c4432.a5acf8",
+        "name": "",
+        "func": "rbe",
+        "gap": "",
+        "start": "",
+        "inout": "out",
+        "property": "payload",
+        "x": 1110,
+        "y": 900,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "bb135780.96ad08",
+        "type": "change",
+        "z": "cf7c4432.a5acf8",
+        "name": "dPadRight",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "payload.dPadRight",
+                "tot": "msg"
+            },
+            {
+                "t": "set",
+                "p": "topic",
+                "pt": "msg",
+                "to": "dPadRight",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 970,
+        "y": 940,
+        "wires": [
+            [
+                "2b724dca.15dbd2"
+            ]
+        ]
+    },
+    {
+        "id": "2b724dca.15dbd2",
+        "type": "rbe",
+        "z": "cf7c4432.a5acf8",
+        "name": "",
+        "func": "rbe",
+        "gap": "",
+        "start": "",
+        "inout": "out",
+        "property": "payload",
+        "x": 1110,
+        "y": 940,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "88dcc031.f247c",
+        "type": "function",
+        "z": "cf7c4432.a5acf8",
+        "name": "Connected status",
+        "func": "msg.payload = {fill:\"green\",shape:\"dot\",text:'connected'};\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 450,
+        "y": 320,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "a3813200.bc5ae",
+        "type": "change",
+        "z": "cf7c4432.a5acf8",
+        "name": "Default color",
+        "rules": [
+            {
+                "t": "set",
+                "p": "r",
+                "pt": "flow",
+                "to": "0",
+                "tot": "num"
+            },
+            {
+                "t": "set",
+                "p": "g",
+                "pt": "flow",
+                "to": "0",
+                "tot": "num"
+            },
+            {
+                "t": "set",
+                "p": "b",
+                "pt": "flow",
+                "to": "64",
+                "tot": "num"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 310,
+        "y": 680,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "11bf1076.b4307",
+        "type": "inject",
+        "z": "cf7c4432.a5acf8",
+        "name": "",
+        "repeat": "",
+        "crontab": "",
+        "once": true,
+        "onceDelay": "0.1",
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 130,
+        "y": 680,
+        "wires": [
+            [
+                "a3813200.bc5ae",
+                "3ce91b1e.71d7c4"
+            ]
+        ]
+    },
+    {
+        "id": "3ce91b1e.71d7c4",
+        "type": "change",
+        "z": "cf7c4432.a5acf8",
+        "name": "No Rumble",
+        "rules": [
+            {
+                "t": "set",
+                "p": "rumbleRight",
+                "pt": "flow",
+                "to": "0",
+                "tot": "num"
+            },
+            {
+                "t": "set",
+                "p": "rumbleLeft",
+                "pt": "flow",
+                "to": "0",
+                "tot": "num"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 310,
+        "y": 720,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "2998da0a.73f6a6",
+        "type": "change",
+        "z": "cf7c4432.a5acf8",
+        "name": "No Rumble",
+        "rules": [
+            {
+                "t": "set",
+                "p": "rumbleRight",
+                "pt": "flow",
+                "to": "0",
+                "tot": "num"
+            },
+            {
+                "t": "set",
+                "p": "rumbleLeft",
+                "pt": "flow",
+                "to": "0",
+                "tot": "num"
+            },
+            {
+                "t": "set",
+                "p": "rumbleRight",
+                "pt": "msg",
+                "to": "0",
+                "tot": "num"
+            },
+            {
+                "t": "set",
+                "p": "rumbleLeft",
+                "pt": "msg",
+                "to": "0",
+                "tot": "num"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 630,
+        "y": 1020,
+        "wires": [
+            [
+                "323e2f3b.0a715"
+            ]
+        ]
+    },
+    {
+        "id": "6bf75efd.a1335",
+        "type": "switch",
+        "z": "cf7c4432.a5acf8",
+        "name": "",
+        "property": "rumbleReset",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "true"
+            },
+            {
+                "t": "false"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 2,
+        "x": 90,
+        "y": 1020,
+        "wires": [
+            [
+                "72b79842.65d338"
+            ],
+            [
+                "39acaaf8.4c71a6"
+            ]
+        ]
+    },
+    {
+        "id": "39acaaf8.4c71a6",
+        "type": "trigger",
+        "z": "cf7c4432.a5acf8",
+        "name": "Reset timer",
+        "op1": "",
+        "op2": "true",
+        "op1type": "nul",
+        "op2type": "bool",
+        "duration": "1",
+        "extend": true,
+        "units": "s",
+        "reset": "",
+        "bytopic": "all",
+        "outputs": 1,
+        "x": 450,
+        "y": 1020,
+        "wires": [
+            [
+                "2998da0a.73f6a6"
+            ]
+        ]
+    },
+    {
+        "id": "72b79842.65d338",
+        "type": "change",
+        "z": "cf7c4432.a5acf8",
+        "name": "Only One Reset",
+        "rules": [
+            {
+                "t": "delete",
+                "p": "rumbleReset",
+                "pt": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 260,
+        "y": 1000,
+        "wires": [
+            [
+                "39acaaf8.4c71a6"
+            ]
+        ]
+    },
+    {
+        "id": "90d127b8.038ff8",
+        "type": "subflow:cf7c4432.a5acf8",
+        "z": "67a2292a06945760",
+        "name": "",
+        "env": [],
+        "x": 650,
+        "y": 260,
+        "wires": [
+            [
+                "367767a8.ecdb28"
+            ],
+            [
+                "b434f625.7195c8"
+            ],
+            [
+                "8a01e210.fa634"
+            ],
+            [
+                "d7d5e3d3.e9fbd"
+            ],
+            [
+                "5dd2ce00.afef6"
+            ],
+            [
+                "97e0907.e94577"
+            ],
+            [
+                "59c7f81b.7c6298"
+            ],
+            [
+                "e980c772.88bb78"
+            ],
+            [
+                "e74da8ae.2e5208"
+            ],
+            [
+                "5869acad.f11ea4"
+            ],
+            [
+                "a3a74439.629828"
+            ],
+            [
+                "a023b0b8.3a282"
+            ],
+            [
+                "646a00c.7e643"
+            ],
+            [
+                "cd3584d6.d45928"
+            ],
+            [
+                "cf923609.f35c78"
+            ],
+            [
+                "55b06aae.da01b4"
+            ],
+            [
+                "b78b1a5b.9a8cd8"
+            ],
+            [
+                "7224c120.cd5d"
+            ],
+            [
+                "86424688.55bc18"
+            ],
+            [
+                "eb927f6.b0fb58"
+            ],
+            [
+                "41372794.56ce08"
+            ],
+            [
+                "ae85f7c2.691ae8"
+            ],
+            [
+                "5bdb2369.772e6c"
+            ],
+            [
+                "faac1a1f.eabbf8"
+            ],
+            [
+                "df3926fc.bd64e8"
+            ],
+            [
+                "7099b28f.4c054c"
+            ]
+        ]
+    },
+    {
+        "id": "367767a8.ecdb28",
+        "type": "debug",
+        "z": "67a2292a06945760",
+        "name": "psButton",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "x": 1260,
+        "y": 80,
+        "wires": []
+    },
+    {
+        "id": "b434f625.7195c8",
+        "type": "debug",
+        "z": "67a2292a06945760",
+        "name": "options",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "x": 1260,
+        "y": 120,
+        "wires": []
+    },
+    {
+        "id": "8a01e210.fa634",
+        "type": "debug",
+        "z": "67a2292a06945760",
+        "name": "share",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "x": 1250,
+        "y": 160,
+        "wires": []
+    },
+    {
+        "id": "d7d5e3d3.e9fbd",
+        "type": "debug",
+        "z": "67a2292a06945760",
+        "name": "triangle",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "x": 1260,
+        "y": 220,
+        "wires": []
+    },
+    {
+        "id": "5dd2ce00.afef6",
+        "type": "debug",
+        "z": "67a2292a06945760",
+        "name": "cross",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "x": 1250,
+        "y": 260,
+        "wires": []
+    },
+    {
+        "id": "97e0907.e94577",
+        "type": "debug",
+        "z": "67a2292a06945760",
+        "name": "square",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "x": 1250,
+        "y": 300,
+        "wires": []
+    },
+    {
+        "id": "59c7f81b.7c6298",
+        "type": "debug",
+        "z": "67a2292a06945760",
+        "name": "circle",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "x": 1250,
+        "y": 340,
+        "wires": []
+    },
+    {
+        "id": "e980c772.88bb78",
+        "type": "debug",
+        "z": "67a2292a06945760",
+        "name": "l1",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "x": 1250,
+        "y": 400,
+        "wires": []
+    },
+    {
+        "id": "e74da8ae.2e5208",
+        "type": "debug",
+        "z": "67a2292a06945760",
+        "name": "l2",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "x": 1250,
+        "y": 440,
+        "wires": []
+    },
+    {
+        "id": "5869acad.f11ea4",
+        "type": "debug",
+        "z": "67a2292a06945760",
+        "name": "r1",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "x": 1250,
+        "y": 480,
+        "wires": []
+    },
+    {
+        "id": "a3a74439.629828",
+        "type": "debug",
+        "z": "67a2292a06945760",
+        "name": "r2",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "x": 1250,
+        "y": 520,
+        "wires": []
+    },
+    {
+        "id": "a023b0b8.3a282",
+        "type": "debug",
+        "z": "67a2292a06945760",
+        "name": "l3",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "x": 1250,
+        "y": 580,
+        "wires": []
+    },
+    {
+        "id": "646a00c.7e643",
+        "type": "debug",
+        "z": "67a2292a06945760",
+        "name": "r3",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "x": 1250,
+        "y": 620,
+        "wires": []
+    },
+    {
+        "id": "cd3584d6.d45928",
+        "type": "debug",
+        "z": "67a2292a06945760",
+        "name": "dPadUp",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "x": 1260,
+        "y": 680,
+        "wires": []
+    },
+    {
+        "id": "cf923609.f35c78",
+        "type": "debug",
+        "z": "67a2292a06945760",
+        "name": "dPadDown",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "x": 1270,
+        "y": 720,
+        "wires": []
+    },
+    {
+        "id": "55b06aae.da01b4",
+        "type": "debug",
+        "z": "67a2292a06945760",
+        "name": "dPadLeft",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "x": 1260,
+        "y": 760,
+        "wires": []
+    },
+    {
+        "id": "b78b1a5b.9a8cd8",
+        "type": "debug",
+        "z": "67a2292a06945760",
+        "name": "dPadRight",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "x": 1270,
+        "y": 800,
+        "wires": []
+    },
+    {
+        "id": "7224c120.cd5d",
+        "type": "debug",
+        "z": "67a2292a06945760",
+        "name": "leftAnalogX",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "x": 950,
+        "y": 660,
+        "wires": []
+    },
+    {
+        "id": "86424688.55bc18",
+        "type": "debug",
+        "z": "67a2292a06945760",
+        "name": "leftAnalogY",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "x": 950,
+        "y": 700,
+        "wires": []
+    },
+    {
+        "id": "eb927f6.b0fb58",
+        "type": "debug",
+        "z": "67a2292a06945760",
+        "name": "rightAnalogX",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "x": 950,
+        "y": 740,
+        "wires": []
+    },
+    {
+        "id": "41372794.56ce08",
+        "type": "debug",
+        "z": "67a2292a06945760",
+        "name": "rightAnalogY",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "x": 950,
+        "y": 780,
+        "wires": []
+    },
+    {
+        "id": "ae85f7c2.691ae8",
+        "type": "debug",
+        "z": "67a2292a06945760",
+        "name": "l2Analog",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "x": 940,
+        "y": 820,
+        "wires": []
+    },
+    {
+        "id": "5bdb2369.772e6c",
+        "type": "debug",
+        "z": "67a2292a06945760",
+        "name": "r2Analog",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "x": 940,
+        "y": 860,
+        "wires": []
+    },
+    {
+        "id": "faac1a1f.eabbf8",
+        "type": "debug",
+        "z": "67a2292a06945760",
+        "name": "batteryLevel",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "x": 690,
+        "y": 800,
+        "wires": []
+    },
+    {
+        "id": "df3926fc.bd64e8",
+        "type": "debug",
+        "z": "67a2292a06945760",
+        "name": "Raw data",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "x": 680,
+        "y": 840,
+        "wires": []
+    },
+    {
+        "id": "40364c.a9f069b4",
+        "type": "change",
+        "z": "67a2292a06945760",
+        "name": "Default color",
+        "rules": [
+            {
+                "t": "set",
+                "p": "r",
+                "pt": "msg",
+                "to": "0",
+                "tot": "num"
+            },
+            {
+                "t": "set",
+                "p": "g",
+                "pt": "msg",
+                "to": "0",
+                "tot": "num"
+            },
+            {
+                "t": "set",
+                "p": "b",
+                "pt": "msg",
+                "to": "64",
+                "tot": "num"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 450,
+        "y": 180,
+        "wires": [
+            [
+                "90d127b8.038ff8"
+            ]
+        ]
+    },
+    {
+        "id": "e0b46c7f.b9727",
+        "type": "change",
+        "z": "67a2292a06945760",
+        "name": "No Rumble",
+        "rules": [
+            {
+                "t": "set",
+                "p": "rumbleRight",
+                "pt": "msg",
+                "to": "0",
+                "tot": "num"
+            },
+            {
+                "t": "set",
+                "p": "rumbleLeft",
+                "pt": "msg",
+                "to": "0",
+                "tot": "num"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 450,
+        "y": 220,
+        "wires": [
+            [
+                "90d127b8.038ff8"
+            ]
+        ]
+    },
+    {
+        "id": "4dcbb15b.316aa",
+        "type": "inject",
+        "z": "67a2292a06945760",
+        "name": "",
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 280,
+        "y": 180,
+        "wires": [
+            [
+                "40364c.a9f069b4"
+            ]
+        ]
+    },
+    {
+        "id": "7a0c57af.6dabe8",
+        "type": "inject",
+        "z": "67a2292a06945760",
+        "name": "",
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 280,
+        "y": 220,
+        "wires": [
+            [
+                "e0b46c7f.b9727"
+            ]
+        ]
+    },
+    {
+        "id": "7099b28f.4c054c",
+        "type": "debug",
+        "z": "67a2292a06945760",
+        "name": "Send-report",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "x": 690,
+        "y": 900,
+        "wires": []
+    },
+    {
+        "id": "18e09825.d21008",
+        "type": "change",
+        "z": "67a2292a06945760",
+        "name": "Color OFF",
+        "rules": [
+            {
+                "t": "set",
+                "p": "r",
+                "pt": "msg",
+                "to": "0",
+                "tot": "num"
+            },
+            {
+                "t": "set",
+                "p": "g",
+                "pt": "msg",
+                "to": "0",
+                "tot": "num"
+            },
+            {
+                "t": "set",
+                "p": "b",
+                "pt": "msg",
+                "to": "0",
+                "tot": "num"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 450,
+        "y": 380,
+        "wires": [
+            [
+                "90d127b8.038ff8"
+            ]
+        ]
+    },
+    {
+        "id": "54f81e79.ad09b",
+        "type": "inject",
+        "z": "67a2292a06945760",
+        "name": "",
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 280,
+        "y": 380,
+        "wires": [
+            [
+                "18e09825.d21008"
+            ]
+        ]
+    },
+    {
+        "id": "44d30a12.528194",
+        "type": "change",
+        "z": "67a2292a06945760",
+        "name": "Full Rumble",
+        "rules": [
+            {
+                "t": "set",
+                "p": "rumbleRight",
+                "pt": "msg",
+                "to": "255",
+                "tot": "num"
+            },
+            {
+                "t": "set",
+                "p": "rumbleLeft",
+                "pt": "msg",
+                "to": "255",
+                "tot": "num"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 450,
+        "y": 440,
+        "wires": [
+            [
+                "90d127b8.038ff8"
+            ]
+        ]
+    },
+    {
+        "id": "5ca8cc99.aaf914",
+        "type": "inject",
+        "z": "67a2292a06945760",
+        "name": "",
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 280,
+        "y": 440,
+        "wires": [
+            [
+                "44d30a12.528194"
+            ]
+        ]
+    },
+    {
+        "id": "9b2a4107.07ed",
+        "type": "change",
+        "z": "67a2292a06945760",
+        "name": "White color",
+        "rules": [
+            {
+                "t": "set",
+                "p": "r",
+                "pt": "msg",
+                "to": "254",
+                "tot": "num"
+            },
+            {
+                "t": "set",
+                "p": "g",
+                "pt": "msg",
+                "to": "254",
+                "tot": "num"
+            },
+            {
+                "t": "set",
+                "p": "b",
+                "pt": "msg",
+                "to": "254",
+                "tot": "num"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 450,
+        "y": 340,
+        "wires": [
+            [
+                "90d127b8.038ff8"
+            ]
+        ]
+    },
+    {
+        "id": "402d6310.1eed7c",
+        "type": "inject",
+        "z": "67a2292a06945760",
+        "name": "",
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 280,
+        "y": 340,
+        "wires": [
+            [
+                "9b2a4107.07ed"
+            ]
+        ]
+    }
+]

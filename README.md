@@ -52,13 +52,17 @@ Additionally, for automatic detection of the correct device, one should install 
   npm install -g @serialport/list
   ```
 With this done, the node will automatically detect either the radio or the Pixhawk connected via usb. In the options of the subflow-node, one can even choose if only one of the options should be considered for auto-connect.<br>
-<p align="center"><img src="https://raw.githubusercontent.com/alexsauter/navalarchimedes/main/figs/TelemetryRCoptions.png" width="750%"></p>
+<p align="center"><img src="https://raw.githubusercontent.com/alexsauter/navalarchimedes/main/figs/TelemetryRCoptions.png" width="75%"></p>
 Also the mavlink-system and mavlink-component to listen to can be selected here. However, one can still detect all other systems and components when listening at the "all"-output of the node.<br>
 The datarate can be changed by setting a number of milliseconds to limit the amount of data coming in. The node can be adjusted to be working in up to 50Hz (20 ms), but the processor of the Raspberry Pi 3B+ will then use up to 25% (in addition to ~2% for the mavlink2rest-program) just for this if chosen. The default rate of 2Hz (500 ms) is gentle to the processor (~2% for the node and ~2% for the mavlink2rest-program).
 
 ### Subflow for DS4 interaction
 
-For the interaction with the bluetooth controller, the <a href="https://github.com/node-hid/node-hid">node-hid</a> package is still required, but now without any further dependencies.
+The subflow for interaction with the Dualshock 4 controller via bluetooth connection is called <a href="https://raw.githubusercontent.com/alexsauter/navalarchimedes/main/BluetoothDS4.json">BluetoothDS4.json</a>, including the debug and injection nodes for testing.<br>
+
+<p align="center"><img src="https://raw.githubusercontent.com/alexsauter/navalarchimedes/main/figs/BluetoothDS4.png" width="100%"></p>
+
+For the interaction with the bluetooth controller, the <a href="https://github.com/node-hid/node-hid">node-hid</a> package is required, but in the latest version without any further dependencies.
   ```sh
   npm install node-hid
   ```
@@ -68,14 +72,13 @@ The settings.js file in the .node-red folder has to be adjusted at the functionG
          HID:require('node-hid')
     },
   ```
-The crc-code, needed for coding the transmission of commands to the controller - but not needed for receiving buttons and such, is added as part of a function-node, taken and adapted from https://github.com/Pecacheu/dualshock/blob/master/crc.js .<br><br>
-
-The original source of the parcing of the receiving buffer from the DS4 controller is based on the work of https://github.com/seidtgeist/node-ds4 .
-
+The crc-code, needed for coding the transmission of commands to the controller - but not needed for receiving buttons and such, is added as part of a function-node, taken and adapted from https://github.com/Pecacheu/dualshock/blob/master/crc.js .<br>
+The original source of the parcing of the receiving buffer from the DS4 controller is based on the work of https://github.com/seidtgeist/node-ds4 .<br>
+The bluetooth controller has first to be connected on an OS-level, but will then be automatically detected by the subflow-node.
 
 ## The project during the periode 2019-2023
 
-The project before the year 2024 was dependent on several npm packages, preferably installed directly into the .node-red folder.
+The project before the year 2024 was parcing the mavlink protocol internally, and was thus dependent on several npm packages, preferably installed directly into the .node-red folder.
   ```sh
   npm install bindings nan prebuild-install process serialport crc jspack underscore util events mavlink process
   npm install node-hid
@@ -94,6 +97,7 @@ That code depends on the inclusion of these packages into the settings.js file i
          process:require('/home/pi/node_modules/process')
     },
   ```
+As the latest version is much more elegant, this first version is not recommended anymore.
 
 ## Authors
 * Alexander Sauter
