@@ -52,8 +52,9 @@ Additionally, for automatic detection of the correct device, one should install 
   npm install -g @serialport/list
   ```
 With this done, the node will automatically detect either the radio or the Pixhawk connected via usb. In the options of the subflow-node, one can even choose if only one of the options should be considered for auto-connect.<br>
-<p align="center"><img src="https://raw.githubusercontent.com/alexsauter/navalarchimedes/main/figs/TelemetryRCoptions.png" width="100%"></p>
-Also the mavlink-system and component to listen to can be selected here. The datarate can be changed in milliseconds to limit the amount of data coming in. The node can be adjusted to be working in up to 50Hz (20 ms), but the processor of the Raspberry Pi 3B+ will then use up to 25% just for this if chosen. The default rate of 2Hz (500 ms) is gentle to the processor (~2%).
+<p align="center"><img src="https://raw.githubusercontent.com/alexsauter/navalarchimedes/main/figs/TelemetryRCoptions.png" width="750%"></p>
+Also the mavlink-system and mavlink-component to listen to can be selected here. However, one can still detect all other systems and components when listening at the "all"-output of the node.<br>
+The datarate can be changed by setting a number of milliseconds to limit the amount of data coming in. The node can be adjusted to be working in up to 50Hz (20 ms), but the processor of the Raspberry Pi 3B+ will then use up to 25% (in addition to ~2% for the mavlink2rest-program) just for this if chosen. The default rate of 2Hz (500 ms) is gentle to the processor (~2% for the node and ~2% for the mavlink2rest-program).
 
 ### Subflow for DS4 interaction
 
