@@ -89,6 +89,63 @@ The crc-code, needed for coding the transmission of commands to the controller -
 The original source of the parcing of the receiving buffer from the DS4 controller is based on the work of https://github.com/seidtgeist/node-ds4 .<br><br>
 Both rumble and color changes are working, the speaker is not supported in this version. A newer project (https://github.com/Pecacheu/dualshock) may be interesting to invesitgate in order to enable further functionality of the controller. Within this project, the reading of the buttons is sufficient.
 
+### Optional modification for auto-selection of Arduino port
+
+For interaction with the Arduino Uno, and thus the I/O of the boat, the <a href="https://github.com/node-red/node-red-nodes/tree/master/hardware/Arduino">node-red-node-arduino</a> is used. However, if other usb-ports are plugged in at a different order from time to time, the port of the standard arduino-node has to be adjusted. When adding some code to the main <a href="https://github.com/node-red/node-red-nodes/blob/master/hardware/Arduino/35-arduino.js">35-arduino.js</a> file, one can add a auto-select function that will choose the correct port as long as "Arduino (www.arduino.cc)" is the device-registered manufacturer - which can be communicated when using a serial port.<br><br>
+The same way as for the auto-detection of the right port for the Pixhawk or radio, this auto-detection dependes on installing globally a part of the <a href="https://serialport.io/docs/bin-list">serialport</a>-package:
+  ```sh
+  npm install -g @serialport/list
+  ```
+However, for the current version of Node SerialPort (v12.x.x), one needs to call the necessary command "serialport-list -f json" on a shell. Thus, a further npm package is needed. This should be installed being in the .node-red folder.
+  ```sh
+  npm install child_process
+  ```
+After installing the arduino-nodes as a part of the node-red-node-arduino palette (or at the same time as the child_process package), one can modifiy the 35-arduino.js file in the .node-red/node_modules/node-red-node-arduino folder.<br>
+Add the dependency for the child_process package:
+  ```js
+	var subProcess = require('child_process');
+  ```
+Add to variables and functions to the ArdunioNode-function:
+  ```sh
+	this.devices = [];
+	this.portaddress = null;
+  ```
+And two functions to the same ArdunioNode-function, just below the variable declarations:
+  ```js
+	this.listPorts = function() {
+		node.devices = [];
+		subProcess.exec('serialport-list -f json', (err, stdout, stderr) => {
+			  if (err) {
+				console.error('Error listing ports', err);
+			} else {
+				node.devices = JSON.parse(stdout);
+			}
+		);
+	};
+	this.findPathToManufacturer(manufacturer) {
+		for (var i = 0; i < node.devices.length; i++) {
+			if (node.devices[i].manufacturer == manufacturer) {
+				node.portaddress = node.devices[i].path;
+			}
+		}
+		return null;
+	;}
+  ```
+And finally, just when entering the startup-function, just after these new functions, add the following code:
+  ```js
+	//console.log("Choosing right manufacturer");
+	//console.log(JSON.stringify(node.devices));
+	node.findPathToManufacturer("Arduino (www.arduino.cc)");
+	if (node.portaddress !== null){
+		console.log("Found: "+node.portaddress);
+		node.device = node.portaddress;
+	} else {
+		//console.log("Manufacturer not found, trying again while trying connect to default port");
+		node.listPorts();
+	}
+  ```
+After this, the port/path chosen in the arduino-node should only be secondarily of interest. If a matching Arduino is found, its port-adress is overwriting the port chosing in Node-RED.
+
 ## The project during the periode 2019-2023
 
 The project before the year 2024 was parcing the mavlink protocol internally, and was thus dependent on several npm packages, preferably installed directly into the .node-red folder.
