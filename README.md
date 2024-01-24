@@ -130,7 +130,7 @@ And two functions to the same ArdunioNode-function, just below the variable decl
 			}
 		}
 		return null;
-	;}
+	};
   ```
 And finally, just when entering the startup-function, just after these new functions, add the following code:
   ```js
