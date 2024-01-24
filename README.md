@@ -123,7 +123,7 @@ And two functions to the same ArdunioNode-function, just below the variable decl
 		}
 		);
 	};
-	this.findPathToManufacturer(manufacturer) {
+	this.findPathToManufacturer = function(manufacturer) {
 		for (var i = 0; i < node.devices.length; i++) {
 			if (node.devices[i].manufacturer == manufacturer) {
 				node.portaddress = node.devices[i].path;
