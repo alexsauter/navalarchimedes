@@ -115,11 +115,12 @@ And two functions to the same ArdunioNode-function, just below the variable decl
 	this.listPorts = function() {
 		node.devices = [];
 		subProcess.exec('serialport-list -f json', (err, stdout, stderr) => {
-			  if (err) {
+			if (err) {
 				console.error('Error listing ports', err);
 			} else {
 				node.devices = JSON.parse(stdout);
 			}
+		}
 		);
 	};
 	this.findPathToManufacturer(manufacturer) {
