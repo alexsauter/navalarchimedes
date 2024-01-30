@@ -1,0 +1,199 @@
+[
+    {
+        "id": "b78595f2e8b79917",
+        "type": "serial in",
+        "z": "4f77a969017aa466",
+        "name": "",
+        "serial": "d866fc67359c02ba",
+        "x": 200,
+        "y": 240,
+        "wires": [
+            [
+                "4b4f4892283f2041"
+            ]
+        ]
+    },
+    {
+        "id": "23cc2c42f8691a80",
+        "type": "function",
+        "z": "4f77a969017aa466",
+        "name": "splice and check validity",
+        "func": "var lasttime = context.get(\"lasttime\")||Date.now();\nmsg.frequency = 1000/(Date.now()-lasttime);\ncontext.set(\"lasttime\",Date.now());msg.header = msg.payload.slice(0, 4);\nmsg.target = [];\nmsg.target[0] = msg.payload.slice(4,12);\nmsg.target[1] = msg.payload.slice(12,20);\nmsg.target[2] = msg.payload.slice(20,28);\nmsg.tail = msg.payload.slice(28, 30);\nmsg.numtargets = 0;\nfor (let i = 0; i < msg.target.length; i++) {\n    if (Buffer.compare(msg.target[i], Buffer.from([0, 0, 0, 0, 0, 0, 0, 0])) != 0) {\n        msg.numtargets = msg.numtargets + 1;\n    }\n}\nif ((Buffer.compare(msg.header, Buffer.from([170,255,3,0])) == 0) && (Buffer.compare(msg.tail, Buffer.from([85,204])) == 0)) {\n    node.status({ fill: \"green\", shape: \"dot\", text: 'valid data, ' + msg.numtargets + ' targets, ' + msg.frequency.toFixed(1) + 'Hz' });\n    return [msg, null];\n} else {\n    node.status({ fill: \"red\", shape: \"dot\", text: 'invalid data, ' + msg.frequency.toFixed(1) + 'Hz' });\n    return [null, msg];\n}\n",
+        "outputs": 2,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 730,
+        "y": 240,
+        "wires": [
+            [
+                "27efd977f0d938a3"
+            ],
+            []
+        ],
+        "outputLabels": [
+            "Valid output",
+            "Invalid output"
+        ]
+    },
+    {
+        "id": "4b4f4892283f2041",
+        "type": "switch",
+        "z": "4f77a969017aa466",
+        "name": "Drop fragments",
+        "property": "payload.length",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "eq",
+                "v": "30",
+                "vt": "num"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 1,
+        "x": 460,
+        "y": 240,
+        "wires": [
+            [
+                "23cc2c42f8691a80"
+            ]
+        ]
+    },
+    {
+        "id": "27efd977f0d938a3",
+        "type": "function",
+        "z": "4f77a969017aa466",
+        "name": "parcing",
+        "func": "msg.targetraw = msg.target;\nmsg.target = [];\nfor (let i = 0; i < msg.targetraw.length; i++) {\n        msg.target[i] = {};\n        //Ta x-buffer\n        msg.target[i].xBuff = msg.targetraw[i].slice(0,2);\n        //Sett fortegnsbit (HSB av siste byte) til 0 (ta alt men ikke fortegnsbit)\n        msg.target[i].xBuffpos = Buffer.alloc(2);\n        msg.target[i].xBuffpos.writeUInt16BE(msg.target[i].xBuff.readUInt16BE() & 0xFF7F,0);\n        //Finn fortegn (OBS! negativ er 0 og positiv er 1)\n        msg.target[i].xfortegn = (msg.target[i].xBuff.readUInt16BE() & 0x0080);\n        msg.target[i].xIsNeg = msg.target[i].xfortegn == 0;\n                //msg.target[i].xfortegn = Buffer.compare((msg.target[i].xBuff & 0x0080), Buffer.from([0,0,143,0])) == 0;\n        //Regn ut verdi\n        msg.target[i].x = (msg.target[i].xBuffpos.readUInt8(0) + msg.target[i].xBuffpos.readUInt8(1)*256);\n        //Fix på fortegn om nødvendig\n        if (msg.target[i].xIsNeg) {\n                msg.target[i].x = - msg.target[i].x;\n        }\n        //msg.target[i].x = msg.target[i].xBuff.readInt16LE(0);\n\n        msg.target[i].yBuff = msg.targetraw[i].slice(2,4);\n        msg.target[i].y = (msg.target[i].yBuff.readUInt8(0) + msg.target[i].yBuff.readUInt8(1)*256) - 2**15; //2**15 fjerner fortegnsbit, y er alltid positiv (= fortegnsbit er 1)\n        //msg.target[i].y = msg.target[i].yBuff.readUInt16LE(0);\n\n        msg.target[i].speedBuff = msg.targetraw[i].slice(4,6);\n        msg.target[i].speedBuffpos = Buffer.alloc(2);\n        msg.target[i].speedBuffpos.writeUInt16BE(msg.target[i].speedBuff.readUInt16BE() & 0xFF7F,0);\n        msg.target[i].speedfortegn = (msg.target[i].speedBuff.readUInt16BE() & 0x0080);\n        msg.target[i].speedIsNeg = msg.target[i].speedfortegn == 0;\n        msg.target[i].speed = (msg.target[i].speedBuffpos.readUInt8(0) + msg.target[i].speedBuffpos.readUInt8(1)*256);\n        if (msg.target[i].speedIsNeg) {\n                msg.target[i].speed = - msg.target[i].speed;\n        }\n        //msg.target[i].speed = msg.target[i].speedBuff.readInt16BE(0);\n\n        msg.target[i].dResBuff = msg.targetraw[i].slice(6,8);\n        msg.target[i].dRes = (msg.target[i].dResBuff.readUInt8(0) + msg.target[i].dResBuff.readUInt8(1)*256);\n        //msg.target[i].dRes = msg.target[i].dResBuff.readUInt16LE(0);\n\n        msg.target[i].d = Math.sqrt(msg.target[i].y**2 + msg.target[i].x**2);\n        msg.target[i].d = msg.target[i].d.toFixed(0);\n        msg.target[i].angle = Math.atan(msg.target[i].x/msg.target[i].y);\n        msg.target[i].angle = 180*msg.target[i].angle/Math.PI;\n        msg.target[i].angle = msg.target[i].angle.toFixed(0);\n}\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1000,
+        "y": 220,
+        "wires": [
+            [
+                "aa3534bcdd0d54ef"
+            ]
+        ]
+    },
+    {
+        "id": "1884c2716b7266d1",
+        "type": "function",
+        "z": "4f77a969017aa466",
+        "name": "Check for serial ports",
+        "func": "var subProcess = global.get(\"child_process\");\nfunction listPorts() {\n  \tmsg.devices = [];\n  \tsubProcess.exec('serialport-list -f json', (err, stdout, stderr) => {\n  \t\t  if (err) {\n  \t\t\tconsole.error('Error listing ports', err);\n  \t\t} else {\n  \t\t\tmsg.devices = JSON.parse(stdout);\n\t\t\tnode.send(msg);\n  \t\t}\n\t}\n\t);\n  };\nlistPorts();\n",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 440,
+        "y": 120,
+        "wires": [
+            [
+                "c1821626da1072fe"
+            ]
+        ]
+    },
+    {
+        "id": "c1821626da1072fe",
+        "type": "debug",
+        "z": "4f77a969017aa466",
+        "name": "debug 98",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 700,
+        "y": 120,
+        "wires": []
+    },
+    {
+        "id": "03303be3e0571f30",
+        "type": "inject",
+        "z": "4f77a969017aa466",
+        "name": "",
+        "props": [],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "x": 210,
+        "y": 120,
+        "wires": [
+            [
+                "1884c2716b7266d1"
+            ]
+        ]
+    },
+    {
+        "id": "2bdb9313ef024134",
+        "type": "comment",
+        "z": "4f77a969017aa466",
+        "name": "Requirements",
+        "info": "Uses child-process package, installed in .node-red as npm install child-process and added to settings.js",
+        "x": 490,
+        "y": 160,
+        "wires": []
+    },
+    {
+        "id": "3ca582281abf1d69",
+        "type": "comment",
+        "z": "4f77a969017aa466",
+        "name": "Requirements",
+        "info": "Uses serial port on Raspberry Pi, activate Serial Port on OS-level, and allow for use of port via sudo chmod 777 /dev/ttyS0",
+        "x": 250,
+        "y": 280,
+        "wires": []
+    },
+    {
+        "id": "aa3534bcdd0d54ef",
+        "type": "debug",
+        "z": "4f77a969017aa466",
+        "name": "debug 99",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1200,
+        "y": 220,
+        "wires": []
+    },
+    {
+        "id": "d866fc67359c02ba",
+        "type": "serial-port",
+        "name": "",
+        "serialport": "/dev/ttyS0",
+        "serialbaud": "256000",
+        "databits": "8",
+        "parity": "none",
+        "stopbits": "1",
+        "waitfor": "",
+        "dtr": "none",
+        "rts": "none",
+        "cts": "none",
+        "dsr": "none",
+        "newline": "2",
+        "bin": "bin",
+        "out": "time",
+        "addchar": "",
+        "responsetimeout": "10000"
+    }
+]

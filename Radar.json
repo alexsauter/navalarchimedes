@@ -1,0 +1,244 @@
+[
+    {
+        "id": "e52b9a1614bb2c7d",
+        "type": "subflow",
+        "name": "HLK-LD2450",
+        "info": "Node for receiving target-data from a HLK-LD2450 radar chip over serial port of a Raspberry Pi (pin 2 and 6 for power, pin 8 and 10 for Rx/Tx).\r\n\r\nRequirements:\r\nUses serial port on Raspberry Pi, activate Serial Port on OS-level, and allow for use of port via \"sudo chmod 777 /dev/ttyS0\"",
+        "category": "Radar",
+        "in": [],
+        "out": [
+            {
+                "x": 1180,
+                "y": 80,
+                "wires": [
+                    {
+                        "id": "1fe393aedb823af1",
+                        "port": 0
+                    }
+                ]
+            }
+        ],
+        "env": [],
+        "meta": {
+            "author": "Alexander Sauter <f-asauter@mil.no>"
+        },
+        "color": "#F3B567",
+        "outputLabels": [
+            "Targets"
+        ],
+        "icon": "node-red/bridge.svg",
+        "status": {
+            "x": 940,
+            "y": 200,
+            "wires": [
+                {
+                    "id": "60d15797561a890f",
+                    "port": 0
+                },
+                {
+                    "id": "2002116d63dc2852",
+                    "port": 0
+                }
+            ]
+        }
+    },
+    {
+        "id": "555c2283c9ec288f",
+        "type": "serial in",
+        "z": "e52b9a1614bb2c7d",
+        "name": "",
+        "serial": "d866fc67359c02ba",
+        "x": 200,
+        "y": 100,
+        "wires": [
+            [
+                "9240757eba386a2f"
+            ]
+        ]
+    },
+    {
+        "id": "bbdb63049a45b16d",
+        "type": "function",
+        "z": "e52b9a1614bb2c7d",
+        "name": "splice and check validity",
+        "func": "var lasttime = context.get(\"lasttime\")||Date.now();\nmsg.frequency = 1000/(Date.now()-lasttime);\ncontext.set(\"lasttime\",Date.now());msg.header = msg.payload.slice(0, 4);\nmsg.target = [];\nmsg.target[0] = msg.payload.slice(4,12);\nmsg.target[1] = msg.payload.slice(12,20);\nmsg.target[2] = msg.payload.slice(20,28);\nmsg.tail = msg.payload.slice(28, 30);\nmsg.numtargets = 0;\nfor (let i = 0; i < msg.target.length; i++) {\n    if (Buffer.compare(msg.target[i], Buffer.from([0, 0, 0, 0, 0, 0, 0, 0])) != 0) {\n        msg.numtargets = msg.numtargets + 1;\n    }\n}\nif ((Buffer.compare(msg.header, Buffer.from([170,255,3,0])) == 0) && (Buffer.compare(msg.tail, Buffer.from([85,204])) == 0)) {\n    node.status({ fill: \"green\", shape: \"dot\", text: 'valid data, ' + msg.numtargets + ' target(s), ' + msg.frequency.toFixed(1) + 'Hz' });\n    return [msg, null];\n} else {\n    node.status({ fill: \"red\", shape: \"dot\", text: 'invalid data, ' + msg.frequency.toFixed(1) + 'Hz' });\n    return [null, msg];\n}\n",
+        "outputs": 2,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 650,
+        "y": 100,
+        "wires": [
+            [
+                "1fe393aedb823af1"
+            ],
+            []
+        ],
+        "outputLabels": [
+            "Valid output",
+            "Invalid output"
+        ]
+    },
+    {
+        "id": "9240757eba386a2f",
+        "type": "switch",
+        "z": "e52b9a1614bb2c7d",
+        "name": "Drop fragments",
+        "property": "payload.length",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "eq",
+                "v": "30",
+                "vt": "num"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 1,
+        "x": 400,
+        "y": 100,
+        "wires": [
+            [
+                "bbdb63049a45b16d"
+            ]
+        ]
+    },
+    {
+        "id": "1fe393aedb823af1",
+        "type": "function",
+        "z": "e52b9a1614bb2c7d",
+        "name": "parcing",
+        "func": "msg.targetraw = msg.target;\nmsg.target = [];\nfor (let i = 0; i < msg.targetraw.length; i++) {\n        msg.target[i] = {};\n        //Ta x-buffer\n        msg.target[i].xBuff = msg.targetraw[i].slice(0,2);\n        //Sett fortegnsbit (HSB av siste byte) til 0 (ta alt men ikke fortegnsbit)\n        msg.target[i].xBuffpos = Buffer.alloc(2);\n        msg.target[i].xBuffpos.writeUInt16BE(msg.target[i].xBuff.readUInt16BE() & 0xFF7F,0);\n        //Finn fortegn (OBS! negativ er 0 og positiv er 1)\n        msg.target[i].xfortegn = (msg.target[i].xBuff.readUInt16BE() & 0x0080);\n        msg.target[i].xIsNeg = msg.target[i].xfortegn == 0;\n                //msg.target[i].xfortegn = Buffer.compare((msg.target[i].xBuff & 0x0080), Buffer.from([0,0,143,0])) == 0;\n        //Regn ut verdi\n        msg.target[i].x = (msg.target[i].xBuffpos.readUInt8(0) + msg.target[i].xBuffpos.readUInt8(1)*256);\n        //Fix på fortegn om nødvendig\n        if (msg.target[i].xIsNeg) {\n                msg.target[i].x = - msg.target[i].x;\n        }\n        //msg.target[i].x = msg.target[i].xBuff.readInt16LE(0);\n\n        msg.target[i].yBuff = msg.targetraw[i].slice(2,4);\n        msg.target[i].y = (msg.target[i].yBuff.readUInt8(0) + msg.target[i].yBuff.readUInt8(1)*256) - 2**15; //2**15 fjerner fortegnsbit, y er alltid positiv (= fortegnsbit er 1)\n        //msg.target[i].y = msg.target[i].yBuff.readUInt16LE(0);\n\n        msg.target[i].speedBuff = msg.targetraw[i].slice(4,6);\n        msg.target[i].speedBuffpos = Buffer.alloc(2);\n        msg.target[i].speedBuffpos.writeUInt16BE(msg.target[i].speedBuff.readUInt16BE() & 0xFF7F,0);\n        msg.target[i].speedfortegn = (msg.target[i].speedBuff.readUInt16BE() & 0x0080);\n        msg.target[i].speedIsNeg = msg.target[i].speedfortegn == 0;\n        msg.target[i].speed = (msg.target[i].speedBuffpos.readUInt8(0) + msg.target[i].speedBuffpos.readUInt8(1)*256);\n        if (msg.target[i].speedIsNeg) {\n                msg.target[i].speed = - msg.target[i].speed;\n        }\n        //msg.target[i].speed = msg.target[i].speedBuff.readInt16BE(0);\n\n        msg.target[i].dResBuff = msg.targetraw[i].slice(6,8);\n        msg.target[i].dRes = (msg.target[i].dResBuff.readUInt8(0) + msg.target[i].dResBuff.readUInt8(1)*256);\n        //msg.target[i].dRes = msg.target[i].dResBuff.readUInt16LE(0);\n\n        msg.target[i].d = Math.sqrt(msg.target[i].y**2 + msg.target[i].x**2);\n        msg.target[i].d = msg.target[i].d.toFixed(0);\n        msg.target[i].angle = Math.atan(msg.target[i].x/msg.target[i].y);\n        msg.target[i].angle = 180*msg.target[i].angle/Math.PI;\n        msg.target[i].angle = msg.target[i].angle.toFixed(0);\n}\n//return msg;\nreturn {topic: \"radar\", port: msg.port, numtargets: msg.numtargets, targets : [{x: msg.target[0].x, y: msg.target[0].y, speed: msg.target[0].speed, distance: Number(msg.target[0].d), bearing: Number(msg.target[0].angle)},{x: msg.target[1].x, y: msg.target[1].y, speed: msg.target[1].speed, distance: Number(msg.target[1].d), bearing: Number(msg.target[1].angle)},{x: msg.target[2].x, y: msg.target[2].y, speed: msg.target[2].speed, distance: Number(msg.target[2].d), bearing: Number(msg.target[2].angle)}]}",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 920,
+        "y": 80,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "90e48cdfc5ef69b3",
+        "type": "comment",
+        "z": "e52b9a1614bb2c7d",
+        "name": "Requirements",
+        "info": "Uses serial port on Raspberry Pi, activate Serial Port on OS-level, and allow for use of port via sudo chmod 777 /dev/ttyS0",
+        "x": 250,
+        "y": 140,
+        "wires": []
+    },
+    {
+        "id": "60d15797561a890f",
+        "type": "status",
+        "z": "e52b9a1614bb2c7d",
+        "name": "",
+        "scope": null,
+        "x": 400,
+        "y": 200,
+        "wires": [
+            [
+                "59bd25036729c37b"
+            ]
+        ]
+    },
+    {
+        "id": "2002116d63dc2852",
+        "type": "function",
+        "z": "e52b9a1614bb2c7d",
+        "name": "Reconnect status",
+        "func": "msg.payload = {fill:\"red\",shape:\"ring\",text:\"trying to reconnect\"};\nreturn msg;",
+        "outputs": 1,
+        "timeout": "",
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 770,
+        "y": 260,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "59bd25036729c37b",
+        "type": "trigger",
+        "z": "e52b9a1614bb2c7d",
+        "name": "",
+        "op1": "",
+        "op2": "no new messages",
+        "op1type": "nul",
+        "op2type": "str",
+        "duration": "1",
+        "extend": true,
+        "overrideDelay": false,
+        "units": "s",
+        "reset": "",
+        "bytopic": "all",
+        "topic": "topic",
+        "outputs": 1,
+        "x": 560,
+        "y": 260,
+        "wires": [
+            [
+                "2002116d63dc2852"
+            ]
+        ]
+    },
+    {
+        "id": "d866fc67359c02ba",
+        "type": "serial-port",
+        "name": "",
+        "serialport": "/dev/ttyS0",
+        "serialbaud": "256000",
+        "databits": "8",
+        "parity": "none",
+        "stopbits": "1",
+        "waitfor": "",
+        "dtr": "none",
+        "rts": "none",
+        "cts": "none",
+        "dsr": "none",
+        "newline": "2",
+        "bin": "bin",
+        "out": "time",
+        "addchar": "",
+        "responsetimeout": "10000"
+    },
+    {
+        "id": "da6832b995a7fc65",
+        "type": "debug",
+        "z": "4f77a969017aa466",
+        "name": "debug 102",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 770,
+        "y": 420,
+        "wires": []
+    },
+    {
+        "id": "88d83daae73d4bcb",
+        "type": "subflow:e52b9a1614bb2c7d",
+        "z": "4f77a969017aa466",
+        "name": "",
+        "x": 550,
+        "y": 420,
+        "wires": [
+            [
+                "da6832b995a7fc65"
+            ]
+        ]
+    }
+]

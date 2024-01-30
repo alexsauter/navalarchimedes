@@ -147,6 +147,21 @@ And finally, just when entering the startup-function, just after these new funct
   ```
 After this, the port/path chosen in the arduino-node should only be secondarily of interest. If a matching Arduino is found, its port-adress is overwriting the port chosing in Node-RED.
 
+### Optional addition of short range radar
+
+As an example of a radar that can be used, a HLK-LD2450 chip was tested and can be implemented. The chip is a 24 GHz radar reporting the position of up to three targets simultaneously, with a range of up to 6.5 meter. Each target is positions in a 2D-plane in units of millimeters and with a relativ speed in centimeters per second.<br>
+The chip can be connected using the serial port as part of the gpio-pins of the Raspberry Pi (pin 2 and 4 for power and pin 8 and 10 for Rx/Tx). To be able to use the serial connection in Node-RED, permissions have to be adjusted for use of the port:
+  ```sh
+  sudo chmod 777 /dev/ttyS0
+  ```
+That should be all, after which the <a href="https://raw.githubusercontent.com/alexsauter/navalarchimedes/main/Radar.json">Radar.json</a> can be downloaded and used. The node looks like the following.
+
+<p align="center"><img src="https://raw.githubusercontent.com/alexsauter/navalarchimedes/main/figs/RadarNode.png" width="80%"></p>
+
+The output of the radar-node looks like the following, here with only one proper detection.
+
+<p align="center"><img src="https://raw.githubusercontent.com/alexsauter/navalarchimedes/main/figs/RadarNodeOutput.png" width="60%"></p>
+
 ## The project during the periode 2019-2023
 
 The project before the year 2024 was parcing the mavlink protocol internally, and was thus dependent on several npm packages, preferably installed directly into the .node-red folder.
