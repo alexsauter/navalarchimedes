@@ -92,7 +92,7 @@ Both rumble and color changes are working, the speaker is not supported in this 
 ### Optional modification for auto-selection of Arduino port
 
 For interaction with the Arduino Uno, and thus the I/O of the boat, the <a href="https://github.com/node-red/node-red-nodes/tree/master/hardware/Arduino">node-red-node-arduino</a> is used. However, if other usb-ports are plugged in at a different order from time to time, the port of the standard arduino-node has to be adjusted. When adding some code to the main <a href="https://github.com/node-red/node-red-nodes/blob/master/hardware/Arduino/35-arduino.js">35-arduino.js</a> file, one can add a auto-select function that will choose the correct port as long as "Arduino (www.arduino.cc)" is the device-registered manufacturer - which can be communicated when using a serial port.<br><br>
-The same way as for the auto-detection of the right port for the Pixhawk or radio, this auto-detection dependes on installing globally a part of the <a href="https://serialport.io/docs/bin-list">serialport</a>-package:
+The same way as for the auto-detection of the right port for the Pixhawk or radio, this auto-detection depends on installing globally a part of the <a href="https://serialport.io/docs/bin-list">serialport</a>-package:
   ```sh
   npm install -g @serialport/list
   ```
