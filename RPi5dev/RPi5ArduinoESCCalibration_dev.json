@@ -1,0 +1,244 @@
+[
+    {
+        "id": "8265b2b1.c8755",
+        "type": "subflow",
+        "name": "ESC Min/Max Calibration",
+        "info": "",
+        "category": "Arduino",
+        "in": [
+            {
+                "x": 40,
+                "y": 80,
+                "wires": [
+                    {
+                        "id": "16f2e3df.0c673c"
+                    }
+                ]
+            }
+        ],
+        "out": [
+            {
+                "x": 740,
+                "y": 80,
+                "wires": [
+                    {
+                        "id": "2082bfa2.0a225",
+                        "port": 0
+                    }
+                ]
+            }
+        ],
+        "env": [],
+        "color": "#FFCC66",
+        "inputLabels": [
+            "Inject msg to start"
+        ],
+        "outputLabels": [
+            "Connect to Arduino output node in PWM"
+        ],
+        "icon": "node-red/alert.svg",
+        "status": {
+            "x": 740,
+            "y": 140,
+            "wires": [
+                {
+                    "id": "5d5307ee.d5c118",
+                    "port": 0
+                }
+            ]
+        }
+    },
+    {
+        "id": "2082bfa2.0a225",
+        "type": "delay",
+        "z": "8265b2b1.c8755",
+        "name": "",
+        "pauseType": "delayv",
+        "timeout": "4",
+        "timeoutUnits": "seconds",
+        "rate": "1",
+        "nbRateUnits": "3",
+        "rateUnits": "second",
+        "randomFirst": "1",
+        "randomLast": "5",
+        "randomUnits": "seconds",
+        "drop": false,
+        "outputs": 1,
+        "x": 380,
+        "y": 80,
+        "wires": [
+            [
+                "669bedbc.802bc4",
+                "5d5307ee.d5c118"
+            ]
+        ]
+    },
+    {
+        "id": "16f2e3df.0c673c",
+        "type": "function",
+        "z": "8265b2b1.c8755",
+        "name": "Calibration",
+        "func": "node.send({payload:180, delay:0 , status:{fill:\"red\",shape:\"dot\",text:\"Calibration procedure started. Turn on power on ESC now!\"}});\nnode.send({payload:180, delay:4500 , status:{fill:\"red\",shape:\"ring\",text:\"Please wait...\"}});\n//Keep 10 seconds at \"high\" throttle-position (allow for 2 seconds reaction time)\nnode.send({payload:0, delay:15000, status:{fill:\"yellow\",shape:\"ring\",text:\"Please wait...\"}});\n//Keep 3 seconds at \"low\" throttle-position (allow for 2 seconds reaction time)\nnode.send({payload:128, delay:20000,status:{fill:\"green\",shape:\"dot\",text:\"Calibration completed. Restart ESC before use.\"}});",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 200,
+        "y": 80,
+        "wires": [
+            [
+                "2082bfa2.0a225"
+            ]
+        ]
+    },
+    {
+        "id": "669bedbc.802bc4",
+        "type": "debug",
+        "z": "8265b2b1.c8755",
+        "name": "",
+        "active": true,
+        "tosidebar": true,
+        "console": true,
+        "tostatus": false,
+        "complete": "status.text",
+        "targetType": "msg",
+        "x": 610,
+        "y": 220,
+        "wires": []
+    },
+    {
+        "id": "5d5307ee.d5c118",
+        "type": "change",
+        "z": "8265b2b1.c8755",
+        "name": "",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "status",
+                "tot": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 600,
+        "y": 140,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "3a45a580.9e69ca",
+        "type": "arduino out",
+        "z": "da434c039a45a142",
+        "name": "Main motor",
+        "pin": "4",
+        "state": "SERVO",
+        "arduino": "2757bbfa.8ab3c4",
+        "x": 970,
+        "y": 160,
+        "wires": []
+    },
+    {
+        "id": "68f03e35.99c43",
+        "type": "inject",
+        "z": "da434c039a45a142",
+        "name": "",
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "100",
+        "payloadType": "num",
+        "x": 750,
+        "y": 120,
+        "wires": [
+            [
+                "3a45a580.9e69ca"
+            ]
+        ]
+    },
+    {
+        "id": "4f05df10.3cf39",
+        "type": "inject",
+        "z": "da434c039a45a142",
+        "name": "",
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "90",
+        "payloadType": "num",
+        "x": 750,
+        "y": 160,
+        "wires": [
+            [
+                "3a45a580.9e69ca"
+            ]
+        ]
+    },
+    {
+        "id": "70a41c9b.92cbf4",
+        "type": "subflow:8265b2b1.c8755",
+        "z": "da434c039a45a142",
+        "d": true,
+        "name": "",
+        "env": [],
+        "x": 410,
+        "y": 160,
+        "wires": [
+            [
+                "3a45a580.9e69ca"
+            ]
+        ]
+    },
+    {
+        "id": "4f6f8db8.3752c4",
+        "type": "inject",
+        "z": "da434c039a45a142",
+        "name": "",
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 200,
+        "y": 160,
+        "wires": [
+            [
+                "70a41c9b.92cbf4"
+            ]
+        ]
+    },
+    {
+        "id": "30418a54.43c7a6",
+        "type": "inject",
+        "z": "da434c039a45a142",
+        "name": "",
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "80",
+        "payloadType": "num",
+        "x": 750,
+        "y": 200,
+        "wires": [
+            [
+                "3a45a580.9e69ca"
+            ]
+        ]
+    },
+    {
+        "id": "2757bbfa.8ab3c4",
+        "type": "arduino-board",
+        "device": "/dev/ttyACM0"
+    }
+]

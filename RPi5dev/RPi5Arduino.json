@@ -1,0 +1,677 @@
+[
+    {
+        "id": "61630d4c.7a6534",
+        "type": "range",
+        "z": "da434c039a45a142",
+        "minin": "0",
+        "maxin": "255",
+        "minout": "50",
+        "maxout": "130",
+        "action": "clamp",
+        "round": true,
+        "property": "payload",
+        "name": "",
+        "x": 960,
+        "y": 560,
+        "wires": [
+            [
+                "a73dc858.a563d8"
+            ]
+        ]
+    },
+    {
+        "id": "ea78d073.c1a19",
+        "type": "range",
+        "z": "da434c039a45a142",
+        "minin": "0",
+        "maxin": "255",
+        "minout": "125",
+        "maxout": "55",
+        "action": "clamp",
+        "round": true,
+        "property": "payload",
+        "name": "",
+        "x": 940,
+        "y": 700,
+        "wires": [
+            [
+                "7d47f260.88518c"
+            ]
+        ]
+    },
+    {
+        "id": "a73dc858.a563d8",
+        "type": "arduino out",
+        "z": "da434c039a45a142",
+        "name": "Main rudder",
+        "pin": "6",
+        "state": "SERVO",
+        "arduino": "2757bbfa.8ab3c4",
+        "x": 1130,
+        "y": 560,
+        "wires": []
+    },
+    {
+        "id": "7d47f260.88518c",
+        "type": "arduino out",
+        "z": "da434c039a45a142",
+        "name": "Side rudders",
+        "pin": "5",
+        "state": "SERVO",
+        "arduino": "2757bbfa.8ab3c4",
+        "x": 1110,
+        "y": 700,
+        "wires": []
+    },
+    {
+        "id": "3a45a580.9e69ca",
+        "type": "arduino out",
+        "z": "da434c039a45a142",
+        "name": "Main motor",
+        "pin": "4",
+        "state": "SERVO",
+        "arduino": "2757bbfa.8ab3c4",
+        "x": 970,
+        "y": 160,
+        "wires": []
+    },
+    {
+        "id": "d583b382.5e138",
+        "type": "arduino out",
+        "z": "da434c039a45a142",
+        "name": "Starboard motor",
+        "pin": "3",
+        "state": "SERVO",
+        "arduino": "2757bbfa.8ab3c4",
+        "x": 960,
+        "y": 300,
+        "wires": []
+    },
+    {
+        "id": "96259666.fdc468",
+        "type": "arduino out",
+        "z": "da434c039a45a142",
+        "name": "Port motor",
+        "pin": "2",
+        "state": "SERVO",
+        "arduino": "2757bbfa.8ab3c4",
+        "x": 950,
+        "y": 440,
+        "wires": []
+    },
+    {
+        "id": "269d0ccb.4f74a4",
+        "type": "function",
+        "z": "da434c039a45a142",
+        "name": "AnalogInToVoltage",
+        "func": "msg.payload = (3.2*5/1023*msg.payload).toFixed(2);\nnode.status({fill:\"green\",shape:\"dot\",text:msg.payload + \" V\"});\nif (msg.payload > 7.5){\n    return [];\n} else {\n    return msg;\n}",
+        "outputs": 1,
+        "timeout": "",
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1090,
+        "y": 800,
+        "wires": [
+            [
+                "c7372051.4fbfe"
+            ]
+        ],
+        "icon": "font-awesome/fa-battery-3"
+    },
+    {
+        "id": "c92120f3.6aa2f",
+        "type": "rbe",
+        "z": "da434c039a45a142",
+        "name": "",
+        "func": "deadbandEq",
+        "gap": "1%",
+        "start": "",
+        "inout": "out",
+        "property": "payload",
+        "x": 900,
+        "y": 800,
+        "wires": [
+            [
+                "269d0ccb.4f74a4"
+            ]
+        ]
+    },
+    {
+        "id": "c7372051.4fbfe",
+        "type": "debug",
+        "z": "da434c039a45a142",
+        "name": "Voltage too low",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1300,
+        "y": 800,
+        "wires": []
+    },
+    {
+        "id": "1d075c27.05b014",
+        "type": "arduino in",
+        "z": "da434c039a45a142",
+        "name": "",
+        "pin": "0",
+        "state": "ANALOG",
+        "arduino": "2757bbfa.8ab3c4",
+        "x": 741,
+        "y": 800,
+        "wires": [
+            [
+                "c92120f3.6aa2f"
+            ]
+        ]
+    },
+    {
+        "id": "68f03e35.99c43",
+        "type": "inject",
+        "z": "da434c039a45a142",
+        "name": "",
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "100",
+        "payloadType": "num",
+        "x": 750,
+        "y": 120,
+        "wires": [
+            [
+                "3a45a580.9e69ca"
+            ]
+        ]
+    },
+    {
+        "id": "4f05df10.3cf39",
+        "type": "inject",
+        "z": "da434c039a45a142",
+        "name": "",
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "90",
+        "payloadType": "num",
+        "x": 750,
+        "y": 160,
+        "wires": [
+            [
+                "3a45a580.9e69ca"
+            ]
+        ]
+    },
+    {
+        "id": "b0e02f23.5e6",
+        "type": "inject",
+        "z": "da434c039a45a142",
+        "name": "",
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "100",
+        "payloadType": "num",
+        "x": 750,
+        "y": 260,
+        "wires": [
+            [
+                "d583b382.5e138"
+            ]
+        ]
+    },
+    {
+        "id": "cd531f51.84191",
+        "type": "inject",
+        "z": "da434c039a45a142",
+        "name": "",
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "90",
+        "payloadType": "num",
+        "x": 750,
+        "y": 300,
+        "wires": [
+            [
+                "d583b382.5e138"
+            ]
+        ]
+    },
+    {
+        "id": "30418a54.43c7a6",
+        "type": "inject",
+        "z": "da434c039a45a142",
+        "name": "",
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "80",
+        "payloadType": "num",
+        "x": 750,
+        "y": 200,
+        "wires": [
+            [
+                "3a45a580.9e69ca"
+            ]
+        ]
+    },
+    {
+        "id": "15470b94.a41914",
+        "type": "inject",
+        "z": "da434c039a45a142",
+        "name": "",
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "80",
+        "payloadType": "num",
+        "x": 750,
+        "y": 340,
+        "wires": [
+            [
+                "d583b382.5e138"
+            ]
+        ]
+    },
+    {
+        "id": "9d0d4c46.79241",
+        "type": "inject",
+        "z": "da434c039a45a142",
+        "name": "",
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "100",
+        "payloadType": "num",
+        "x": 750,
+        "y": 400,
+        "wires": [
+            [
+                "96259666.fdc468"
+            ]
+        ]
+    },
+    {
+        "id": "de3891d1.0b552",
+        "type": "inject",
+        "z": "da434c039a45a142",
+        "name": "",
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "90",
+        "payloadType": "num",
+        "x": 750,
+        "y": 440,
+        "wires": [
+            [
+                "96259666.fdc468"
+            ]
+        ]
+    },
+    {
+        "id": "7ed3e8a.a998218",
+        "type": "inject",
+        "z": "da434c039a45a142",
+        "name": "",
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "80",
+        "payloadType": "num",
+        "x": 750,
+        "y": 480,
+        "wires": [
+            [
+                "96259666.fdc468"
+            ]
+        ]
+    },
+    {
+        "id": "b37c953f.bdde98",
+        "type": "inject",
+        "z": "da434c039a45a142",
+        "name": "",
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "158",
+        "payloadType": "num",
+        "x": 750,
+        "y": 520,
+        "wires": [
+            [
+                "61630d4c.7a6534"
+            ]
+        ]
+    },
+    {
+        "id": "dc7b8c21.7ee1f",
+        "type": "inject",
+        "z": "da434c039a45a142",
+        "name": "",
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "128",
+        "payloadType": "num",
+        "x": 750,
+        "y": 560,
+        "wires": [
+            [
+                "61630d4c.7a6534"
+            ]
+        ]
+    },
+    {
+        "id": "2b2f6dc.68fde92",
+        "type": "inject",
+        "z": "da434c039a45a142",
+        "name": "",
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "98",
+        "payloadType": "num",
+        "x": 750,
+        "y": 600,
+        "wires": [
+            [
+                "61630d4c.7a6534"
+            ]
+        ]
+    },
+    {
+        "id": "74c0d426.ae3dcc",
+        "type": "inject",
+        "z": "da434c039a45a142",
+        "name": "",
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "178",
+        "payloadType": "num",
+        "x": 750,
+        "y": 660,
+        "wires": [
+            [
+                "ea78d073.c1a19"
+            ]
+        ]
+    },
+    {
+        "id": "28c4f1b8.e6f55e",
+        "type": "inject",
+        "z": "da434c039a45a142",
+        "name": "",
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "128",
+        "payloadType": "num",
+        "x": 750,
+        "y": 700,
+        "wires": [
+            [
+                "ea78d073.c1a19"
+            ]
+        ]
+    },
+    {
+        "id": "709b1259.cd987c",
+        "type": "inject",
+        "z": "da434c039a45a142",
+        "name": "",
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "78",
+        "payloadType": "num",
+        "x": 750,
+        "y": 740,
+        "wires": [
+            [
+                "ea78d073.c1a19"
+            ]
+        ]
+    },
+    {
+        "id": "f4b25d0ee75c1cbb",
+        "type": "arduino out",
+        "z": "da434c039a45a142",
+        "name": "Turret vertical",
+        "pin": "10",
+        "state": "SERVO",
+        "arduino": "2757bbfa.8ab3c4",
+        "x": 1500,
+        "y": 160,
+        "wires": []
+    },
+    {
+        "id": "988716068afd6a27",
+        "type": "arduino out",
+        "z": "da434c039a45a142",
+        "name": "Turret horizontal",
+        "pin": "11",
+        "state": "SERVO",
+        "arduino": "2757bbfa.8ab3c4",
+        "x": 1500,
+        "y": 300,
+        "wires": []
+    },
+    {
+        "id": "21950cce7a08f2f5",
+        "type": "inject",
+        "z": "da434c039a45a142",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "130",
+        "payloadType": "num",
+        "x": 1230,
+        "y": 120,
+        "wires": [
+            [
+                "f4b25d0ee75c1cbb"
+            ]
+        ]
+    },
+    {
+        "id": "1126c71169c1489b",
+        "type": "inject",
+        "z": "da434c039a45a142",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "90",
+        "payloadType": "num",
+        "x": 1230,
+        "y": 160,
+        "wires": [
+            [
+                "f4b25d0ee75c1cbb"
+            ]
+        ]
+    },
+    {
+        "id": "9c1ca5802d03c369",
+        "type": "inject",
+        "z": "da434c039a45a142",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "50",
+        "payloadType": "num",
+        "x": 1230,
+        "y": 200,
+        "wires": [
+            [
+                "f4b25d0ee75c1cbb"
+            ]
+        ]
+    },
+    {
+        "id": "59708eca2e0c6c28",
+        "type": "inject",
+        "z": "da434c039a45a142",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "180",
+        "payloadType": "num",
+        "x": 1230,
+        "y": 280,
+        "wires": [
+            [
+                "988716068afd6a27"
+            ]
+        ]
+    },
+    {
+        "id": "3314e91273b3e68a",
+        "type": "inject",
+        "z": "da434c039a45a142",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "90",
+        "payloadType": "num",
+        "x": 1230,
+        "y": 320,
+        "wires": [
+            [
+                "988716068afd6a27"
+            ]
+        ]
+    },
+    {
+        "id": "1758e4b8f4a6707e",
+        "type": "inject",
+        "z": "da434c039a45a142",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "0",
+        "payloadType": "num",
+        "x": 1228,
+        "y": 358,
+        "wires": [
+            [
+                "988716068afd6a27"
+            ]
+        ]
+    },
+    {
+        "id": "2757bbfa.8ab3c4",
+        "type": "arduino-board",
+        "device": "/dev/ttyACM0"
+    }
+]
