@@ -24,11 +24,14 @@ There has been a camera-option before, but this has now been improved significan
 <p align="center"><img src="https://raw.githubusercontent.com/alexsauter/navalarchimedes/main/RPi5dev/figs/RPiCamereModuleV3.png" width="15%"><img src="https://raw.githubusercontent.com/alexsauter/navalarchimedes/main/RPi5dev/figs/LasterPointer.png" width="15%"></p>
 Also, there was earlier no common option of directing the camera. To small servos where added to add that feature. As a small "proof-of-principle", there has also been added a small laser - a show of principle how an effector can be added to a drone like this. The laser is low power an can directly be used via a 5V digital output pin of the Arduino.
 
-
 ### RC solution
 Finally, a proper RC controller and receiver was added to the options to control the drone.
 <p align="center"><img src="https://raw.githubusercontent.com/alexsauter/navalarchimedes/main/RPi5dev/figs/RCradio.jpg" width="15%"><img src="https://raw.githubusercontent.com/alexsauter/navalarchimedes/main/RPi5dev/figs/RCreceiver.jpg" width="15%"></p>
 The receiver is read in via the Pixhawk, using the MAVlink protocol as before.
+
+### Raspberry Pi Connect
+<p align="center"><img src="https://raw.githubusercontent.com/alexsauter/navalarchimedes/main/RPi5dev/figs/RPiConnect.png" width="35%"></p>
+The Raspberry Pi 5 comes additionally with the option to remote control the unit via Raspberry Pi Connect. This is a easy access way getting to work with programming of the drone without much prior knowledge of data systems.
 
 ## Software solutions for RPi 5
 
