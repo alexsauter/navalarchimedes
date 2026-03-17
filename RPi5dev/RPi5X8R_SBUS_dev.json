@@ -1,0 +1,230 @@
+[
+    {
+        "id": "7f7d223eefff70b2",
+        "type": "inject",
+        "z": "8ffdddd4bb37154a",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 140,
+        "y": 120,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "942de24ac3c1d1e1",
+        "type": "serial in",
+        "z": "8ffdddd4bb37154a",
+        "name": "",
+        "serial": "d866fc67359c02ba",
+        "x": 190,
+        "y": 260,
+        "wires": [
+            [
+                "974b8789bc3b5d35",
+                "eb9934a949eb273c"
+            ]
+        ]
+    },
+    {
+        "id": "974b8789bc3b5d35",
+        "type": "debug",
+        "z": "8ffdddd4bb37154a",
+        "name": "debug 4",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 420,
+        "y": 240,
+        "wires": []
+    },
+    {
+        "id": "06f6c33ae27fe123",
+        "type": "function",
+        "z": "8ffdddd4bb37154a",
+        "name": "splice and check validity",
+        "func": "let lasttime = context.get(\"lasttime\")||Date.now();\nmsg.frequency = 1000/(Date.now()-lasttime);\ncontext.set(\"lasttime\",Date.now());msg.header = msg.payload.slice(0, 4);\nmsg.target = [];\nmsg.target[0] = msg.payload.slice(4,12);\nmsg.target[1] = msg.payload.slice(12,20);\nmsg.target[2] = msg.payload.slice(20,28);\nmsg.tail = msg.payload.slice(28, 30);\nmsg.numtargets = 0;\nfor (let i = 0; i < msg.target.length; i++) {\n    if (Buffer.compare(msg.target[i], Buffer.from([0, 0, 0, 0, 0, 0, 0, 0])) != 0) {\n        msg.numtargets = msg.numtargets + 1;\n    }\n}\nif ((Buffer.compare(msg.header, Buffer.from([170,255,3,0])) == 0) && (Buffer.compare(msg.tail, Buffer.from([85,204])) == 0)) {\n    node.status({ fill: \"green\", shape: \"dot\", text: 'valid data, ' + msg.numtargets + ' target(s), ' + msg.frequency.toFixed(1) + 'Hz' });\n    return [msg, null];\n} else {\n    node.status({ fill: \"red\", shape: \"dot\", text: 'invalid data, ' + msg.frequency.toFixed(1) + 'Hz' });\n    return [null, msg];\n}\n",
+        "outputs": 2,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 270,
+        "y": 480,
+        "wires": [
+            [],
+            []
+        ],
+        "outputLabels": [
+            "Valid output",
+            "Invalid output"
+        ]
+    },
+    {
+        "id": "eb9934a949eb273c",
+        "type": "function",
+        "z": "8ffdddd4bb37154a",
+        "name": "splice and check validity",
+        "func": "let lasttime = context.get(\"lasttime\")||Date.now();\nmsg.frequency = 1000/(Date.now()-lasttime);\ncontext.set(\"lasttime\",Date.now());\n\n//msg.payload = msg.payload.reverse();\nmsg.sbusheader = msg.payload.slice(0, 1);\nmsg.channels = msg.payload.slice(1,23);\nmsg.lastchannel = msg.payload.slice(23, 23);\nmsg.sbusfooter = msg.payload.slice(24, 24);\n\n\nmsg.channelsStr = \"\";\nmsg.channel = [];\nfor (let i = 0; i < msg.channels.length; i++) {\n    let temp = msg.channels[i].toString(2);\n    while (temp.length < 8) {\n        temp = \"0\" + temp;\n    }\n    msg.channelsStr += temp;\n}\nfor (let i = 0; i < 16; i++) {\n    msg.channel[i] = msg.channelsStr.substring((11 * i) + 0,(11 * i) +11);\n    msg.channel[i] = parseInt(msg.channel[i],2);\n}\n\nmsg.channel1 = msg.channel[0];\nmsg.channel2 = msg.channel[1];\n\n/*msg.channel[0] = msg.channels.slice(0,22);\nmsg.result = parseInt(\"101100111011\",2);\nmsg.resultStr = msg.result.toString(2);\nmsg.resultStr3 = msg.resultStr.substring(0,7);\n*/\n//msg.testbuffer = Buffer.from(msg.test);\n//msg.channel[1] = msg.payload.slice(12,20);\n//msg.channel[2] = msg.payload.slice(20,28);\n\nif (true) {\n//if ((Buffer.compare(msg.header, Buffer.from([170,255,3,0])) == 0) && (Buffer.compare(msg.tail, Buffer.from([85,204])) == 0)) {\n    node.status({ fill: \"green\", shape: \"dot\", text: 'valid data, ' + msg.frequency.toFixed(1) + 'Hz' });\n    return [msg, null];\n} else {\n    node.status({ fill: \"red\", shape: \"dot\", text: 'invalid data, ' + msg.frequency.toFixed(1) + 'Hz' });\n    return [null, msg];\n}\n",
+        "outputs": 2,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 450,
+        "y": 320,
+        "wires": [
+            [
+                "011031a807bc146a",
+                "79418283c6a6af1e",
+                "b8bf94cc780e35b0"
+            ],
+            []
+        ],
+        "outputLabels": [
+            "Valid output",
+            "Invalid output"
+        ]
+    },
+    {
+        "id": "011031a807bc146a",
+        "type": "debug",
+        "z": "8ffdddd4bb37154a",
+        "name": "debug 5",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 760,
+        "y": 300,
+        "wires": []
+    },
+    {
+        "id": "f7ed919d2f7d205d",
+        "type": "function",
+        "z": "8ffdddd4bb37154a",
+        "name": "function 1",
+        "func": "msg.result = parseInt(\"101100111011\",2);\nmsg.resultStr = msg.result.toString(2);\nmsg.resultStr3 = msg.resultStr.substring(0,7);\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 420,
+        "y": 380,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "9736a0954fe1b3f5",
+        "type": "link out",
+        "z": "8ffdddd4bb37154a",
+        "name": "link out 3",
+        "mode": "link",
+        "links": [],
+        "x": 785,
+        "y": 420,
+        "wires": []
+    },
+    {
+        "id": "79418283c6a6af1e",
+        "type": "debug",
+        "z": "8ffdddd4bb37154a",
+        "name": "debug 6",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "channel[1]",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 740,
+        "y": 360,
+        "wires": []
+    },
+    {
+        "id": "5b7ff781b9a37c89",
+        "type": "comment",
+        "z": "8ffdddd4bb37154a",
+        "name": "",
+        "info": "FrSky receivers will output a range of 172 - 1811 with channels set to a range of -100% to +100%.\nUsing extended limits of -150% to +150% outputs a range of 0 to 2047, which is the maximum range acheivable with 11 bits of data.",
+        "x": 680,
+        "y": 160,
+        "wires": []
+    },
+    {
+        "id": "b8bf94cc780e35b0",
+        "type": "change",
+        "z": "8ffdddd4bb37154a",
+        "name": "",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "channel2",
+                "tot": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 640,
+        "y": 420,
+        "wires": [
+            [
+                "9736a0954fe1b3f5"
+            ]
+        ]
+    },
+    {
+        "id": "d866fc67359c02ba",
+        "type": "serial-port",
+        "name": "",
+        "serialport": "/dev/ttyAMA0",
+        "serialbaud": "100000",
+        "databits": "8",
+        "parity": "even",
+        "stopbits": "2",
+        "waitfor": "0x0F",
+        "dtr": "none",
+        "rts": "none",
+        "cts": "none",
+        "dsr": "none",
+        "newline": "25",
+        "bin": "bin",
+        "out": "count",
+        "addchar": "",
+        "responsetimeout": "10000"
+    }
+]
