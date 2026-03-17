@@ -30,7 +30,7 @@ Finally, a proper RC controller and receiver was added to the options to control
 The receiver is read in via the Pixhawk (SBUS), using the MAVlink protocol as before.
 
 ### Raspberry Pi Connect
-<p align="center"><img src="https://raw.githubusercontent.com/alexsauter/navalarchimedes/main/RPi5dev/figs/RPiConnect.png" width="35%"></p>
+<p align="center"><img src="https://raw.githubusercontent.com/alexsauter/navalarchimedes/main/RPi5dev/figs/RPiConnect.png" width="30%"></p>
 The Raspberry Pi 5 comes additionally with the option to remote control the unit via Raspberry Pi Connect. This is a easy access way getting to work with programming of the drone without much prior knowledge of data systems.
 
 ## Software solutions for RPi 5
@@ -64,8 +64,8 @@ Run the application through
 ```sh
 python app.py
 ```
-and access the web interface through your browser: http://<Your IP>:8080/.</br>
-If the mDNS is working, you should be able to find the page via <a href="http://boatpi01.local:8080/">http://boatpi01.local:8080/</a>, just change the number for the specific boat.</br>
+and access the web interface through your browser: http://Your IP:8080/.</br></br>
+If the mDNS is working, you should be able to find the page via <a href="http://boatpi01.local:8080/">http://boatpi01.local:8080/</a>, just change the number for the specific boat.</br></br>
 The program kan also be started as a service, e.g. "picamera2-webui.service", in a form something like this: 
 ```sh
 [Unit]
@@ -104,7 +104,7 @@ paths:
     (...)
     sourceOnDemand: yes
 ```
-or
+or make the RPi Camera the default path:
 ```sh
 pathDefaults:
     source: rpiCamera
@@ -119,7 +119,7 @@ To test, start mediamtx in that folder (it will use the settings-file if found):
 ```sh
 ./mediamtx
 ```
-To view the camera-stream in a web-browser, use the address http://<ip-addr-of-MediaMTX-server>:8889/cam. Making use of mDNS here, you can fine you drone's camera-feed using <a href="http://boatpi01.local:8889/cam">http://boatpi01.local:8889/cam</a>, just change the number of the boat according to your drone.</br></br>
+To view the camera-stream in a web-browser, use the address http://ip-addr-of-MediaMTX-server:8889/cam. Making use of mDNS here, you can fine you drone's camera-feed using <a href="http://boatpi01.local:8889/cam">http://boatpi01.local:8889/cam</a>, just change the number of the boat according to your drone.</br></br>
 If you are satisfied with your settings, you can add a mediamtx-service that starts with the OS. See <a href="https://mediamtx.org/docs/other/start-on-boot">https://mediamtx.org/docs/other/start-on-boot
 </a> for possible updates. But in short, copy the server executable and configuration into global folders:
 ```sh
@@ -160,6 +160,11 @@ If necessary, check the status of the service:
 ```sh
 systemctl status mediamtx
 journalctl -u mediamtx -f
+```
+Or restart the service:
+```sh
+sudo systemctl daemon-reload
+sudo systemctl restart mediamtx
 ```
 
 
