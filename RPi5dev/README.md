@@ -173,6 +173,30 @@ This MediaMTX solution is then not necessarily integrated into Node-RED, as it r
 Interestingly, the MediaMTX solution is not only supporting the WebRTC access mentioned so far, but allows also many other ways of accessing the video-feed. One other that is worth menioning, maybe for use in VLC-player, is RTSP.To view the stream using a media player application with the RTSP protocol, use the address rtsp://ip-address-of-MediaMTX-server:8554/cam, in this case <a href="rtsp://boatpi01.local:8554/cam">rtsp://boatpi01.local:8554/cam</a> - just with the right number for your drone. Further options are available through these other access ways, like recording of the video-feed.</br></br>
 Finally, make notice of that this solution doesn't require resources as long as not video-feed is watched. The MediaMTX server will close the camera when not used, which is important when depending on battery power.
 
+### Arduino - access to motors/servos
+While the integration of the Arduino is straight forward, through Firmata and the Arduino-nodes in Node-RED, the auto-detect feature from the <a href="https://github.com/alexsauter/navalarchimedes/tree/main">main</a> page is still useful.</br></br>
+Furthermore, to make startup easier, the available motor are integrated in a selection for Node-RED.
+<p align="center"><img src="https://raw.githubusercontent.com/alexsauter/navalarchimedes/main/RPi5dev/figs/SubflowArduino.png" width="80%"></p>
+The nodes can be downloaded here: <a href="https://raw.githubusercontent.com/alexsauter/navalarchimedes/main/RPi5dev/RPi5Arduino.json">RPi5Arduino.json</a>. The specific pins might have to be adjusted to the specific drone.</br></br>
+For new ESCs, or when reprogrammed by mistake, one can try to calibrate the ESCs via Node-RED. A first version of this can be found here: <a href="https://raw.githubusercontent.com/alexsauter/navalarchimedes/main/RPi5dev/RPi5ArduinoESCCalibration_dev.json">RPi5ArduinoESCCalibration_dev.json</a>. This requires some more understanding, and might have to be done by teachers - and adjusted depending on the type of ESC.
+
+### Telemetry and RC
+Both telemetry and radio control (RC) is established via a Pixhawk 4 (tested mostly with firmware version 1.15.4). Communication via mavlink is still enabled through mavlink2rest (using port 8088). In this new version, the control via the RC controller is made more easily available.
+<p align="center"><img src="https://raw.githubusercontent.com/alexsauter/navalarchimedes/main/RPi5dev/figs/SubflowPixhawk.png" width="80%"></p>
+The new subflow can be downloaded here: <a href="https://raw.githubusercontent.com/alexsauter/navalarchimedes/main/RPi5dev/RPi5TelemetryRC.json">RPi5TelemetryRC.json</a>.
+
+### Keyboard and Touch support
+Through the use of event-listeners as part of e.g. Node-RED dashboard, one can also control the drone through a keyboard or a touch screen. A simple example can be seen here.
+<p align="center"><img src="https://raw.githubusercontent.com/alexsauter/navalarchimedes/main/RPi5dev/figs/SubflowKeyboardTouch.png" width="70%"></p>
+The corresponding nodes can be downloaded here: <a href="https://raw.githubusercontent.com/alexsauter/navalarchimedes/main/RPi5dev/RPi5KeyboardTouch.json">RPi5KeyboardTouch.json</a>.
+
+### Radar
+Radar is still just based on the serial communication, and should work as before. Try nodes her: <a href="https://raw.githubusercontent.com/alexsauter/navalarchimedes/main/RPi5dev/RPi5Radar.json">RPi5Radar.json</a>.</br></br>
+The radar-chips where earlier placed in the same spot as now the turret is placed at. So future use needs to find a new position.
+
+### RC receiver without Pixhawk
+Some might want to use the RC receivers without the need for a Pixhawk. Nodes for that have been started to be developed: <a href="https://raw.githubusercontent.com/alexsauter/navalarchimedes/main/RPi5dev/RPi5X8R_SBUS_dev.json">RPi5X8R_SBUS_dev.json</a>.</br></br>
+The goal is the read the SBUS directly at the Raspberry Pi 5. For now, the need for a signal converter fitting to the uart-pins of the Raspberry Pi 5 (pins 8 and 10, only RXD on pin 10 should be needed) is stopping further development. Power levels used will be 3.3V, using pin 1 at 3.3V and pin 9 for GND.
 
 ## Authors
 * Alexander Sauter
