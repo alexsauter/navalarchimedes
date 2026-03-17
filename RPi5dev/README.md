@@ -21,13 +21,13 @@ Power is now distributed via all three ESCs, instead of only one of them.
 ### Laser turret with camera
 <p align="center"><img src="https://raw.githubusercontent.com/alexsauter/navalarchimedes/main/RPi5dev/figs/Turret.jpg" width="35%"></p>
 There has been a camera-option before, but this has now been improved significantly (see programming in later section). The new camera is a Raspberry Pi camera module version 3.
-<p align="center"><img src="https://raw.githubusercontent.com/alexsauter/navalarchimedes/main/RPi5dev/figs/RPiCamereModuleV3.png" width="15%">     <img src="https://raw.githubusercontent.com/alexsauter/navalarchimedes/main/RPi5dev/figs/LasterPointer.png" width="15%"></p>
+<p align="center"><img src="https://raw.githubusercontent.com/alexsauter/navalarchimedes/main/RPi5dev/figs/RPiCamereModuleV3.png" width="15%">&nbsp;&nbsp;&nbsp;&nbsp;<img src="https://raw.githubusercontent.com/alexsauter/navalarchimedes/main/RPi5dev/figs/LasterPointer.png" width="15%"></p>
 Also, there was earlier no common option of directing the camera. To small servos where added to add that feature. As a small "proof-of-principle", there has also been added a small laser - a show of principle how an effector can be added to a drone like this. The laser is low power an can directly be used via a 5V digital output pin of the Arduino.
 
 ### RC solution
 Finally, a proper RC controller and receiver was added to the options to control the drone.
-<p align="center"><img src="https://raw.githubusercontent.com/alexsauter/navalarchimedes/main/RPi5dev/figs/RCradio.jpg" width="20%">     <img src="https://raw.githubusercontent.com/alexsauter/navalarchimedes/main/RPi5dev/figs/RCreceiver.jpg" width="20%"></p>
-The receiver is read in via the Pixhawk, using the MAVlink protocol as before.
+<p align="center"><img src="https://raw.githubusercontent.com/alexsauter/navalarchimedes/main/RPi5dev/figs/RCradio.jpg" width="20%">&nbsp;&nbsp;&nbsp;&nbsp;<img src="https://raw.githubusercontent.com/alexsauter/navalarchimedes/main/RPi5dev/figs/RCreceiver.jpg" width="35%"></p>
+The receiver is read in via the Pixhawk (SBUS), using the MAVlink protocol as before.
 
 ### Raspberry Pi Connect
 <p align="center"><img src="https://raw.githubusercontent.com/alexsauter/navalarchimedes/main/RPi5dev/figs/RPiConnect.png" width="35%"></p>
@@ -36,7 +36,9 @@ The Raspberry Pi 5 comes additionally with the option to remote control the unit
 ## Software solutions for RPi 5
 
 ### Subflow for DS4 interaction
+The bluetooth controller is still working. As it is dependent on the node-hid package (see <a href="https://github.com/alexsauter/navalarchimedes/tree/main">main</a> for integration of that to Node-RED), this should continue working as long as node-hid is not changing significantly or being deprecated.</br></br>
 
+With only minor changes, the subflow for interaction with the Dualshock 4 controller via bluetooth connection is called <a href="https://raw.githubusercontent.com/alexsauter/navalarchimedes/main/RPi5dev/RPi5BluetoothDS4.json">RPi5BluetoothDS4.json</a>, including the debug and injection nodes for testing.
 
 ## Authors
 * Alexander Sauter
