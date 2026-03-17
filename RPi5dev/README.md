@@ -36,9 +36,132 @@ The Raspberry Pi 5 comes additionally with the option to remote control the unit
 ## Software solutions for RPi 5
 
 ### Subflow for DS4 interaction
-The bluetooth controller is still working. As it is dependent on the node-hid package (see <a href="https://github.com/alexsauter/navalarchimedes/tree/main">main</a> for integration of that to Node-RED), this should continue working as long as node-hid is not changing significantly or being deprecated.</br></br>
+The bluetooth controller is still working. As it is dependent on the node-hid package (see <a href="https://github.com/alexsauter/navalarchimedes/tree/main">main</a> for integration of that to Node-RED), this should continue working as long as node-hid is not changing significantly or being deprecated.
+
+<p align="center"><img src="https://raw.githubusercontent.com/alexsauter/navalarchimedes/main/figs/BluetoothDS4.png" width="100%"></p>
 
 With only minor changes, the subflow for interaction with the Dualshock 4 controller via bluetooth connection is called <a href="https://raw.githubusercontent.com/alexsauter/navalarchimedes/main/RPi5dev/RPi5BluetoothDS4.json">RPi5BluetoothDS4.json</a>, including the debug and injection nodes for testing.
+
+### Integration of camera
+There are two easy to use github-projects for integrating the camera:
+* <a href="https://github.com/monkeymademe/CamUI">CamUI</a>
+* <a href="https://github.com/bluenviron/mediamtx">MediaMTX</a> (see also <a href="https://mediamtx.org/">mediamtx.org</a>)
+Both solutions have been tested and can work. CamUI is a nice solution where one can change the camera-settings live. MediaMTX is better after configuration for streaming in different ways, with low latency. Both ways are shortly presented, but the MediaMTX solution is recommended for such a drone-solution - as it is flexible but still high performance in terms of resolution and latency.</br></br>
+#### CamUI
+CamUI is based on flask, picamera2 and python. All of those should be available on a standard Raspberry Pi 5. Possibly update the OS before downloading from github:
+```sh
+sudo apt update && sudo apt upgrade -y
+```
+Clone the repository to the Raspberry Pi:
+```sh
+git clone https://github.com/monkeymademe/picamera2-WebUI.git
+```
+Enter the directory:
+```sh
+cd picamera2-WebUI
+```
+Run the application through
+```sh
+python app.py
+```
+and access the web interface through your browser: http://<Your IP>:8080/.</br>
+If the mDNS is working, you should be able to find the page via <a href="http://boatpi01.local:8080/">http://boatpi01.local:8080/</a>, just change the number for the specific boat.</br>
+The program kan also be started as a service, e.g. "picamera2-webui.service", in a form something like this: 
+```sh
+[Unit]
+Description=CamUI Server
+After=network.target
+[Service]
+Type=simple
+ExecStart=/usr/bin/python /home/pi/CamUI/app.py
+Restart=always
+[Install]
+WantedBy=multi-user.target
+```
+However, if this will use the camera continuously - using a significantly higher amount of power continuously. A better solution is then MediaMTX, which only will use the camera if watched (if setup properly).
+
+#### MediaMTX
+MediaMTX is also mentioned among the solutions recommended on <a href="https://www.raspberrypi.com/documentation/computers/camera_software.html">raspberrypi.com</a>. The process is similar to CamUI, but without python.</br></br>
+Make first a folder for mediamtx. Its content can be deleted in the end, this will only be a temporary folder during setup.
+```sh
+mkdir mediamtx
+cd mediamtx
+```
+Then download the newest version compatible with Raspberry Pi 5. At the time of writing this, it would be v1.16.3 for linux (arm). Download and extract the files:
+```sh
+wget https://github.com/bluenviron/mediamtx/releases/download/v1.16.3/mediamtx_v1.16.3_linux_arm64.tar.gz
+tar -xvzf mediamtx_v1.16.3_linux_arm64.tar.gz
+```
+You can make a backup of the settings-file, just in case:
+```sh
+cp mediamtx.yml mediamtx.yml_orig
+```
+Change the settings in the file mediamtx.yml to:
+-----------------------
+paths:
+  cam:
+    source: rpiCamera
+    (...)
+    sourceOnDemand: yes
+-----------------------
+or
+-----------------------
+pathDefaults:
+    source: rpiCamera
+    (...)
+    sourceOnDemand: true
+(...)
+paths:
+    cam:
+----------------------
+
+To test, start mediamtx in that folder (it will use the settings-file if found):
+```sh
+./mediamtx
+```
+To view the camera-stream in a web-browser, use the address http://<ip-addr-of-MediaMTX-server>:8889/cam. Making use of mDNS here, you can fine you drone's camera-feed using <a href="http://boatpi01.local:8889/cam">http://boatpi01.local:8889/cam</a>, just change the number of the boat according to your drone.</br></br>
+If you are satisfied with your settings, you can add a mediamtx-service that starts with the OS. See <a href="https://mediamtx.org/docs/other/start-on-boot">https://mediamtx.org/docs/other/start-on-boot
+</a> for possible updates. But in short, copy the server executable and configuration into global folders:
+```sh
+sudo cp mediamtx /usr/local/bin/mediamtx
+sudo cp mediamtx.yml /usr/local/etc/mediamtx.yml
+```
+Create a systemd service:
+```sh
+sudo tee /etc/systemd/system/mediamtx.service >/dev/null << EOF
+[Unit]
+Description=MediaMTX streaming server
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+ExecStart=/usr/local/bin/mediamtx /usr/local/etc/mediamtx.yml
+User=pi
+Group=pi
+Restart=on-failure
+RestartSec=5
+
+[Install]
+WantedBy=multi-user.target
+EOF
+```
+Enable a wait-online service:
+```sh
+sudo systemctl enable systemd-networkd-wait-online.service
+```
+Enable and start the service:
+```sh
+sudo systemctl daemon-reload
+sudo systemctl enable mediamtx
+sudo systemctl start mediamtx
+```
+You should then again be able to see the camera-feed when using the same address as before: <a href="http://boatpi01.local:8889/cam">http://boatpi01.local:8889/cam</a>, just change the number of the boat according to your drone.</br>
+If necessary, check the status of the service:
+```sh
+systemctl status mediamtx
+journalctl -u mediamtx -f
+```
+
 
 ## Authors
 * Alexander Sauter
