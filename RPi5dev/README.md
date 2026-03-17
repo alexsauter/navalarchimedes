@@ -78,7 +78,10 @@ Restart=always
 [Install]
 WantedBy=multi-user.target
 ```
-However, if this will use the camera continuously - using a significantly higher amount of power continuously. A better solution is then MediaMTX, which only will use the camera if watched (if setup properly).
+However, if this will use the camera continuously - using a significantly higher amount of power continuously. A better solution is then the <a href="https://github.com/alexsauter/navalarchimedes/tree/main/RPi5dev#mediamtx">MediaMTX</a> solution, which only will use the camera if watched (if setup properly).</br></br>
+CamUI can also be integrated into Node-RED, both starting the camera-feed and integration into the dashboard.
+<p align="center"><img src="https://raw.githubusercontent.com/alexsauter/navalarchimedes/main/RPi5dev/figs/SubflowCamera.png" width="100%"></p>
+This example subflow can be downloaded here: <a href="https://raw.githubusercontent.com/alexsauter/navalarchimedes/main/RPi5dev/RPi5CamUI.json">RPi5CamUI.json</a>.
 
 #### MediaMTX
 MediaMTX is also mentioned among the solutions recommended on <a href="https://www.raspberrypi.com/documentation/computers/camera_software.html">raspberrypi.com</a>. The process is similar to CamUI, but without python.</br></br>
@@ -166,6 +169,9 @@ Or restart the service:
 sudo systemctl daemon-reload
 sudo systemctl restart mediamtx
 ```
+This MediaMTX solution is then not necessarily integrated into Node-RED, as it runs independently from the control-level. However, a similar setup as for the <a href="https://github.com/alexsauter/navalarchimedes/tree/main/RPi5dev#camui">CamUI</a> solution can be used if needed. Use the subflow at the end of that section, just change the address to the one you want to use.</br></br>
+Interestingly, the MediaMTX solution is not only supporting the WebRTC access mentioned so far, but allows also many other ways of accessing the video-feed. One other that is worth menioning, maybe for use in VLC-player, is RTSP.To view the stream using a media player application with the RTSP protocol, use the address rtsp://ip-address-of-MediaMTX-server:8554/cam, in this case <a href="rtsp://boatpi01.local:8554/cam">rtsp://boatpi01.local:8554/cam</a> - just with the right number for your drone. Further options are available through these other access ways, like recording of the video-feed.</br></br>
+Finally, make notice of that this solution doesn't require resources as long as not video-feed is watched. The MediaMTX server will close the camera when not used, which is important when depending on battery power.
 
 
 ## Authors
