@@ -184,7 +184,8 @@ In order to measure voltage levels of the battery through the Arduino, one can u
 ### Telemetry and RC
 Both telemetry and radio control (RC) is established via a Pixhawk 4 (tested mostly with firmware version 1.15.4). Communication via mavlink is still enabled through mavlink2rest (using port 8088). In this new version, the control via the RC controller is made more easily available.
 <p align="center"><img src="https://raw.githubusercontent.com/alexsauter/navalarchimedes/main/RPi5dev/figs/SubflowPixhawk.png" width="80%"></p>
-The new subflow can be downloaded here: <a href="https://raw.githubusercontent.com/alexsauter/navalarchimedes/main/RPi5dev/RPi5TelemetryRC.json">RPi5TelemetryRC.json</a>.
+The new subflow can be downloaded here: <a href="https://raw.githubusercontent.com/alexsauter/navalarchimedes/main/RPi5dev/RPi5TelemetryRC.json">RPi5TelemetryRC.json</a>.</br></br>
+It is important to choose the right channel, so that one listens to the right controller.
 
 ### Keyboard and Touch support
 Through the use of event-listeners as part of e.g. Node-RED dashboard, one can also control the drone through a keyboard or a touch screen. A simple example can be seen here.
