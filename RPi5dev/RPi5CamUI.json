@@ -1,0 +1,262 @@
+[
+    {
+        "id": "8197713ac7a50420",
+        "type": "inject",
+        "z": "a24432690fc37ecd",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 200,
+        "y": 160,
+        "wires": [
+            [
+                "2316219f2432718e"
+            ]
+        ]
+    },
+    {
+        "id": "2316219f2432718e",
+        "type": "exec",
+        "z": "a24432690fc37ecd",
+        "command": "python picamera2-WebUI/app.py",
+        "addpay": "",
+        "append": "",
+        "useSpawn": "true",
+        "timer": "",
+        "winHide": false,
+        "oldrc": false,
+        "name": "",
+        "x": 580,
+        "y": 160,
+        "wires": [
+            [
+                "fcf3eaabd059092b"
+            ],
+            [
+                "d6194170c8ef6637"
+            ],
+            []
+        ]
+    },
+    {
+        "id": "fcf3eaabd059092b",
+        "type": "debug",
+        "z": "a24432690fc37ecd",
+        "name": "debug 7",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 880,
+        "y": 120,
+        "wires": []
+    },
+    {
+        "id": "d6194170c8ef6637",
+        "type": "debug",
+        "z": "a24432690fc37ecd",
+        "name": "debug 8",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 880,
+        "y": 160,
+        "wires": []
+    },
+    {
+        "id": "3ae734d92422d06e",
+        "type": "comment",
+        "z": "a24432690fc37ecd",
+        "name": "",
+        "info": "Using https://github.com/monkeymademe/picamera2-WebUI\n\ncamera settings: http://localhost:8080\nvideo-feed: http://localhost:8080/video_feed_0\nsnapshot: http://localhost:8080/control_camera_0",
+        "x": 180,
+        "y": 280,
+        "wires": []
+    },
+    {
+        "id": "30924fc4.26b0b",
+        "type": "inject",
+        "z": "a24432690fc37ecd",
+        "name": "Show LiveFeed",
+        "repeat": "",
+        "crontab": "",
+        "once": true,
+        "onceDelay": "1",
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 222,
+        "y": 359,
+        "wires": [
+            [
+                "aa829adb53d0353e",
+                "508438e6be515d7f",
+                "3ea86364.08675c"
+            ]
+        ]
+    },
+    {
+        "id": "508438e6be515d7f",
+        "type": "ui_template",
+        "z": "a24432690fc37ecd",
+        "group": "18efcd7b.476dd3",
+        "name": "Show LiveFeed",
+        "order": 0,
+        "width": "0",
+        "height": "0",
+        "format": "<div style=\"text-align: center;padding: 0px;\"><iframe id=\"LiveFeed\" src=\"http://localhost:8080/video_feed_0\" style=\"display: block; width: 100%; height: 100vh; border: none;\" scrolling=\"no\" frameborder=\"0\"></iframe></div>\n",
+        "storeOutMessages": true,
+        "fwdInMessages": true,
+        "resendOnRefresh": false,
+        "templateScope": "local",
+        "className": "",
+        "x": 920,
+        "y": 540,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "aa829adb53d0353e",
+        "type": "function",
+        "z": "a24432690fc37ecd",
+        "d": true,
+        "name": "Create LiveFeed-address",
+        "func": "//Statisk:\nmsg.payload = \"http://localhost:8080/control_camera_0\";\nreturn msg;",
+        "outputs": 1,
+        "timeout": "",
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 630,
+        "y": 540,
+        "wires": [
+            [
+                "508438e6be515d7f"
+            ]
+        ]
+    },
+    {
+        "id": "3ea86364.08675c",
+        "type": "ip",
+        "z": "a24432690fc37ecd",
+        "d": true,
+        "name": "Get IP",
+        "https": false,
+        "timeout": "5000",
+        "internalIPv4": true,
+        "internalIPv6": false,
+        "publicIPv4": false,
+        "publicIPv6": false,
+        "x": 409,
+        "y": 359,
+        "wires": [
+            [
+                "430e3efc.16c6c"
+            ]
+        ]
+    },
+    {
+        "id": "430e3efc.16c6c",
+        "type": "function",
+        "z": "a24432690fc37ecd",
+        "d": true,
+        "name": "Create LiveFeed-address",
+        "func": "//Dynamisk:\nmsg.payload = \"http://\"+msg.payload.internalIPv4+\":8080/video_feed_0\";\nreturn msg;",
+        "outputs": 1,
+        "timeout": "",
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 630,
+        "y": 360,
+        "wires": [
+            [
+                "f8179e79.32567",
+                "dec480ea.e876d"
+            ]
+        ]
+    },
+    {
+        "id": "f8179e79.32567",
+        "type": "ui_template",
+        "z": "a24432690fc37ecd",
+        "d": true,
+        "group": "18efcd7b.476dd3",
+        "name": "Show LiveFeed",
+        "order": 0,
+        "width": "0",
+        "height": "0",
+        "format": "<div style=\"text-align: center;padding: 0px;\"><iframe id=\"LiveFeed\" src=\"\" style=\"display: block; width: 100%; height: 100vh; border: none;\" scrolling=\"no\" frameborder=\"0\"></iframe></div>\n<script>\n(function(scope) {\n    // watch msg object from Node-RED\n    scope.$watch('msg', function(msg) {\n        // new message received\n        var x = document.getElementById('LiveFeed');\n        x.setAttribute('src', msg.payload); \n        });\n})(scope);\n</script>",
+        "storeOutMessages": true,
+        "fwdInMessages": true,
+        "resendOnRefresh": false,
+        "templateScope": "local",
+        "className": "",
+        "x": 923,
+        "y": 360,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "dec480ea.e876d",
+        "type": "debug",
+        "z": "a24432690fc37ecd",
+        "d": true,
+        "name": "",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 913,
+        "y": 430,
+        "wires": []
+    },
+    {
+        "id": "18efcd7b.476dd3",
+        "type": "ui_group",
+        "name": "Default",
+        "tab": "d6e85e56.1502c",
+        "order": 1,
+        "disp": false,
+        "width": "20",
+        "collapse": false,
+        "className": ""
+    },
+    {
+        "id": "d6e85e56.1502c",
+        "type": "ui_tab",
+        "name": "Home",
+        "icon": "dashboard",
+        "disabled": false,
+        "hidden": false
+    }
+]
