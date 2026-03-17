@@ -97,15 +97,15 @@ You can make a backup of the settings-file, just in case:
 cp mediamtx.yml mediamtx.yml_orig
 ```
 Change the settings in the file mediamtx.yml to:
------------------------
+```sh
 paths:
   cam:
     source: rpiCamera
     (...)
     sourceOnDemand: yes
------------------------
+```
 or
------------------------
+```sh
 pathDefaults:
     source: rpiCamera
     (...)
@@ -113,7 +113,7 @@ pathDefaults:
 (...)
 paths:
     cam:
-----------------------
+```
 
 To test, start mediamtx in that folder (it will use the settings-file if found):
 ```sh
@@ -155,7 +155,7 @@ sudo systemctl daemon-reload
 sudo systemctl enable mediamtx
 sudo systemctl start mediamtx
 ```
-You should then again be able to see the camera-feed when using the same address as before: <a href="http://boatpi01.local:8889/cam">http://boatpi01.local:8889/cam</a>, just change the number of the boat according to your drone.</br>
+You should then again be able to see the camera-feed when using the same address as before: <a href="http://boatpi01.local:8889/cam">http://boatpi01.local:8889/cam</a>, just change the number of the boat according to your drone.</br></br>
 If necessary, check the status of the service:
 ```sh
 systemctl status mediamtx
